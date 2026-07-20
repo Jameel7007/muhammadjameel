@@ -1,0 +1,45 @@
+/* ---------------------------------------------------------------------------
+   Design tokens — the single source of truth for the site's palette,
+   typography and spacing. Taken from the Claude Design file
+   "Muhammad Jameel.dc.html". Change values here, not in page styles.
+   --------------------------------------------------------------------------- */
+:root {
+  /* Color */
+  --color-bg: #fafaf7;        /* cream — page background */
+  --color-ink: #0d0d0d;       /* near-black — body text, dark section bg */
+  --color-green: #2e5a34;     /* deep green — hero, blockquotes, selection */
+  --color-accent: #d94a3a;    /* red — links, section labels, footer */
+  --color-cream: #fafaf7;     /* light text on dark/colored surfaces */
+
+  /* Ink at reduced strength (muted text, rules) */
+  --ink-45: rgba(13, 13, 13, 0.45);
+  --ink-50: rgba(13, 13, 13, 0.5);
+  --ink-55: rgba(13, 13, 13, 0.55);
+  --ink-62: rgba(13, 13, 13, 0.62);
+  --ink-70: rgba(13, 13, 13, 0.7);
+  --rule: rgba(13, 13, 13, 0.16);
+
+  /* Cream at reduced strength (muted text/rules on dark surfaces) */
+  --cream-50: rgba(250, 250, 247, 0.5);
+  --cream-62: rgba(250, 250, 247, 0.62);
+  --cream-75: rgba(250, 250, 247, 0.75);
+  --cream-82: rgba(250, 250, 247, 0.82);
+  --cream-rule: rgba(250, 250, 247, 0.2);
+
+  /* Typography */
+  --font-serif: 'EB Garamond', Georgia, serif;
+  --font-mono: ui-monospace, Menlo, monospace;
+  --text-body: 19px;
+  --leading-body: 1.8;
+
+  /* Layout */
+  --measure: 680px;           /* reading column */
+  --measure-wide: 880px;      /* list pages (blog, documents) */
+  --measure-max: 1080px;      /* bio / books grids */
+  --pad-x: clamp(24px, 6vw, 80px);
+  --pad-section: clamp(96px, 14vh, 170px);
+  --label-gap: clamp(48px, 7vh, 72px);
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0.6, 0.2, 1);
+}

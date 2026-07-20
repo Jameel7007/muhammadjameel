@@ -1,0 +1,25 @@
+---
+import type { Post } from '../lib/posts';
+import { readingTime, shortDate } from '../lib/posts';
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const { title, date, description, tags, type } = post.data;
+const minutes = readingTime(post.body);
+---
+
+<a href={`/blog/${post.id}/`} class="post-row" data-reveal>
+  <div class="post-date">{shortDate(date)}<br />{date.getUTCFullYear()}</div>
+  <div class="post-main">
+    <h3>{title}</h3>
+    <p class="post-desc">{description}</p>
+    <div class="post-meta">
+      {type === 'note' && <span>Note</span>}
+      {tags.map((tag) => <span>{tag}</span>)}
+      <span>{minutes} min read</span>
+    </div>
+  </div>
+</a>

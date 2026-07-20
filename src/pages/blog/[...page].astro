@@ -1,0 +1,54 @@
+---
+import type { GetStaticPaths, Page } from 'astro';
+import Base from '../../layouts/Base.astro';
+import PostRow from '../../components/PostRow.astro';
+import { getPublishedPosts, type Post } from '../../lib/posts';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = await getPublishedPosts();
+  return paginate(posts, { pageSize: 10 });
+}) satisfies GetStaticPaths;
+
+interface Props {
+  page: Page<Post>;
+}
+
+const { page } = Astro.props;
+---
+
+<Base
+  title={page.currentPage > 1 ? `Blog — Page ${page.currentPage} — Muhammad Jameel` : 'Blog — Muhammad Jameel'}
+  description="Essays and short writings on Sufism, the Nation of Islam, and the science of the heart."
+>
+  <section class="section page-top">
+    <div class="inner-wide">
+      <div class="section-label" data-reveal>Blog</div>
+      <div class="post-list">
+        {page.data.map((post) => <PostRow post={post} />)}
+      </div>
+      {
+        page.lastPage > 1 && (
+          <nav class="pagination" aria-label="Pagination">
+            <div>{page.url.prev && <a href={page.url.prev}>Newer posts</a>}</div>
+            <span class="page-count">
+              Page {page.currentPage} of {page.lastPage}
+            </span>
+            <div>{page.url.next && <a href={page.url.next}>Older posts</a>}</div>
+          </nav>
+        )
+      }
+    </div>
+  </section>
+</Base>
+
+<style>
+  .page-top {
+    padding-top: 150px;
+    min-height: 100vh;
+  }
+
+  .inner-wide {
+    max-width: var(--measure-wide);
+    margin: 0 auto;
+  }
+</style>

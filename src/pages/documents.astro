@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import DocumentsList from '../components/DocumentsList.astro';
+---
+
+<Base
+  title="Documents — Muhammad Jameel"
+  description="Downloadable essays, glossaries and study companions by Muhammad Jameel."
+>
+  <section class="section section-dark page-top">
+    <div class="inner-wide">
+      <div class="section-label" data-reveal>Documents</div>
+      <DocumentsList />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .page-top {
+    padding-top: 150px;
+    min-height: 100vh;
+  }
+
+  .section-dark {
+    background: var(--color-ink);
+    color: var(--color-cream);
+  }
+
+  .inner-wide {
+    max-width: var(--measure-wide);
+    margin: 0 auto;
+  }
+</style>

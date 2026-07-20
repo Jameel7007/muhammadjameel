@@ -1,0 +1,234 @@
+---
+import { getEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import BioSection from '../components/BioSection.astro';
+import DocumentsList from '../components/DocumentsList.astro';
+import PostRow from '../components/PostRow.astro';
+import { getPublishedPosts } from '../lib/posts';
+
+const posts = (await getPublishedPosts()).slice(0, 3);
+
+// Book copy lives in src/content/site/books.md.
+const booksEntry = await getEntry('site', 'books');
+const books = booksEntry?.data.books ?? [];
+const coverColors = {
+  green: 'var(--color-green)',
+  ink: 'var(--color-ink)',
+  red: 'var(--color-accent)',
+} as const;
+---
+
+<Base
+  title="Muhammad Jameel — Author"
+  description="Author of Sufism & The Nation of Islam, Death of the Scholars, and Religious Exemption. Essays on the science of the heart."
+  navOverlay
+>
+  <section id="hero" class="hero">
+    <div class="hero-center">
+      <h1>Muhammad Jameel</h1>
+      <p class="hero-sub">Author</p>
+    </div>
+    <div class="hero-links">
+      <a href="/blog">Blog</a>
+      <a href="/about">Bio</a>
+      <a href="#books">Books</a>
+      <a href="/documents">Documents</a>
+    </div>
+  </section>
+
+  <section id="bio" class="section">
+    <div class="inner-max">
+      <div class="section-label" data-reveal>Bio</div>
+      <BioSection />
+    </div>
+  </section>
+
+  <section id="blog" class="section">
+    <div class="inner-wide">
+      <div class="section-label" data-reveal>Blog</div>
+      <div class="post-list">
+        {posts.map((post) => <PostRow post={post} />)}
+      </div>
+      <div class="all-posts" data-reveal>
+        <a href="/blog" class="link-underline">All posts</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="books" class="section">
+    <div class="inner-max">
+      <div class="section-label" data-reveal>Books</div>
+      <div class="books-grid">
+        {
+          books.map((book) => (
+            <div class="book" data-reveal>
+              <div class="book-cover" style={`background:${coverColors[book.cover]}`}>
+                <div class="book-title">
+                  {book.titleLines.map((line, i) => (
+                    <>
+                      {i > 0 && <br />}
+                      {line}
+                    </>
+                  ))}
+                </div>
+                <div class="book-author">Muhammad Jameel</div>
+              </div>
+              <p class="book-desc">{book.description}</p>
+              <a href={book.link} target="_blank" rel="noopener" class="btn-outline">
+                {book.buyLabel}
+              </a>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="documents" class="section section-dark">
+    <div class="inner-wide">
+      <div class="section-label" data-reveal>Documents</div>
+      <DocumentsList />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    min-height: 100svh;
+    background: var(--color-green);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 120px 24px 56px;
+    text-align: center;
+  }
+
+  .hero-center {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(22px, 3vh, 34px);
+  }
+
+  .hero h1 {
+    margin: 0;
+    color: var(--color-cream);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(46px, 8.5vw, 124px);
+    line-height: 1.06;
+    letter-spacing: 0.005em;
+    animation: heroFade 1.1s var(--ease) 0.15s both;
+  }
+
+  .hero-sub {
+    margin: 0;
+    max-width: 34em;
+    color: var(--cream-82);
+    font-style: italic;
+    font-size: clamp(17px, 2vw, 22px);
+    line-height: 1.5;
+    animation: heroFade 1.1s var(--ease) 0.5s both;
+  }
+
+  .hero-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: clamp(22px, 4vw, 52px);
+    font-size: 17px;
+    font-style: italic;
+    animation: heroFade 1.1s var(--ease) 0.85s both;
+  }
+
+  .hero-links a {
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--color-cream);
+    border-bottom: 1px solid rgba(250, 250, 247, 0.35);
+    padding-bottom: 3px;
+  }
+
+  .hero-links a:hover {
+    color: var(--color-cream);
+    border-bottom-color: var(--color-cream);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero h1,
+    .hero-sub,
+    .hero-links {
+      animation: none;
+    }
+  }
+
+  .inner-max {
+    max-width: var(--measure-max);
+    margin: 0 auto;
+  }
+
+  .inner-wide {
+    max-width: var(--measure-wide);
+    margin: 0 auto;
+  }
+
+  .all-posts {
+    padding-top: clamp(36px, 5vh, 52px);
+  }
+
+  .books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: clamp(40px, 5vw, 72px);
+  }
+
+  .book {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .book-cover {
+    aspect-ratio: 2 / 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 12% 10%;
+    text-align: center;
+    transition: transform 0.5s var(--ease);
+  }
+
+  .book-cover:hover {
+    transform: translateY(-8px);
+  }
+
+  .book-title {
+    color: var(--color-cream);
+    font-style: italic;
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.3;
+  }
+
+  .book-author {
+    color: var(--color-cream);
+    font-style: italic;
+    font-size: 14px;
+  }
+
+  .book-desc {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ink-70);
+  }
+
+  .section-dark {
+    background: var(--color-ink);
+    color: var(--color-cream);
+  }
+</style>

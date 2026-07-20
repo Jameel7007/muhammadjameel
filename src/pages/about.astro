@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import BioSection from '../components/BioSection.astro';
+---
+
+<Base
+  title="Bio — Muhammad Jameel"
+  description="Muhammad Jameel writes at the meeting point of the Nation of Islam and the classical Sufi tradition. He lives and writes in Michigan."
+>
+  <section class="section page-top">
+    <div class="inner-max">
+      <div class="section-label" data-reveal>Bio</div>
+      <BioSection />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .page-top {
+    padding-top: 150px;
+    min-height: 100vh;
+  }
+
+  .inner-max {
+    max-width: var(--measure-max);
+    margin: 0 auto;
+  }
+</style>

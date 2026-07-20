@@ -1,0 +1,39 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { getPublishedPosts, longDate, readingTime, type Post } from '../../lib/posts';
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const { title, description, date, tags, type } = post.data;
+const { Content } = await render(post);
+const minutes = readingTime(post.body);
+---
+
+<Base title={`${title} — Muhammad Jameel`} description={description} ogType="article">
+  <section class="article-page">
+    <article class="article">
+      <a href="/blog" class="back-link">All posts</a>
+      <header class="article-header">
+        <div class="article-tags">
+          {type === 'note' && <span>Note</span>}
+          {tags.map((tag) => <span>{tag}</span>)}
+        </div>
+        <h1>{title}</h1>
+        <p class="article-subtitle">{description}</p>
+        <div class="article-meta">Muhammad Jameel · {longDate(date)} · {minutes} min read</div>
+      </header>
+      <div class="prose">
+        <Content />
+      </div>
+    </article>
+  </section>
+</Base>

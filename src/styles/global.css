@@ -1,0 +1,455 @@
+@import './tokens.css';
+
+/* ---- Base ---------------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-serif);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+}
+
+a:hover {
+  color: var(--color-accent);
+}
+
+::selection {
+  background: var(--color-green);
+  color: var(--color-cream);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ---- Nav ----------------------------------------------------------------- */
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 22px clamp(24px, 5vw, 64px);
+  box-sizing: border-box;
+  color: var(--color-cream);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+}
+
+.site-nav.solid {
+  background: rgba(250, 250, 247, 0.92);
+  color: var(--color-ink);
+  border-bottom: 1px solid rgba(13, 13, 13, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.site-nav a {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.site-nav a:hover {
+  opacity: 0.65;
+  color: inherit;
+}
+
+.site-nav .wordmark {
+  font-style: italic;
+  font-size: 20px;
+  letter-spacing: 0.01em;
+}
+
+.site-nav nav {
+  display: flex;
+  gap: clamp(18px, 3vw, 40px);
+  font-size: 16px;
+  font-style: italic;
+}
+
+/* ---- Sections ------------------------------------------------------------ */
+.section {
+  background: var(--color-bg);
+  padding: var(--pad-section) var(--pad-x);
+  box-sizing: border-box;
+}
+
+.section-label {
+  font-size: 13px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--label-gap);
+}
+
+/* ---- Blog list ----------------------------------------------------------- */
+.post-list {
+  border-top: 1px solid var(--rule);
+}
+
+.post-row {
+  display: grid;
+  grid-template-columns: clamp(84px, 12vw, 130px) 1fr;
+  gap: clamp(20px, 4vw, 40px);
+  padding: clamp(36px, 5vh, 52px) 0;
+  border-bottom: 1px solid var(--rule);
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.post-row:hover {
+  color: var(--color-accent);
+}
+
+.post-row .post-date {
+  font-size: 15px;
+  color: var(--ink-50);
+  padding-top: 10px;
+}
+
+.post-row .post-main {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.post-row h3 {
+  margin: 0;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(26px, 3.4vw, 34px);
+  line-height: 1.2;
+}
+
+.post-row .post-desc {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink-62);
+  max-width: 60ch;
+}
+
+.post-row .post-meta,
+.post-meta {
+  display: flex;
+  gap: 18px;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-45);
+}
+
+/* ---- Article ------------------------------------------------------------- */
+.article-page {
+  background: var(--color-bg);
+  min-height: 100vh;
+  padding: 150px var(--pad-x) 140px;
+  box-sizing: border-box;
+}
+
+.article {
+  max-width: var(--measure);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.article .back-link {
+  cursor: pointer;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--ink-55);
+  text-decoration: none;
+  align-self: flex-start;
+}
+
+.article .back-link:hover {
+  color: var(--color-accent);
+}
+
+.article-header {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 12px;
+}
+
+.article-tags {
+  display: flex;
+  gap: 18px;
+  font-size: 13px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.article-header h1 {
+  margin: 0;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(36px, 5.5vw, 58px);
+  line-height: 1.12;
+  text-wrap: pretty;
+}
+
+.article-subtitle {
+  margin: 0;
+  font-size: clamp(19px, 2.2vw, 23px);
+  line-height: 1.5;
+  color: var(--ink-55);
+  font-style: italic;
+  text-wrap: pretty;
+}
+
+.article-meta {
+  font-size: 16px;
+  color: var(--ink-50);
+}
+
+/* ---- Prose (markdown body) ----------------------------------------------- */
+.prose {
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+}
+
+.prose > :first-child {
+  margin-top: 0;
+}
+
+.prose p {
+  margin: 0 0 28px;
+}
+
+.prose a {
+  color: var(--color-accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(217, 74, 58, 0.35);
+}
+
+.prose a:hover {
+  border-bottom-color: var(--color-accent);
+}
+
+.prose h2,
+.prose h3 {
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.25;
+  margin: 48px 0 20px;
+}
+
+.prose h2 {
+  font-size: clamp(27px, 3.2vw, 34px);
+}
+
+.prose h3 {
+  font-size: clamp(22px, 2.6vw, 27px);
+}
+
+.prose blockquote {
+  margin: 36px 0;
+  padding: 0;
+  border: none;
+  text-align: center;
+  font-style: italic;
+  font-size: clamp(23px, 2.8vw, 29px);
+  line-height: 1.5;
+  color: var(--color-green);
+  text-wrap: pretty;
+}
+
+.prose blockquote p {
+  margin: 0;
+}
+
+.prose ul,
+.prose ol {
+  margin: 0 0 28px;
+  padding-left: 1.3em;
+}
+
+.prose li {
+  margin-bottom: 10px;
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 44px auto;
+  max-width: 120px;
+}
+
+.prose figure {
+  margin: 36px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.prose figcaption {
+  font-size: 15px;
+  font-style: italic;
+  color: var(--ink-50);
+  text-align: center;
+}
+
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+}
+
+.prose sup a,
+.prose a[data-footnote-ref],
+.prose a.data-footnote-backref {
+  color: var(--color-accent);
+  text-decoration: none;
+  border-bottom: none;
+}
+
+/* GFM footnotes section */
+.prose .footnotes {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-62);
+}
+
+.prose .footnotes .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.prose .footnotes ol {
+  margin: 0;
+  padding-left: 1.2em;
+}
+
+.prose .footnotes li::marker {
+  color: var(--color-accent);
+}
+
+.prose .footnotes p {
+  margin: 0 0 10px;
+  display: inline;
+}
+
+/* ---- Buttons & inline links --------------------------------------------- */
+.btn-outline {
+  align-self: flex-start;
+  font-style: italic;
+  font-size: 16px;
+  text-decoration: none;
+  color: var(--color-ink);
+  border: 1px solid var(--color-ink);
+  padding: 10px 22px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: var(--color-ink);
+  color: var(--color-cream);
+}
+
+.link-underline {
+  font-style: italic;
+  font-size: 17px;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 3px;
+}
+
+.link-underline:hover {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+/* ---- Pagination ----------------------------------------------------------- */
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 24px;
+  padding-top: clamp(36px, 5vh, 52px);
+  font-style: italic;
+  font-size: 17px;
+}
+
+.pagination a {
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 3px;
+}
+
+.pagination a:hover {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+.pagination .page-count {
+  font-size: 15px;
+  color: var(--ink-50);
+  font-style: normal;
+}
+
+/* ---- Reveal animation ----------------------------------------------------- */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+}
+
+[data-reveal].revealed {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+@keyframes heroFade {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

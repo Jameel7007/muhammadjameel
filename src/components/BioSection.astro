@@ -1,0 +1,80 @@
+---
+import { getEntry, render } from 'astro:content';
+
+// The author bio, used on the home page and on /about.
+// All text lives in src/content/site/bio.md.
+const bio = await getEntry('site', 'bio');
+if (!bio) throw new Error('Missing site copy: src/content/site/bio.md');
+const { Content } = await render(bio);
+---
+
+<div class="bio-grid">
+  <div class="portrait" data-reveal>
+    <!-- Replace with <img src="/portrait.jpg" alt="Muhammad Jameel" /> when a photo is ready -->
+    <div class="portrait-placeholder">
+      <span>portrait photo</span>
+    </div>
+  </div>
+  <div class="bio-text" data-reveal>
+    <Content />
+  </div>
+</div>
+<blockquote class="bio-quote" data-reveal>{bio.data.quote}</blockquote>
+
+<style>
+  .bio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: clamp(44px, 6vw, 96px);
+    align-items: start;
+  }
+
+  .portrait {
+    max-width: 420px;
+    aspect-ratio: 3 / 4;
+  }
+
+  .portrait-placeholder {
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      45deg,
+      #efede6,
+      #efede6 14px,
+      #e7e4db 14px,
+      #e7e4db 28px
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .portrait-placeholder span {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-45);
+  }
+
+  .bio-text {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    font-size: 19px;
+    line-height: 1.75;
+    max-width: 66ch;
+  }
+
+  .bio-text :global(p) {
+    margin: 0;
+  }
+
+  .bio-quote {
+    max-width: 23em;
+    margin: clamp(80px, 12vh, 140px) auto 0;
+    text-align: center;
+    font-style: italic;
+    font-size: clamp(24px, 3vw, 33px);
+    line-height: 1.5;
+    color: var(--color-green);
+  }
+</style>
