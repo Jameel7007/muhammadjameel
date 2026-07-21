@@ -32,6 +32,37 @@ npm run preview  # serve the built site locally
 
 Start from `draft: true` if you want to work on a post without publishing it.
 
+## Images in posts
+
+A post that needs images should be a **folder** instead of a single file — the slug stays the same:
+
+```
+src/content/blog/
+  a-text-only-post.md              → /blog/a-text-only-post/
+  my-post-with-images/             → /blog/my-post-with-images/
+    index.md      (or index.mdx)
+    photo.jpg
+```
+
+Reference co-located images with a relative path and they are processed through Astro's image optimization (resized, converted, hashed) at build time:
+
+```md
+![A bench outside the mosque](./photo.jpg)
+```
+
+Markdown images render full column width with square edges, matching the design.
+
+For a **captioned** image, name the post `index.mdx` and use the `Figure` component (`src/components/Figure.astro`) — the caption is typeset small, italic, centered, in muted gray:
+
+```mdx
+import Figure from '../../../components/Figure.astro';
+import photo from './photo.jpg';
+
+<Figure src={photo} alt="A bench outside the mosque" caption="The bench, photographed in 2019." />
+```
+
+`Figure` also accepts a plain string `src` for images in `public/` or remote URLs (those skip optimization). See `src/content/blog/the-people-of-the-bench/` for a working example of a folder post using `Figure`.
+
 ## Editing site copy
 
 All fixed site text lives in plain files under `src/content/site/` — edit these, not the components:

@@ -3,13 +3,23 @@ interface Props {
   /** When true (home), the nav sits transparent over the green hero and
       turns solid on scroll. Everywhere else it is solid from the start. */
   overlay?: boolean;
+  /** When false (home), the top-right links are hidden at mobile widths
+      only — the hero's bottom link set serves as navigation there. At
+      desktop widths the links always show. */
+  mobileLinks?: boolean;
 }
 
-const { overlay = false } = Astro.props;
+const { overlay = false, mobileLinks = true } = Astro.props;
 ---
 
-<div class:list={['site-nav', { solid: !overlay }]} data-overlay={overlay ? 'true' : 'false'}>
-  <a href="/" class="wordmark">Muhammad Jameel</a>
+<div
+  class:list={['site-nav', { solid: !overlay, 'no-mobile-links': !mobileLinks }]}
+  data-overlay={overlay ? 'true' : 'false'}
+>
+  <a href="/" class="wordmark" aria-label="Muhammad Jameel — home">
+    <span class="wordmark-full">Muhammad Jameel</span>
+    <span class="wordmark-mono" aria-hidden="true">MJ</span>
+  </a>
   <nav>
     <a href="/about">Bio</a>
     <a href="/blog">Blog</a>

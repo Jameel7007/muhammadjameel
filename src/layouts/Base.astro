@@ -11,6 +11,9 @@ interface Props {
   ogImage?: string;
   /** Nav starts transparent over a full-bleed hero (home only) */
   navOverlay?: boolean;
+  /** Hide the nav's top-right links at mobile widths only (home only —
+      the hero's bottom link set serves as mobile navigation) */
+  navMobileLinks?: boolean;
 }
 
 const {
@@ -19,6 +22,7 @@ const {
   ogType = 'website',
   ogImage = '/og-default.png',
   navOverlay = false,
+  navMobileLinks = true,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -55,7 +59,7 @@ const ogImageUrl = new URL(ogImage, Astro.site);
     />
   </head>
   <body>
-    <Nav overlay={navOverlay} />
+    <Nav overlay={navOverlay} mobileLinks={navMobileLinks} />
     <slot />
     <Footer />
 

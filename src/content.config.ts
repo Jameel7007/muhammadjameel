@@ -2,7 +2,13 @@ import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
 const blog = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
+  // Posts are either a single file (my-post.md) or a folder with co-located
+  // images (my-post/index.md). Both produce the slug "my-post".
+  loader: glob({
+    pattern: '**/*.{md,mdx}',
+    base: './src/content/blog',
+    generateId: ({ entry }) => entry.replace(/\.(md|mdx)$/, '').replace(/\/index$/, ''),
+  }),
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),

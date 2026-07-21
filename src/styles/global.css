@@ -73,13 +73,50 @@ img {
   font-style: italic;
   font-size: 20px;
   letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+/* Below 768px the wordmark collapses to the MJ monogram */
+.site-nav .wordmark-mono {
+  display: none;
 }
 
 .site-nav nav {
   display: flex;
+  flex-wrap: nowrap;
   gap: clamp(18px, 3vw, 40px);
   font-size: 16px;
   font-style: italic;
+}
+
+.site-nav nav a {
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .site-nav .wordmark-full {
+    display: none;
+  }
+
+  .site-nav .wordmark-mono {
+    display: inline;
+  }
+
+  /* Comfortable tap targets: visual gap stays modest, but each link's
+     hit area is padded out to roughly 44px tall. */
+  .site-nav nav {
+    gap: 4px;
+  }
+
+  .site-nav nav a {
+    padding: 12px 9px;
+    margin: -12px 0;
+  }
+
+  /* Homepage only: the hero's bottom link set is the mobile navigation */
+  .site-nav.no-mobile-links nav {
+    display: none;
+  }
 }
 
 /* ---- Sections ------------------------------------------------------------ */
@@ -296,11 +333,24 @@ img {
   max-width: 120px;
 }
 
+/* Default Markdown images: full column width, square edges (the design
+   language is strictly rectilinear — no rounded corners anywhere). */
+.prose img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 36px 0;
+}
+
 .prose figure {
   margin: 36px 0;
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+.prose figure img {
+  margin: 0;
 }
 
 .prose figcaption {
