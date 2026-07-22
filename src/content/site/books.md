@@ -13,5 +13,5 @@ books:
   - titleLines: ['Religious', 'Exemption']
     cover: red
     description: An examination of conscience, law, and the believer's duty when faith and state authority collide.
-    link: https://www.amazon.com
+    link: https://www.amazon.com/dp/B09SY8P9RR
 ---
