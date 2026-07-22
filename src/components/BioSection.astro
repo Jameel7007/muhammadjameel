@@ -38,6 +38,16 @@ const { Content } = await render(bio);
     aspect-ratio: 3 / 4;
   }
 
+  /* Desktop: the portrait pins while the bio text scrolls past, and
+     releases when its grid row (the bio text) ends. Offset clears the
+     fixed header (~90px tall) plus breathing room. */
+  @media (min-width: 768px) {
+    .portrait {
+      position: sticky;
+      top: 130px;
+    }
+  }
+
   .portrait img {
     display: block;
     width: 100%;
