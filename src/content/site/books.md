@@ -5,7 +5,7 @@ books:
   - titleLines: ['Sufism &', 'The Nation of Islam']
     cover: green
     description: The hidden affinities between the teachings of the Honorable Elijah Muhammad and the classical Sufi path.
-    link: https://www.amazon.com
+    link: https://www.amazon.com/dp/172473122X
   - titleLines: ['Death of', 'the Scholars']
     cover: ink
     description: An elegy for a vanishing generation of sacred learning, and what is lost when the inheritors of the Prophet depart.
