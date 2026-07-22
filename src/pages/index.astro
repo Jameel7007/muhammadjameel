@@ -237,6 +237,18 @@ const coverColors = {
     color: var(--ink-70);
   }
 
+  /* Mobile: covers render near full-width, so their text scales up to
+     keep the same visual presence it has on desktop. Desktop unchanged. */
+  @media (max-width: 767px) {
+    .book-title {
+      font-size: clamp(26px, 7.5vw, 30px);
+    }
+
+    .book-author {
+      font-size: var(--text-ui);
+    }
+  }
+
   .section-dark {
     background: var(--color-ink);
     color: var(--color-cream);
