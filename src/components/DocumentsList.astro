@@ -43,13 +43,13 @@ const documents = entry?.data.documents ?? [];
   }
 
   .doc-pages {
-    font-size: 15px;
+    font-size: var(--text-small);
     color: var(--cream-50);
     white-space: nowrap;
   }
 
   .doc-desc {
-    font-size: 16px;
+    font-size: var(--text-ui);
     line-height: 1.6;
     color: var(--cream-62);
     max-width: 56ch;
@@ -57,7 +57,7 @@ const documents = entry?.data.documents ?? [];
 
   .doc-link {
     font-style: italic;
-    font-size: 16px;
+    font-size: var(--text-ui);
     color: var(--color-cream);
     text-decoration: none;
     border-bottom: 1px solid rgba(250, 250, 247, 0.35);

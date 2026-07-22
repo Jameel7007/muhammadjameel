@@ -158,6 +158,19 @@ const coverColors = {
     border-bottom-color: var(--color-cream);
   }
 
+  /* Desktop: slightly larger hero links, still clearly subordinate
+     to the hero name */
+  @media (min-width: 768px) {
+    .hero-links {
+      font-size: 21px;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-links a {
+      padding-bottom: 5px;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .hero h1,
     .hero-sub,
@@ -218,12 +231,12 @@ const coverColors = {
   .book-author {
     color: var(--color-cream);
     font-style: italic;
-    font-size: 14px;
+    font-size: var(--text-meta);
   }
 
   .book-desc {
     margin: 0;
-    font-size: 17px;
+    font-size: var(--text-detail);
     line-height: 1.6;
     color: var(--ink-70);
   }

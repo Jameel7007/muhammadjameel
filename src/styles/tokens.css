@@ -26,10 +26,15 @@
   --cream-82: rgba(250, 250, 247, 0.82);
   --cream-rule: rgba(250, 250, 247, 0.2);
 
-  /* Typography */
+  /* Typography — the type scale. Nothing on the site may render below
+     --text-meta (15px); adjust sizes here, not in page styles. */
   --font-serif: 'EB Garamond', Georgia, serif;
   --font-mono: ui-monospace, Menlo, monospace;
-  --text-body: 19px;
+  --text-body: 19px;    /* post/bio body (mobile; 21px on desktop below) */
+  --text-detail: 18px;  /* descriptions, blurbs, inline text links */
+  --text-ui: 17px;      /* buttons, meta lines, small links */
+  --text-small: 16px;   /* footnotes, captions, dates, copyright */
+  --text-meta: 15px;    /* uppercase label/meta rows — the size floor */
   --leading-body: 1.8;
 
   /* Layout */
@@ -42,4 +47,11 @@
 
   /* Motion */
   --ease: cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+
+/* Desktop: larger reading size (the 680px column stays as is) */
+@media (min-width: 768px) {
+  :root {
+    --text-body: 21px;
+  }
 }

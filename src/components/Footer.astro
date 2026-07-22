@@ -76,7 +76,7 @@ const year = new Date().getFullYear();
   .newsletter-blurb {
     margin: 0;
     max-width: 36em;
-    font-size: 17px;
+    font-size: var(--text-detail);
     line-height: 1.6;
     color: rgba(250, 250, 247, 0.85);
   }
@@ -99,7 +99,7 @@ const year = new Date().getFullYear();
     border-bottom: 1px solid rgba(250, 250, 247, 0.6);
     color: var(--color-cream);
     font-family: var(--font-serif);
-    font-size: 17px;
+    font-size: var(--text-detail);
     padding: 10px 2px;
     outline: none;
   }
@@ -114,7 +114,7 @@ const year = new Date().getFullYear();
     color: var(--color-cream);
     font-family: var(--font-serif);
     font-style: italic;
-    font-size: 16px;
+    font-size: var(--text-ui);
     padding: 10px 26px;
     cursor: pointer;
     transition: background 0.3s ease, color 0.3s ease;
@@ -145,7 +145,7 @@ const year = new Date().getFullYear();
     display: flex;
     gap: 26px;
     font-style: italic;
-    font-size: 16px;
+    font-size: var(--text-ui);
   }
 
   .social a {
@@ -160,7 +160,7 @@ const year = new Date().getFullYear();
   }
 
   .copyright {
-    font-size: 15px;
+    font-size: var(--text-small);
     color: var(--cream-75);
   }
 </style>
