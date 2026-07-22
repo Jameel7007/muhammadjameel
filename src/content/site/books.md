@@ -9,7 +9,7 @@ books:
   - titleLines: ['Death of', 'the Scholars']
     cover: ink
     description: An elegy for a vanishing generation of sacred learning, and what is lost when the inheritors of the Prophet depart.
-    link: https://www.amazon.com
+    link: https://www.amazon.com/dp/1687530327
   - titleLines: ['Religious', 'Exemption']
     cover: red
     description: An examination of conscience, law, and the believer's duty when faith and state authority collide.
