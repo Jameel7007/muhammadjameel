@@ -80,7 +80,7 @@ All fixed site text lives in plain files under `src/content/site/` — edit thes
 - `src/content/blog/` — posts.
 - `src/content/site/` — all fixed site copy (see "Editing site copy" above).
 - `public/documents/` — the PDFs behind the Documents section. The current ones are placeholders.
-- `src/components/BioSection.astro` — replace the portrait placeholder with a real `<img>` when ready.
+- `src/assets/portrait.jpg` — the bio portrait (shown on `/` and `/about`); replace the file to change it.
 - `public/og-default.png` — default social-share image.
 - `astro.config.mjs` — set `site` to your production domain (used by canonical URLs, RSS and the sitemap).
 - The footer subscribe form is not wired to a provider yet — set the form `action` in `src/components/Footer.astro` when you pick one (until then it shows a local thank-you). The social links in the footer point at bare domains; put your real profiles there.

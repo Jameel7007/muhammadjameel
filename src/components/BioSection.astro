@@ -1,5 +1,7 @@
 ---
 import { getEntry, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import portrait from '../assets/portrait.jpg';
 
 // The author bio, used on the home page and on /about.
 // All text lives in src/content/site/bio.md.
@@ -10,10 +12,12 @@ const { Content } = await render(bio);
 
 <div class="bio-grid">
   <div class="portrait" data-reveal>
-    <!-- Replace with <img src="/portrait.jpg" alt="Muhammad Jameel" /> when a photo is ready -->
-    <div class="portrait-placeholder">
-      <span>portrait photo</span>
-    </div>
+    <Image
+      src={portrait}
+      alt="Muhammad Jameel"
+      widths={[420, 840]}
+      sizes="(max-width: 767px) 100vw, 420px"
+    />
   </div>
   <div class="bio-text" data-reveal>
     <Content />
@@ -34,25 +38,11 @@ const { Content } = await render(bio);
     aspect-ratio: 3 / 4;
   }
 
-  .portrait-placeholder {
+  .portrait img {
+    display: block;
     width: 100%;
     height: 100%;
-    background: repeating-linear-gradient(
-      45deg,
-      #efede6,
-      #efede6 14px,
-      #e7e4db 14px,
-      #e7e4db 28px
-    );
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .portrait-placeholder span {
-    font-family: var(--font-mono);
-    font-size: 13px;
-    color: var(--ink-45);
+    object-fit: cover;
   }
 
   .bio-text {
