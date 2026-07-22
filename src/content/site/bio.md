@@ -1,5 +1,5 @@
 ---
-quote: '"The heart was made to travel. Every teaching I have ever loved is a map of the same road home."'
+quote: '"Whenever a new fruit comes, the taste of the previous fruit does not remain - Shams-i Tabrizi"'
 ---
 
 Muhammad Jameel came to Islam in 2010, after hearing Minister Louis Farrakhan deliver the Saviours' Day address. What began as curiosity became conviction, and within the year he had embraced the faith and taken up a disciplined study of the teachings of the Honorable Elijah Muhammad.
