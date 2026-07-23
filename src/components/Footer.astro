@@ -31,6 +31,7 @@ const subscribeAction = copy.buttondownUsername
         <button type="submit">{copy.subscribeLabel}</button>
       </form>
       <p class="subscribe-thanks" hidden>{copy.subscribeThanks}</p>
+      <p class="subscribe-error" role="alert" hidden>{copy.subscribeError}</p>
     </div>
     <div class="footer-bottom">
       <div class="social">
@@ -137,6 +138,13 @@ const subscribeAction = copy.buttondownUsername
     font-size: 18px;
   }
 
+  .subscribe-error {
+    margin: 4px 0 0;
+    font-style: italic;
+    font-size: var(--text-ui);
+    color: rgba(250, 250, 247, 0.85);
+  }
+
   .footer-bottom {
     display: flex;
     flex-wrap: wrap;
@@ -174,15 +182,21 @@ const subscribeAction = copy.buttondownUsername
 <script>
   const form = document.querySelector<HTMLFormElement>('.subscribe-form');
   const thanks = document.querySelector<HTMLElement>('.subscribe-thanks');
+  const error = document.querySelector<HTMLElement>('.subscribe-error');
   // Submit to Buttondown in the background and show our own thank-you —
-  // no redirect to Buttondown's confirmation page. Without an action
-  // (no username configured yet) it's a local thank-you only.
-  if (form && thanks) {
+  // the reader never leaves the page. The response is opaque (no-cors),
+  // so we can't read a status code: a resolved fetch means the request
+  // reached Buttondown, and a rejection means it never left (offline,
+  // DNS, blocked), which is what the inline error covers.
+  if (form && thanks && error) {
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const action = form.getAttribute('action');
       const email = (form.querySelector('input[name="email"]') as HTMLInputElement).value;
+      error.hidden = true;
       if (action) {
+        if (button) button.disabled = true;
         try {
           await fetch(action, {
             method: 'POST',
@@ -191,8 +205,12 @@ const subscribeAction = copy.buttondownUsername
             body: new URLSearchParams({ email }),
           });
         } catch {
-          /* opaque/no-cors errors are expected; the POST still lands */
+          // Request never left the browser — keep the form so they can retry.
+          if (button) button.disabled = false;
+          error.hidden = false;
+          return;
         }
+        if (button) button.disabled = false;
       }
       form.hidden = true;
       thanks.hidden = false;

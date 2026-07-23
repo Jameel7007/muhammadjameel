@@ -1,5 +1,5 @@
 ---
-quote: '"Whenever a new fruit comes, the taste of the previous fruit does not remain" - Shams-i Tabrizi'
+quote: '"Whenever a new fruit comes, the taste of the previous fruit does not remain." — Shams-i Tabrizi'
 ---
 
 Muhammad Jameel was brought to Islam in 2010 in Scranton, Pennsylvania. Through Brothers Enrique Muhammad and Demario Muhammad, he was introduced to the esoteric sciences, the Qur’an, Sufism, and the teachings of the Honorable Elijah Muhammad. In February 2010, he was invited to watch and listen to the Honorable Minister Louis Farrakhan deliver the Saviours’ Day address. It was only the second time he had heard the Minister’s voice, but the address awakened something decisive within him. He came to believe in the Minister and his message, accepted Islam, and began his spiritual journey.

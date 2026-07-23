@@ -49,6 +49,7 @@ const site = defineCollection({
     emailPlaceholder: z.string().optional(),
     subscribeLabel: z.string().optional(),
     subscribeThanks: z.string().optional(),
+    subscribeError: z.string().optional(),
     buttondownUsername: z.string().optional(),
     social: z.array(z.object({ label: z.string(), url: z.string().url() })).optional(),
     copyright: z.string().optional(),

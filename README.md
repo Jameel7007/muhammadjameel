@@ -86,7 +86,7 @@ All fixed site text lives in plain files under `src/content/site/` — edit thes
 - `src/assets/portrait.jpg` — the bio portrait (shown on `/` and `/about`); replace the file to change it.
 - `public/og-default.png` — default social-share image.
 - `astro.config.mjs` — set `site` to your production domain (used by canonical URLs, RSS and the sitemap).
-- The footer subscribe form posts to Buttondown — set `buttondownUsername:` in `src/content/site/footer.md` to your real Buttondown username (until then, submissions only show the local thank-you). The reader stays on the page and sees the site's own thank-you message.
+- The footer subscribe form posts to Buttondown (username `jameel`, set as `buttondownUsername:` in `src/content/site/footer.md`). The reader stays on the page and sees the site's own thank-you message; a failed request shows the inline `subscribeError:` message instead.
 
 ## Deploying to Cloudflare Pages
 
