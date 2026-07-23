@@ -35,9 +35,9 @@
   --text-ui: 17px;      /* buttons, meta lines, small links */
   --text-small: 16px;   /* footnotes, captions, dates, copyright */
   --text-meta: 15px;    /* uppercase label/meta rows — the size floor */
-  --text-hero-link: 21px; /* hero bottom links: ~1.3-1.4x the header nav
+  --text-hero-link: 21px; /* hero bottom links: ~1.3x the header nav
                              (16px mobile / 20px desktop) so they read
-                             as the primary invitation (28px desktop) */
+                             as the primary invitation (25px desktop) */
   --leading-body: 1.8;
 
   /* Layout */
@@ -56,6 +56,6 @@
 @media (min-width: 768px) {
   :root {
     --text-body: 21px;
-    --text-hero-link: 28px;
+    --text-hero-link: 25px;
   }
 }

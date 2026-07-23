@@ -24,6 +24,7 @@ npm run preview  # serve the built site locally
    tags: [Sufism, Commentary]
    type: article   # "article" for essays, "note" for short writings
    draft: false    # true = excluded from the build, index, RSS and sitemap
+   featured: false # true = shown large at the top of the homepage blog section
    ---
    ```
 
@@ -31,6 +32,8 @@ npm run preview  # serve the built site locally
 4. Commit and push (or run `npm run build`). That's it — the index, RSS feed and sitemap update automatically, newest first, and reading time is computed from the word count.
 
 Start from `draft: true` if you want to work on a post without publishing it.
+
+**Featuring a post:** set `featured: true` on exactly one post to show it prominently (large title, description, date, reading time under a "Featured" label) at the top of the homepage blog section, followed by the two most recent other posts. With no featured post, the homepage simply shows the latest three. If several posts carry the flag, the newest one wins.
 
 ## Images in posts
 
@@ -69,7 +72,7 @@ All fixed site text lives in plain files under `src/content/site/` — edit thes
 
 | File | Holds |
 | --- | --- |
-| `src/content/site/bio.md` | The bio paragraphs (Markdown body) and the green pull quote (`quote:` in frontmatter). Shown on `/` and `/about`. |
+| `src/content/site/bio.md` | The bio paragraphs (Markdown body) and the green pull quote (`quote:` in frontmatter). The full bio shows on `/about`; the homepage shows only the paragraphs above the `<!-- homepage-end -->` marker (at most two) with a "Read the full biography" link. |
 | `src/content/site/books.md` | The three books: cover title lines, cover color (`green`/`ink`/`red`), description, buy link and button label. |
 | `src/content/site/footer.md` | Newsletter heading, blurb, email placeholder, button label, thank-you message, social links, and the copyright line (year is added automatically). |
 | `src/content/site/documents.md` | The documents list: title, page count, description, and the PDF path under `public/documents/`. |
@@ -83,7 +86,7 @@ All fixed site text lives in plain files under `src/content/site/` — edit thes
 - `src/assets/portrait.jpg` — the bio portrait (shown on `/` and `/about`); replace the file to change it.
 - `public/og-default.png` — default social-share image.
 - `astro.config.mjs` — set `site` to your production domain (used by canonical URLs, RSS and the sitemap).
-- The footer subscribe form is not wired to a provider yet — set the form `action` in `src/components/Footer.astro` when you pick one (until then it shows a local thank-you). The social links in the footer point at bare domains; put your real profiles there.
+- The footer subscribe form posts to Buttondown — set `buttondownUsername:` in `src/content/site/footer.md` to your real Buttondown username (until then, submissions only show the local thank-you). The reader stays on the page and sees the site's own thank-you message.
 
 ## Deploying to Cloudflare Pages
 

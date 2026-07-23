@@ -6,6 +6,13 @@ const entry = await getEntry('site', 'footer');
 if (!entry) throw new Error('Missing site copy: src/content/site/footer.md');
 const copy = entry.data;
 const year = new Date().getFullYear();
+
+// Buttondown subscribe endpoint (username set in footer.md). The form
+// posts here; the script below intercepts submit so the reader stays
+// on the page and sees our own thank-you instead of Buttondown's.
+const subscribeAction = copy.buttondownUsername
+  ? `https://buttondown.com/api/emails/embed-subscribe/${copy.buttondownUsername}`
+  : undefined;
 ---
 
 <footer class="site-footer">
@@ -13,11 +20,10 @@ const year = new Date().getFullYear();
     <div class="newsletter">
       <h2>{copy.newsletterHeading}</h2>
       <p class="newsletter-blurb">{copy.newsletterBlurb}</p>
-      <!-- Wire this form to your newsletter provider (Buttondown, Mailchimp, etc.)
-           by setting the action/method below. Until then it shows a local thank-you. -->
-      <form class="subscribe-form">
+      <form class="subscribe-form" action={subscribeAction} method="POST">
         <input
           type="email"
+          name="email"
           required
           placeholder={copy.emailPlaceholder}
           aria-label="Email address"
@@ -168,11 +174,26 @@ const year = new Date().getFullYear();
 <script>
   const form = document.querySelector<HTMLFormElement>('.subscribe-form');
   const thanks = document.querySelector<HTMLElement>('.subscribe-thanks');
-  // No provider is wired up yet: if the form has no action, show the design's
-  // thank-you state locally instead of navigating.
-  if (form && thanks && !form.getAttribute('action')) {
-    form.addEventListener('submit', (e) => {
+  // Submit to Buttondown in the background and show our own thank-you —
+  // no redirect to Buttondown's confirmation page. Without an action
+  // (no username configured yet) it's a local thank-you only.
+  if (form && thanks) {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      const action = form.getAttribute('action');
+      const email = (form.querySelector('input[name="email"]') as HTMLInputElement).value;
+      if (action) {
+        try {
+          await fetch(action, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({ email }),
+          });
+        } catch {
+          /* opaque/no-cors errors are expected; the POST still lands */
+        }
+      }
       form.hidden = true;
       thanks.hidden = false;
     });

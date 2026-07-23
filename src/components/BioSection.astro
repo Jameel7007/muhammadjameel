@@ -3,11 +3,30 @@ import { getEntry, render } from 'astro:content';
 import { Image } from 'astro:assets';
 import portrait from '../assets/portrait.jpg';
 
-// The author bio, used on the home page and on /about.
-// All text lives in src/content/site/bio.md.
+// The author bio, used on the home page (short) and on /about (full).
+// All text lives in src/content/site/bio.md. The short variant shows
+// the paragraphs above the <!-- homepage-end --> marker (at most two)
+// followed by a link to the full biography.
+interface Props {
+  variant?: 'full' | 'short';
+}
+
+const { variant = 'full' } = Astro.props;
+
 const bio = await getEntry('site', 'bio');
 if (!bio) throw new Error('Missing site copy: src/content/site/bio.md');
 const { Content } = await render(bio);
+
+const HOMEPAGE_MARKER = '<!-- homepage-end -->';
+const shortParagraphs =
+  variant === 'short'
+    ? (bio.body ?? '')
+        .split(HOMEPAGE_MARKER)[0]
+        .split(/\n\s*\n/)
+        .map((p) => p.trim())
+        .filter(Boolean)
+        .slice(0, 2)
+    : [];
 ---
 
 <div class="bio-grid">
@@ -20,10 +39,23 @@ const { Content } = await render(bio);
     />
   </div>
   <div class="bio-text" data-reveal>
-    <Content />
+    {
+      variant === 'short' ? (
+        <>
+          {shortParagraphs.map((p) => (
+            <p>{p}</p>
+          ))}
+          <a href="/about" class="link-underline read-more">
+            Read the full biography
+          </a>
+        </>
+      ) : (
+        <Content />
+      )
+    }
   </div>
 </div>
-<blockquote class="bio-quote" data-reveal>{bio.data.quote}</blockquote>
+{variant === 'full' && <blockquote class="bio-quote" data-reveal>{bio.data.quote}</blockquote>}
 
 <style>
   .bio-grid {
@@ -66,6 +98,11 @@ const { Content } = await render(bio);
 
   .bio-text :global(p) {
     margin: 0;
+  }
+
+  .read-more {
+    align-self: flex-start;
+    margin-top: 8px;
   }
 
   .bio-quote {

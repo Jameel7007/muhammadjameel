@@ -4,9 +4,15 @@ import Base from '../layouts/Base.astro';
 import BioSection from '../components/BioSection.astro';
 import DocumentsList from '../components/DocumentsList.astro';
 import PostRow from '../components/PostRow.astro';
-import { getPublishedPosts } from '../lib/posts';
+import { getPublishedPosts, longDate, readingTime } from '../lib/posts';
 
-const posts = (await getPublishedPosts()).slice(0, 3);
+// Featured-plus-recent: one flagged post gets the large treatment,
+// followed by the next two most recent. With no flag, latest three.
+const allPosts = await getPublishedPosts();
+const featuredPost = allPosts.find((p) => p.data.featured) ?? null;
+const posts = featuredPost
+  ? allPosts.filter((p) => p !== featuredPost).slice(0, 2)
+  : allPosts.slice(0, 3);
 
 // Book copy lives in src/content/site/books.md.
 const booksEntry = await getEntry('site', 'books');
@@ -40,13 +46,26 @@ const coverColors = {
   <section id="bio" class="section">
     <div class="inner-max">
       <div class="section-label" data-reveal>Bio</div>
-      <BioSection />
+      <BioSection variant="short" />
     </div>
   </section>
 
   <section id="blog" class="section">
     <div class="inner-wide">
       <div class="section-label" data-reveal>Blog</div>
+      {
+        featuredPost && (
+          <a href={`/blog/${featuredPost.id}/`} class="featured-post" data-reveal>
+            <div class="featured-label">Featured</div>
+            <h3>{featuredPost.data.title}</h3>
+            <p class="featured-desc">{featuredPost.data.description}</p>
+            <div class="post-meta">
+              <span>{longDate(featuredPost.data.date)}</span>
+              <span>{readingTime(featuredPost.body)} min read</span>
+            </div>
+          </a>
+        )
+      }
       <div class="post-list">
         {posts.map((post) => <PostRow post={post} />)}
       </div>
@@ -153,6 +172,7 @@ const coverColors = {
     color: var(--color-cream);
     border-bottom: 1px solid rgba(250, 250, 247, 0.35);
     padding-bottom: 3px;
+    white-space: nowrap;
   }
 
   .hero-links a:hover {
@@ -187,6 +207,46 @@ const coverColors = {
 
   .all-posts {
     padding-top: clamp(36px, 5vh, 52px);
+  }
+
+  /* Featured post: the same reading language as the index rows, one
+     step up in scale. */
+  .featured-post {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-bottom: clamp(40px, 6vh, 60px);
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  .featured-post:hover {
+    color: var(--color-accent);
+  }
+
+  .featured-label {
+    font-size: var(--text-meta);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .featured-post h3 {
+    margin: 0;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(34px, 4.5vw, 46px);
+    line-height: 1.15;
+    text-wrap: pretty;
+  }
+
+  .featured-desc {
+    margin: 0;
+    font-size: var(--text-body);
+    line-height: 1.6;
+    color: var(--ink-62);
+    max-width: 60ch;
   }
 
   .books-grid {

@@ -6,6 +6,8 @@ Muhammad Jameel was brought to Islam in 2010 in Scranton, Pennsylvania. Through 
 
 Drawn to the science of the heart at the center of the classical Sufi tradition, he was guided to a Naqshbandi dhikr circle in Connecticut, where he was then living. He later made several trips to Michigan to visit Mawlana Shaykh Hisham Kabbani and eventually moved there to remain close to Mawlana and the Naqshbandi Sufi Order. He attended weekly gatherings of dhikr, spent time in the companionship of many beautiful murids, and offered what service he could.
 
+<!-- homepage-end -->
+
 Through the Naqshbandi path, he learned about the snares of the ego, the ruinous characteristics that corrupt human character, and the spiritual disciplines through which those tendencies may be confronted and overcome. He also came to understand more deeply the meanings of service, companionship, humility, and love.
 
 His writing stands at the meeting point of these two inheritances. He is the author of three books: *Sufism & the Nation of Islam*, a study of the affinities between the teachings of the Honorable Elijah Muhammad and the classical Sufi path; *Death of the Scholars*, an elegy for a vanishing generation of sacred learning; and *Religious Exemption*, an examination of conscience, law, and the believer’s duty when the two come into conflict.

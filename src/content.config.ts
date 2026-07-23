@@ -18,6 +18,9 @@ const blog = defineCollection({
     type: z.enum(['article', 'note']).default('article'),
     // Drafts are excluded from builds, the index, RSS and the sitemap.
     draft: z.boolean().default(false),
+    // Featured post: shown prominently at the top of the homepage blog
+    // section. If no post is flagged, the homepage shows the latest three.
+    featured: z.boolean().default(false),
   }),
 });
 
@@ -46,6 +49,7 @@ const site = defineCollection({
     emailPlaceholder: z.string().optional(),
     subscribeLabel: z.string().optional(),
     subscribeThanks: z.string().optional(),
+    buttondownUsername: z.string().optional(),
     social: z.array(z.object({ label: z.string(), url: z.string().url() })).optional(),
     copyright: z.string().optional(),
     // documents.md
