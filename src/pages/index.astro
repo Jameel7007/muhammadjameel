@@ -14,6 +14,10 @@ const posts = featuredPost
   ? allPosts.filter((p) => p !== featuredPost).slice(0, 2)
   : allPosts.slice(0, 3);
 
+// The pull quote lives in bio.md frontmatter (shared with /about).
+const bioEntry = await getEntry('site', 'bio');
+const pullQuote = bioEntry?.data.quote;
+
 // Book copy lives in src/content/site/books.md.
 const booksEntry = await getEntry('site', 'books');
 const books = booksEntry?.data.books ?? [];
@@ -43,14 +47,22 @@ const coverColors = {
     </div>
   </section>
 
-  <section id="bio" class="section">
+  <section id="bio" class:list={['section', { 'seam-collapse-bottom': pullQuote }]}>
     <div class="inner-max">
       <div class="section-label" data-reveal>Bio</div>
       <BioSection variant="short" />
     </div>
   </section>
 
-  <section id="blog" class="section">
+  {
+    pullQuote && (
+      <section class="quote-break" aria-label="Quote">
+        <blockquote class="pull-quote">{pullQuote}</blockquote>
+      </section>
+    )
+  }
+
+  <section id="blog" class:list={['section', 'blog-section', { 'seam-collapse-top': pullQuote }]}>
     <div class="inner-wide">
       <div class="section-label" data-reveal>Blog</div>
       {
@@ -209,19 +221,82 @@ const coverColors = {
     padding-top: clamp(36px, 5vh, 52px);
   }
 
+  /* Pull quote: lives INSIDE the bio→blog transition rather than adding
+     a third gap. The neighboring section paddings collapse on this seam
+     (see .seam-collapse-*) and this one symmetric band owns the whole
+     transition, keeping it near the site's 224px section rhythm. Ink,
+     not green — the featured title below carries the green. Fades up
+     once when it enters the viewport (script below); transform-based,
+     so the space is reserved and nothing shifts when it fires. */
+  .quote-break {
+    background: var(--color-bg);
+    padding: clamp(60px, 8.5vh, 76px) var(--pad-x);
+    box-sizing: border-box;
+  }
+
+  .seam-collapse-bottom {
+    padding-bottom: 0;
+  }
+
+  .seam-collapse-top {
+    padding-top: 0;
+  }
+
+  .pull-quote {
+    max-width: 23em;
+    margin: 0 auto;
+    text-align: center;
+    font-style: italic;
+    font-size: clamp(24px, 3vw, 33px);
+    line-height: 1.5;
+    color: var(--color-ink);
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+  }
+
+  .pull-quote.revealed {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pull-quote {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
   /* Featured post: the same reading language as the index rows, one
-     step up in scale. */
+     step up in scale, set apart by the site green and extra air —
+     typography and spacing only, no fills or borders. */
   .featured-post {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    padding-bottom: clamp(40px, 6vh, 60px);
+    padding: clamp(28px, 5vh, 56px) 0 clamp(88px, 12vh, 124px);
     text-decoration: none;
     color: inherit;
     cursor: pointer;
   }
 
+  /* The featured block carries its own 40px top padding, so the blog
+     label's margin is trimmed to keep label→featured (16 + 40 = 56)
+     level with how BOOKS/DOCUMENTS labels sit above their content. */
+  .blog-section .section-label {
+    margin-bottom: 16px;
+  }
+
+  .featured-post h3 {
+    color: var(--color-green);
+  }
+
   .featured-post:hover {
+    color: var(--color-accent);
+  }
+
+  .featured-post:hover h3 {
     color: var(--color-accent);
   }
 
@@ -314,3 +389,28 @@ const coverColors = {
     color: var(--color-cream);
   }
 </style>
+
+<script>
+  // Pull quote: fade up once when ~25% visible, then stay. Reduced-motion
+  // users (handled in CSS too) see it immediately.
+  const quote = document.querySelector('.pull-quote');
+  if (quote) {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced || !('IntersectionObserver' in window)) {
+      quote.classList.add('revealed');
+    } else {
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              quote.classList.add('revealed');
+              io.disconnect();
+            }
+          }
+        },
+        { threshold: 0.25 }
+      );
+      io.observe(quote);
+    }
+  }
+</script>

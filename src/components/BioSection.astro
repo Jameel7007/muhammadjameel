@@ -29,7 +29,7 @@ const shortParagraphs =
     : [];
 ---
 
-<div class="bio-grid">
+<div class:list={['bio-grid', variant]}>
   <div class="portrait" data-reveal>
     <Image
       src={portrait}
@@ -77,6 +77,20 @@ const shortParagraphs =
     .portrait {
       position: sticky;
       top: 130px;
+    }
+
+    /* Short variant (homepage): the two-paragraph text column is taller
+       than the 3:4 portrait, which left an empty band under the photo.
+       Stretch the portrait to the text column's height (object-fit crop)
+       so both columns end together and the section height is driven by
+       its content. */
+    .bio-grid.short {
+      align-items: stretch;
+    }
+
+    .bio-grid.short .portrait {
+      aspect-ratio: auto;
+      height: auto;
     }
   }
 
