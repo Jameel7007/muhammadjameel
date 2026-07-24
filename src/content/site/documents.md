@@ -9,8 +9,8 @@ documents:
     pages: 44
     description: A comparative glossary of terms shared between the Nation's lessons and classical tasawwuf.
     file: /documents/supreme-wisdom-sufi-lexicon.pdf
-  - title: Notes on the Naqshbandi Daily Practice
-    pages: 28
-    description: A plain-language companion to the daily awrad, written for new seekers.
-    file: /documents/naqshbandi-daily-practice.pdf
+  - title: The Worst Is Yet to Come
+    pages: 2
+    description: The Honorable Elijah Muhammad's 1969 warning to America, reprinted from the September 12, 1969 issue of Muhammad Speaks.
+    file: /documents/worst-is-yet-to-come-1969.pdf
 ---
