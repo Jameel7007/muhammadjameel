@@ -205,7 +205,7 @@ img {
   margin: 0;
   font-size: var(--text-detail);
   line-height: 1.6;
-  color: var(--ink-62);
+  color: var(--ink-65);
   max-width: 60ch;
 }
 
@@ -216,7 +216,9 @@ img {
   font-size: var(--text-meta);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--ink-45);
+  /* Kept lighter than the descriptions (--ink-65) but not so faint it
+     recedes — around the ~#8a8580 floor. */
+  color: var(--ink-50);
 }
 
 /* ---- Article ------------------------------------------------------------- */
