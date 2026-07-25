@@ -64,26 +64,31 @@ const coverColors = {
 
   <section id="blog" class:list={['section', 'blog-section', { 'seam-collapse-top': pullQuote }]}>
     <div class="inner-wide">
-      <div class="section-label blog-label">Blog</div>
-      {
-        featuredPost && (
-          <a href={`/blog/${featuredPost.id}/`} class="featured-post">
-            <div class="featured-label">Featured</div>
-            <h3>{featuredPost.data.title}</h3>
-            <p class="featured-desc">{featuredPost.data.description}</p>
-            <div class="post-meta">
-              <span>{longDate(featuredPost.data.date)}</span>
-              <span>{readingTime(featuredPost.body)} min read</span>
-            </div>
-            <!-- Optional affordance: delete this span (and the
-                 .featured-read CSS rules) to remove it. -->
-            <span class="featured-read">
-              <span class="featured-read-text">Read</span>
-              <span class="featured-arrow" aria-hidden="true">→</span>
-            </span>
-          </a>
-        )
-      }
+      <!-- The label and the featured post rise together as one unit, on the
+           site-wide [data-reveal] observer — same behaviour as the Documents
+           and Books sections. -->
+      <div class="featured-region" data-reveal>
+        <div class="section-label">Blog</div>
+        {
+          featuredPost && (
+            <a href={`/blog/${featuredPost.id}/`} class="featured-post">
+              <div class="featured-label">Featured</div>
+              <h3>{featuredPost.data.title}</h3>
+              <p class="featured-desc">{featuredPost.data.description}</p>
+              <div class="post-meta">
+                <span>{longDate(featuredPost.data.date)}</span>
+                <span>{readingTime(featuredPost.body)} min read</span>
+              </div>
+              <!-- Optional affordance: delete this span (and the
+                   .featured-read CSS rules) to remove it. -->
+              <span class="featured-read">
+                <span class="featured-read-text">Read</span>
+                <span class="featured-arrow" aria-hidden="true">→</span>
+              </span>
+            </a>
+          )
+        }
+      </div>
       <div class="post-list">
         {posts.map((post) => <PostRow post={post} />)}
       </div>
@@ -294,33 +299,6 @@ const coverColors = {
     margin-bottom: 16px;
   }
 
-  /* BLOG label entrance: the word settles into place. It fades 0→1 while
-     its tracking eases from ~60% of final out to the normal 0.4em — the
-     letterspacing IS the motion, no vertical movement (distinct from the
-     quote's rise and the featured stagger). Fires once (.revealed added
-     by the script); reduced-motion shows it settled instantly. The label
-     is a left-aligned block, so tracking out never reflows the rows below
-     — no layout shift. */
-  .blog-label {
-    display: inline-block;
-    opacity: 0;
-    letter-spacing: 0.24em;
-    transition: opacity 0.7s var(--ease), letter-spacing 0.7s var(--ease);
-  }
-
-  .blog-label.revealed {
-    opacity: 1;
-    letter-spacing: 0.4em;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .blog-label {
-      opacity: 1;
-      letter-spacing: 0.4em;
-      transition: none;
-    }
-  }
-
   .featured-post h3 {
     color: var(--color-green);
   }
@@ -340,44 +318,17 @@ const coverColors = {
     color: var(--color-accent);
   }
 
-  /* Staggered reveal: same vocabulary as the pull quote (fade + rise,
-     ease-out, fires once via the script below, transform-based so no
-     layout shift). Three beats: label, then title +150ms, then
-     description/meta/read +300ms. */
-  .featured-post > * {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-
-  .featured-post .featured-label {
-    transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
-  }
-
-  .featured-post h3 {
-    transition: opacity 0.7s var(--ease) 0.15s, transform 0.7s var(--ease) 0.15s;
-  }
-
-  .featured-post .featured-desc,
-  .featured-post .post-meta,
-  .featured-post .featured-read {
-    transition: opacity 0.7s var(--ease) 0.3s, transform 0.7s var(--ease) 0.3s;
-  }
-
-  .featured-post.revealed > * {
-    opacity: 1;
-    transform: none;
-  }
-
-  /* The rest of the blog section stays static: the featured block is
-     the only choreographed element here. Overrides the global
-     [data-reveal] fade for this section's rows/label/all-posts link. */
-  .blog-section :global([data-reveal]) {
+  /* The post rows and the All-posts link below stay static — the featured
+     region is the only thing that animates in this section. Scoped so it
+     cannot touch .featured-region's own [data-reveal]. */
+  .blog-section .post-list :global([data-reveal]),
+  .blog-section .all-posts {
     opacity: 1;
     transform: none;
     transition: none;
   }
 
-  /* Optional Read → affordance (last reveal beat). Delete with the span. */
+  /* Optional Read → affordance. Delete with the span. */
   .featured-read {
     align-self: flex-start;
     display: inline-flex;
@@ -496,59 +447,28 @@ const coverColors = {
 </style>
 
 <script>
-  // Pull quote and featured post: fade up once when partly visible, then
-  // stay. Reduced-motion users (handled in CSS too) see them immediately.
+  // Pull quote: fades up once when a quarter of it is visible, then stays.
+  // Everything else on this page uses the site-wide [data-reveal] observer
+  // in Base.astro. Reduced-motion users (handled in CSS too) see it at once.
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const revealOnce = (el: Element | null, threshold: number) => {
-    if (!el) return;
+  const quote = document.querySelector('.pull-quote');
+
+  if (quote) {
     if (reduced || !('IntersectionObserver' in window)) {
-      el.classList.add('revealed');
-      return;
+      quote.classList.add('revealed');
+    } else {
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              quote.classList.add('revealed');
+              io.disconnect();
+            }
+          }
+        },
+        { threshold: 0.25 }
+      );
+      io.observe(quote);
     }
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            el.classList.add('revealed');
-            io.disconnect();
-          }
-        }
-      },
-      { threshold }
-    );
-    io.observe(el);
-  };
-
-  revealOnce(document.querySelector('.pull-quote'), 0.25);
-
-  // Blog section reveals top-down: the BLOG label settles first, then the
-  // featured stagger begins. Chaining (rather than two independent
-  // observers) guarantees the order — the large featured block can reach
-  // its threshold before the small label reaches 60%, so we drive the
-  // featured reveal off the label's, delayed until the label has settled.
-  const blogLabel = document.querySelector('.blog-label');
-  const featured = document.querySelector('.featured-post');
-  const revealFeatured = () => featured && featured.classList.add('revealed');
-
-  if (reduced || !('IntersectionObserver' in window)) {
-    blogLabel && blogLabel.classList.add('revealed');
-    revealFeatured();
-  } else if (blogLabel) {
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            blogLabel.classList.add('revealed');
-            // Let the label's ~700ms settle nearly finish before FEATURED.
-            window.setTimeout(revealFeatured, 550);
-            io.disconnect();
-          }
-        }
-      },
-      { threshold: 0.6 }
-    );
-    io.observe(blogLabel);
-  } else {
-    revealFeatured();
   }
 </script>
