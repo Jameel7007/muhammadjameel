@@ -67,7 +67,7 @@ const coverColors = {
       <!-- The label and the featured post rise together as one unit, on the
            site-wide [data-reveal] observer — same behaviour as the Documents
            and Books sections. -->
-      <div class="featured-region" data-reveal>
+      <div class:list={['featured-region', { 'has-featured': featuredPost }]} data-reveal>
         <div class="section-label">Blog</div>
         {
           featuredPost && (
@@ -294,8 +294,10 @@ const coverColors = {
 
   /* The featured block carries its own 40px top padding, so the blog
      label's margin is trimmed to keep label→featured (16 + 40 = 56)
-     level with how BOOKS/DOCUMENTS labels sit above their content. */
-  .blog-section .section-label {
+     level with how BOOKS/DOCUMENTS labels sit above their content.
+     With no featured post the label sits straight above the post list,
+     so it keeps the standard --label-gap like every other section. */
+  .featured-region.has-featured .section-label {
     margin-bottom: 16px;
   }
 

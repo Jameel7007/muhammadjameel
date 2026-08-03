@@ -21,6 +21,9 @@ const blog = defineCollection({
     // Featured post: shown prominently at the top of the homepage blog
     // section. If no post is flagged, the homepage shows the latest three.
     featured: z.boolean().default(false),
+    // Lorem-ipsum filler kept only so the layout has something to show.
+    // Suppresses the author byline — no unauthored text carries the name.
+    placeholder: z.boolean().default(false),
   }),
 });
 

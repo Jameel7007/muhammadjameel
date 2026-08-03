@@ -13,9 +13,11 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { title, description, date, tags, type } = post.data;
+const { title, description, date, tags, type, placeholder } = post.data;
 const { Content } = await render(post);
 const minutes = readingTime(post.body);
+// Placeholder posts run without the byline — nothing unauthored is signed.
+const byline = placeholder ? '' : 'Muhammad Jameel · ';
 ---
 
 <Base title={`${title} — Muhammad Jameel`} description={description} ogType="article">
@@ -29,7 +31,7 @@ const minutes = readingTime(post.body);
         </div>
         <h1>{title}</h1>
         <p class="article-subtitle">{description}</p>
-        <div class="article-meta">Muhammad Jameel · {longDate(date)} · {minutes} min read</div>
+        <div class="article-meta">{byline}{longDate(date)} · {minutes} min read</div>
       </header>
       <div class="prose">
         <Content />

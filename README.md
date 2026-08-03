@@ -64,7 +64,7 @@ import photo from './photo.jpg';
 <Figure src={photo} alt="A bench outside the mosque" caption="The bench, photographed in 2019." />
 ```
 
-`Figure` also accepts a plain string `src` for images in `public/` or remote URLs (those skip optimization). See `src/content/blog/the-people-of-the-bench/` for a working example of a folder post using `Figure`.
+`Figure` also accepts a plain string `src` for images in `public/` or remote URLs (those skip optimization). See `src/content/blog/lorem-ipsum-dolor-sit-amet/` for a working example of a folder post using `Figure`.
 
 ## Editing site copy
 
