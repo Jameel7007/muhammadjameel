@@ -4,6 +4,7 @@ import Base from '../layouts/Base.astro';
 import BioSection from '../components/BioSection.astro';
 import DocumentsList from '../components/DocumentsList.astro';
 import PostRow from '../components/PostRow.astro';
+import ProjectsList from '../components/ProjectsList.astro';
 import { getPublishedPosts, longDate, readingTime } from '../lib/posts';
 
 // Featured-plus-recent: one flagged post gets the large treatment,
@@ -43,6 +44,7 @@ const coverColors = {
       <a href="/blog">Blog</a>
       <a href="/about">Bio</a>
       <a href="#books">Books</a>
+      <a href="#projects">Projects</a>
       <a href="/documents">Documents</a>
     </div>
   </section>
@@ -127,6 +129,13 @@ const coverColors = {
     </div>
   </section>
 
+  <section id="projects" class="section">
+    <div class="inner-wide">
+      <div class="section-label" data-reveal>Projects</div>
+      <ProjectsList />
+    </div>
+  </section>
+
   <section id="documents" class="section section-dark">
     <div class="inner-wide">
       <div class="section-label" data-reveal>Documents</div>
@@ -207,6 +216,16 @@ const coverColors = {
   @media (min-width: 768px) {
     .hero-links a {
       padding-bottom: 6px;
+    }
+  }
+
+  /* Five links stop fitting on one line below ~420px. Left alone the set
+     breaks 4 / 1 and orphans "Documents"; capping the width breaks it
+     3 / 2 instead, so both rows read as deliberate. */
+  @media (max-width: 419px) {
+    .hero-links {
+      max-width: 210px;
+      row-gap: 26px;
     }
   }
 

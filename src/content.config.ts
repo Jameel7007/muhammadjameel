@@ -56,6 +56,17 @@ const site = defineCollection({
     buttondownUsername: z.string().optional(),
     social: z.array(z.object({ label: z.string(), url: z.string().url() })).optional(),
     copyright: z.string().optional(),
+    // projects.md
+    projects: z
+      .array(
+        z.object({
+          title: z.string(),
+          description: z.string(),
+          link: z.string().url(),
+          linkLabel: z.string().default('Visit'),
+        })
+      )
+      .optional(),
     // documents.md
     documents: z
       .array(
