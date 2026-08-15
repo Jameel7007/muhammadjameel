@@ -8,8 +8,8 @@
   --color-bg: #fafaf7;        /* cream — page background */
   --color-ink: #0d0d0d;       /* near-black — body text, dark section bg */
   --color-green: #2e5a34;     /* deep green — hero, blockquotes, selection */
-  --color-accent: #d94a3a;    /* red — links, section labels, footer */
-  --color-oxblood: #8f2e24;   /* deep accent — the Projects band */
+  --color-accent: #d94a3a;    /* red — links and section labels */
+  --color-oxblood: #8f2e24;   /* deep accent — the footer ground */
   --color-cream: #fafaf7;     /* light text on dark/colored surfaces */
 
   /* Ink at reduced strength (muted text, rules) */
