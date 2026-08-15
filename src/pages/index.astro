@@ -129,7 +129,7 @@ const coverColors = {
     </div>
   </section>
 
-  <section id="projects" class="section">
+  <section id="projects" class="section section-oxblood">
     <div class="inner-wide">
       <div class="section-label" data-reveal>Projects</div>
       <ProjectsList />
@@ -463,6 +463,17 @@ const coverColors = {
 
   .section-dark {
     background: var(--color-ink);
+    color: var(--color-cream);
+  }
+
+  /* Projects band. On oxblood the accent-red label would sit red-on-red,
+     so the label goes cream — the same move .section-dark's cream text is. */
+  .section-oxblood {
+    background: var(--color-oxblood);
+    color: var(--color-cream);
+  }
+
+  .section-oxblood .section-label {
     color: var(--color-cream);
   }
 </style>

@@ -329,8 +329,34 @@ img {
   font-size: clamp(22px, 2.6vw, 27px);
 }
 
+/* Block citation: extended quoted passages — hadith, narrated stories,
+   translated sources. Set apart by an indent and a rule rather than by
+   size, so a long quotation stays readable at length. For a short
+   centred pull quote, use <PullQuote> (see components/PullQuote.astro). */
 .prose blockquote {
   margin: 36px 0;
+  padding: 4px 0 4px clamp(20px, 4vw, 34px);
+  border: none;
+  border-left: 1px solid var(--rule);
+  text-align: left;
+  font-style: normal;
+  font-size: calc(var(--text-body) - 1px);
+  line-height: 1.7;
+  color: var(--ink-70);
+  text-wrap: pretty;
+}
+
+.prose blockquote p {
+  margin: 0 0 20px;
+}
+
+.prose blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+/* Short centred pull quote — the epigraph treatment. */
+.prose .pull-quote {
+  margin: 44px 0;
   padding: 0;
   border: none;
   text-align: center;
@@ -341,7 +367,7 @@ img {
   text-wrap: pretty;
 }
 
-.prose blockquote p {
+.prose .pull-quote p {
   margin: 0;
 }
 
