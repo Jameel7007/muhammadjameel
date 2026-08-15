@@ -7,7 +7,7 @@ type: article
 draft: false
 ---
 
-Recently we were blessed to hear a few weighty words from the Honorable Minister Louis Farrakhan. There is one thing he said that I want to sit with and open up, and in doing so share some of what I have learned in the Naqshbandi Sufi Way.
+Recently we were blessed to hear a few weighty words from the Honorable Minister Farrakhan. There is one thing that he said that I want to look into and parse more deeply, and in doing so share some of what I have learned in the Naqshbandi Sufi Way.
 
 Firstly, let us look at the need for a guide. The famous saying of the great Sufi sage Bayazid Bistami is: "Whoever has no shaykh, their shaykh is the devil."[^bayazid] The Honorable Elijah Muhammad also spoke on our need for a human being to guide us:
 
