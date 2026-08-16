@@ -221,10 +221,14 @@ const coverColors = {
 
   /* Five links stop fitting on one line below ~420px. Left alone the set
      breaks 4 / 1 and orphans "Documents"; capping the width breaks it
-     3 / 2 instead, so both rows read as deliberate. */
+     3 / 2 instead, so both rows read as deliberate.
+
+     230px, not 210px: Georgia is wider than EB Garamond, and at 210px the
+     fallback breaks 3 / 1 / 1. 230px holds 3 / 2 in both, so the row
+     survives the font-swap window and any future fallback. */
   @media (max-width: 419px) {
     .hero-links {
-      max-width: 210px;
+      max-width: 230px;
       row-gap: 26px;
     }
   }
