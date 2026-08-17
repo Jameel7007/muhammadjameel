@@ -427,6 +427,11 @@ const coverColors = {
     padding: 12% 10%;
     text-align: center;
     transition: transform 0.5s var(--ease);
+    /* The cover is the type's container: its width is set by the grid
+       column, not the viewport, so the title must scale with IT. At
+       in-between widths the grid drops to one wide column and a
+       viewport-sized title turns into a postage stamp. */
+    container-type: inline-size;
   }
 
   .book-cover:hover {
@@ -453,8 +458,9 @@ const coverColors = {
     color: var(--ink-70);
   }
 
-  /* Mobile: covers render near full-width, so their text scales up to
-     keep the same visual presence it has on desktop. Desktop unchanged. */
+  /* Mobile bump for browsers WITHOUT container queries only — the cqi
+     sizing below covers every width by construction and must win, so
+     this fallback stays above it in source order. */
   @media (max-width: 767px) {
     .book-title {
       font-size: clamp(26px, 7.5vw, 30px);
@@ -462,6 +468,23 @@ const coverColors = {
 
     .book-author {
       font-size: var(--text-ui);
+    }
+  }
+
+  /* Cover-relative type. cqi resolves against the cover's CONTENT box
+     (inside its 10% side padding), and 11cqi of that box matches the
+     26px-on-a-300px-cover ratio of the three-column desktop design —
+     so a lone 500px cover gets a ~45px title instead of staying at the
+     viewport clamp. @supports, not a double declaration: the CSS
+     minifier collapses duplicate properties, which would silently
+     delete the fallback above. */
+  @supports (font-size: 1cqi) {
+    .book-title {
+      font-size: clamp(20px, 11cqi, 46px);
+    }
+
+    .book-author {
+      font-size: clamp(15px, 6cqi, 26px);
     }
   }
 
