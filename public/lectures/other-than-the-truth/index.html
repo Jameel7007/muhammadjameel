@@ -274,6 +274,9 @@ html[data-voice="sis"] .portrait img{opacity:.5}
   .js.loaded .portrait figure{opacity:1;transform:none}
 }
 
+/* Keyboard tips only where there is a keyboard */
+@media (hover:none) and (pointer:coarse),(max-width:600px){.hint{display:none}}
+
 /* ---------- Narrow screens ---------- */
 @media (max-width:860px){
   .log{grid-template-columns:minmax(0,1fr)}
