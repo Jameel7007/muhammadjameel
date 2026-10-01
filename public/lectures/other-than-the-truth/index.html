@@ -8,7 +8,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;1,7..72,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=DM+Serif+Display:ital@0;1&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;1,7..72,400&display=swap">
 <style>
 /* Layout: a tape log read under a night sky. Left margin = timecode, centre = the voice
    at the stand. Circulating texts arrive as spirit-duplicator sheets in violet ditto ink.
@@ -18,7 +18,7 @@
   --ink:#ece6d7; --dim:#8c95ad; --gold:#d8b76b; --gold-hi:#f1d58f; --gold-dim:#9c8653;
   --paper:#e6e3ea; --ditto:#43398f; --ditto-soft:#bdb3f0; --stop:#b8382c;
   --neb-a:rgba(96,66,196,.30); --neb-b:rgba(36,78,170,.24); --neb-c:rgba(150,62,150,.14); --neb-d:rgba(216,183,107,.07);
-  --f-display:"Bodoni Moda","Bodoni 72",Didot,Georgia,serif;
+  --f-display:"DM Serif Display",Georgia,"Times New Roman",serif;
   --f-body:"Literata",Georgia,"Times New Roman",serif;
   --f-type:"Courier Prime","Courier New",Courier,monospace;
   --f-util:"Archivo Narrow","Arial Narrow","Helvetica Neue",Arial,sans-serif;
@@ -56,7 +56,7 @@ time{font-variant-numeric:tabular-nums}
 .hero>*{min-width:0}
 .kicker{font-family:var(--f-util);text-transform:uppercase;letter-spacing:.16em;font-size:.76rem;color:var(--dim);margin:0;display:flex;flex-wrap:wrap;gap:6px 18px}
 .kicker b{color:var(--gold);font-weight:500}
-h1{font-family:var(--f-display);font-weight:400;font-optical-sizing:auto;margin:0;line-height:1;letter-spacing:-.02em;
+h1{font-family:var(--f-display);font-weight:400;margin:0;line-height:1;letter-spacing:-.01em;
   font-size:clamp(2.9rem,12.5vw,9.2rem);color:var(--ink);text-wrap:balance;overflow-wrap:break-word}
 h1 .w{display:inline-block;overflow:hidden;vertical-align:top;padding:.12em .14em .2em;margin:-.12em -.14em -.2em}
 h1 .w>span{display:inline-block}
@@ -112,7 +112,7 @@ mark{background:none;color:var(--gold)}
 .sec-n{font-family:var(--f-display);font-size:clamp(3rem,7vw,5.4rem);line-height:.8;color:var(--gold);justify-self:start;will-change:transform;text-shadow:0 0 28px rgba(216,183,107,.25)}
 .sec-meta{min-width:0}
 .eyebrow{margin:0 0 6px;font-family:var(--f-util);text-transform:uppercase;letter-spacing:.14em;font-size:.72rem;color:var(--dim)}
-.sec-head h2{margin:0;font-family:var(--f-display);font-weight:400;font-size:clamp(1.4rem,3.2vw,2.3rem);line-height:1.12;text-wrap:balance;max-width:34ch;overflow-wrap:break-word}
+.sec-head h2{margin:0;font-family:var(--f-body);font-weight:400;font-size:clamp(1.3rem,2.8vw,2rem);line-height:1.25;text-wrap:balance;max-width:34ch;overflow-wrap:break-word}
 
 .turn{scroll-margin-top:30vh}
 .who{margin:30px 0 10px;display:flex;align-items:center;gap:10px;font-family:var(--f-util)}
@@ -126,12 +126,12 @@ mark{background:none;color:var(--gold)}
 .v-sis .who,.v-sv .who{color:var(--ditto-soft)}
 
 /* Breath lines: each transcript segment holds its own line */
-.lines{display:grid;grid-template-columns:minmax(0,1fr);gap:4px}
+.lines{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
 .seg{position:relative;-webkit-tap-highlight-color:transparent}
 button,.track,.tick{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
-.ln{position:relative;margin:0;min-width:0;font-size:1.28rem;line-height:1.5;overflow-wrap:break-word}
+.ln{position:relative;margin:0;min-width:0;font-size:1.42rem;line-height:1.72;overflow-wrap:break-word}
 .ln .seg{transition:opacity .5s ease}
-.ln time{position:absolute;right:calc(100% + clamp(16px,3vw,40px));top:.46em;width:5.2rem;text-align:right;font-family:var(--f-util);font-size:.72rem;color:var(--dim);opacity:.5;transition:opacity .25s;cursor:default}
+.ln time{position:absolute;right:calc(100% + clamp(16px,3vw,40px));top:.62em;width:5.2rem;text-align:right;font-family:var(--f-util);font-size:.72rem;color:var(--dim);opacity:.5;transition:opacity .25s;cursor:default}
 .ln:hover time{opacity:1;color:var(--gold)}
 .v-sv .ln{font-style:italic;color:var(--ditto-soft);font-size:1.16rem}
 .v-sv .lines{padding-left:16px;border-left:2px solid var(--ditto)}
@@ -264,7 +264,8 @@ html.playing .log .sheet .seg.speaking{opacity:1}
   .sec-head{grid-template-columns:auto minmax(0,1fr);column-gap:16px;margin-top:80px}
   .ln time{display:none}
   .sp.seg::before{left:-10px}
-  .ln{font-size:1.12rem;line-height:1.55}
+  .ln{font-size:1.2rem;line-height:1.72}
+  .lines{gap:12px}
   .reel{grid-template-columns:auto auto minmax(0,1fr) auto;gap:12px}
   .now{display:none}
 }
