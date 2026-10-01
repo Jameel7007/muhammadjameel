@@ -8,7 +8,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=DM+Serif+Display:ital@0;1&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;1,7..72,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,700;1,7..72,400;1,7..72,700&display=swap">
 <style>
 /* Layout: a tape log read under a night sky. Left margin = timecode, centre = the voice
    at the stand. Circulating texts arrive as spirit-duplicator sheets in violet ditto ink.
@@ -18,7 +18,7 @@
   --ink:#ece6d7; --dim:#8c95ad; --gold:#d8b76b; --gold-hi:#f1d58f; --gold-dim:#9c8653;
   --paper:#e6e3ea; --ditto:#43398f; --ditto-soft:#bdb3f0; --stop:#b8382c;
   --neb-a:rgba(96,66,196,.30); --neb-b:rgba(36,78,170,.24); --neb-c:rgba(150,62,150,.14); --neb-d:rgba(216,183,107,.07);
-  --f-display:"DM Serif Display",Georgia,"Times New Roman",serif;
+  --f-display:"Literata",Georgia,"Times New Roman",serif;
   --f-body:"Literata",Georgia,"Times New Roman",serif;
   --f-type:"Courier Prime","Courier New",Courier,monospace;
   --f-util:"Archivo Narrow","Arial Narrow","Helvetica Neue",Arial,sans-serif;
@@ -56,7 +56,7 @@ time{font-variant-numeric:tabular-nums}
 .hero>*{min-width:0}
 .kicker{font-family:var(--f-util);text-transform:uppercase;letter-spacing:.16em;font-size:.76rem;color:var(--dim);margin:0;display:flex;flex-wrap:wrap;gap:6px 18px}
 .kicker b{color:var(--gold);font-weight:500}
-h1{font-family:var(--f-display);font-weight:400;margin:0;line-height:1;letter-spacing:-.01em;
+h1{font-family:var(--f-display);font-weight:700;font-style:italic;margin:0;line-height:1;letter-spacing:-.025em;
   font-size:clamp(2.9rem,12.5vw,9.2rem);color:var(--ink);text-wrap:balance;overflow-wrap:break-word}
 h1 .w{display:inline-block;overflow:hidden;vertical-align:top;padding:.12em .14em .2em;margin:-.12em -.14em -.2em}
 h1 .w>span{display:inline-block}
@@ -67,7 +67,7 @@ h1 .truth::after{content:"";position:absolute;left:.02em;right:.06em;bottom:.04e
 .lede em{color:var(--ditto-soft)}
 .facts{display:flex;flex-wrap:wrap;gap:14px 40px;margin:4px 0 0;padding:0;list-style:none;font-family:var(--f-util)}
 .facts li{display:grid;gap:2px}
-.facts .v{font-family:var(--f-display);font-size:2.2rem;line-height:1;color:var(--gold);font-variant-numeric:tabular-nums}
+.facts .v{font-family:var(--f-display);font-weight:700;font-size:2.2rem;line-height:1;color:var(--gold);font-variant-numeric:tabular-nums}
 .facts .k{text-transform:uppercase;letter-spacing:.12em;font-size:.72rem;color:var(--dim)}
 .cast{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(15rem,100%),1fr));max-width:48rem;gap:18px}
 .cast div{border-top:1px solid var(--rule);padding-top:12px;min-width:0}
@@ -109,7 +109,7 @@ mark{background:none;color:var(--gold)}
 
 .sec-head{grid-column:1/-1;display:grid;grid-template-columns:5.2rem minmax(0,1fr);column-gap:clamp(16px,3vw,40px);align-items:end;margin:110px 0 40px;padding-top:30px;border-top:1px solid var(--rule);scroll-margin-top:24px}
 .sec-head:first-child{margin-top:24px}
-.sec-n{font-family:var(--f-display);font-size:clamp(3rem,7vw,5.4rem);line-height:.8;color:var(--gold);justify-self:start;will-change:transform;text-shadow:0 0 28px rgba(216,183,107,.25)}
+.sec-n{font-family:var(--f-display);font-weight:700;font-size:clamp(3rem,7vw,5.4rem);line-height:.8;color:var(--gold);justify-self:start;will-change:transform;text-shadow:0 0 28px rgba(216,183,107,.25)}
 .sec-meta{min-width:0}
 .eyebrow{margin:0 0 6px;font-family:var(--f-util);text-transform:uppercase;letter-spacing:.14em;font-size:.72rem;color:var(--dim)}
 .sec-head h2{margin:0;font-family:var(--f-body);font-weight:400;font-size:clamp(1.3rem,2.8vw,2rem);line-height:1.25;text-wrap:balance;max-width:34ch;overflow-wrap:break-word}
@@ -168,7 +168,7 @@ html.playing .log .sheet .seg.speaking{opacity:1}
 /* ---------- Coda ---------- */
 .coda{border-top:1px solid var(--rule);margin-top:110px;padding-block:64px 24px;display:grid;gap:18px;max-width:46rem}
 .coda p{margin:0}
-.coda .big{font-family:var(--f-display);font-size:clamp(2rem,6vw,3.8rem);line-height:1.05;color:var(--ink);text-wrap:balance}
+.coda .big{font-family:var(--f-display);font-weight:700;font-style:italic;font-size:clamp(2rem,6vw,3.8rem);line-height:1.05;color:var(--ink);text-wrap:balance}
 .coda .big span{color:var(--gold);font-style:italic}
 .coda .small{font-family:var(--f-util);color:var(--dim);font-size:.9rem;letter-spacing:.04em}
 
@@ -190,7 +190,7 @@ html.playing .log .sheet .seg.speaking{opacity:1}
 .play .i-pause{display:none}
 .playing .play .i-play{display:none}.playing .play .i-pause{display:block}
 .play .ring{position:absolute;inset:-5px;border-radius:50%;border:1px solid var(--gold);opacity:0;transform:scale(.85)}
-.digits{display:flex;font-family:var(--f-display);font-size:1.5rem;color:var(--gold);line-height:1}
+.digits{display:flex;font-family:var(--f-display);font-weight:700;font-size:1.5rem;color:var(--gold);line-height:1}
 .dg{display:inline-block;height:1em;overflow:hidden;width:.62em;text-align:center}
 .dg .strip{display:block;transition:transform .5s var(--ease);will-change:transform}
 .dg .strip span{display:block;height:1em}
