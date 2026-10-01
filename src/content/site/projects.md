@@ -3,6 +3,10 @@
 # appears in the Projects section on the homepage — no code change needed.
 # linkLabel is optional and defaults to "Visit".
 projects:
+  - title: Other Than the Truth
+    description: The Theology of Time, October 15, 1972. A sister reads teachings circulating in the Honorable Elijah Muhammad's name, and he stops her, one claim at a time. The full exchange, transcribed word for word and set to the original recording.
+    link: https://muhammadjameel.com/lectures/other-than-the-truth/
+    linkLabel: Read and listen
   - title: Muqarnas
     description: A medieval stalactite vault drawn, solved, and raised before the camera, from a single thirteenth-century plan and al-Kāshī's fifteenth-century method — one module, one curve, one table of measures, rebuilt tier on tier in three dimensions.
     link: https://jameel7007.github.io/muqarnas/
