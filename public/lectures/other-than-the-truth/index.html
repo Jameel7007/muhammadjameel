@@ -1,0 +1,707 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#04060d">
+<title>Other Than the Truth</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;1,7..72,400&display=swap">
+<style>
+/* Layout: a tape log read under a night sky. Left margin = timecode, centre = the voice
+   at the stand. Circulating texts arrive as spirit-duplicator sheets in violet ditto ink.
+   The reel bar at the foot runs with scroll, or with the recording once it is loaded. */
+:root{
+  --void:#04060d; --night:#0a1020; --night-2:rgba(16,23,44,.72); --rule:rgba(173,186,230,.14);
+  --ink:#ece6d7; --dim:#8c95ad; --gold:#d8b76b; --gold-hi:#f1d58f; --gold-dim:#9c8653;
+  --paper:#e6e3ea; --ditto:#43398f; --ditto-soft:#bdb3f0; --stop:#b8382c;
+  --neb-a:rgba(96,66,196,.30); --neb-b:rgba(36,78,170,.24); --neb-c:rgba(150,62,150,.14); --neb-d:rgba(216,183,107,.07);
+  --f-display:"Bodoni Moda","Bodoni 72",Didot,Georgia,serif;
+  --f-body:"Literata",Georgia,"Times New Roman",serif;
+  --f-type:"Courier Prime","Courier New",Courier,monospace;
+  --f-util:"Archivo Narrow","Arial Narrow","Helvetica Neue",Arial,sans-serif;
+  --ease:cubic-bezier(.2,.7,.15,1);
+  --gut:clamp(16px,4vw,48px);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;background:var(--void)}
+body{margin:0;background:var(--void);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6;
+  padding-inline:var(--gut);padding-block:0 calc(120px + env(safe-area-inset-bottom,0px));overflow-x:hidden}
+::selection{background:var(--gold);color:var(--void)}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:4px;border-radius:2px}
+time{font-variant-numeric:tabular-nums}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- The sky ---------- */
+.sky{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:radial-gradient(120% 80% at 50% 0%,#0b1230 0%,var(--void) 60%)}
+.nebula{position:absolute;inset:-20%;background:
+  radial-gradient(38% 30% at 22% 18%,var(--neb-a),transparent 70%),
+  radial-gradient(34% 40% at 84% 38%,var(--neb-b),transparent 72%),
+  radial-gradient(40% 26% at 58% 86%,var(--neb-c),transparent 70%),
+  radial-gradient(22% 18% at 40% 55%,var(--neb-d),transparent 70%);will-change:transform}
+.stars{position:absolute;left:0;top:0;width:100%;will-change:transform}
+.twinkle{position:absolute;width:3px;height:3px;margin:-1.5px 0 0 -1.5px;border-radius:50%;background:#fff;box-shadow:0 0 6px 1px rgba(200,210,255,.8),0 0 14px 2px rgba(150,140,255,.35);opacity:.5}
+.meteor{position:absolute;top:var(--y,12%);left:var(--x,80%);width:var(--len,180px);height:1px;background:linear-gradient(90deg,rgba(255,244,214,.95),rgba(255,255,255,0));opacity:0;transform:rotate(var(--a,-24deg));transform-origin:left center}
+.meteor::after{content:"";position:absolute;left:-1px;top:-1px;width:3px;height:3px;border-radius:50%;background:#fff;box-shadow:0 0 8px 2px rgba(255,240,200,.8)}
+.vignette{position:absolute;inset:0;background:radial-gradient(75% 65% at 50% 45%,transparent 40%,rgba(2,3,8,.55) 100%)}
+.wrap{position:relative;z-index:1;max-width:58rem;margin-inline:auto;overflow-x:clip}
+
+/* ---------- Hero ---------- */
+.hero{padding-block:clamp(56px,10vw,132px) 44px;display:grid;grid-template-columns:minmax(0,1fr);gap:30px;border-bottom:1px solid var(--rule)}
+.hero>*{min-width:0}
+.kicker{font-family:var(--f-util);text-transform:uppercase;letter-spacing:.16em;font-size:.76rem;color:var(--dim);margin:0;display:flex;flex-wrap:wrap;gap:6px 18px}
+.kicker b{color:var(--gold);font-weight:500}
+h1{font-family:var(--f-display);font-weight:400;font-optical-sizing:auto;margin:0;line-height:1;letter-spacing:-.02em;
+  font-size:clamp(2.9rem,12.5vw,9.2rem);color:var(--ink);text-wrap:balance;overflow-wrap:break-word}
+h1 .w{display:inline-block;overflow:hidden;vertical-align:top;padding:.12em .14em .2em;margin:-.12em -.14em -.2em}
+h1 .w>span{display:inline-block}
+h1 .g>span{color:var(--gold);font-style:italic}
+h1 .truth{position:relative}
+h1 .truth::after{content:"";position:absolute;left:.02em;right:.06em;bottom:.04em;height:2px;background:linear-gradient(90deg,var(--gold),rgba(216,183,107,0));transform-origin:left;transform:scaleX(1)}
+.lede{max-width:36rem;font-size:1.14rem;margin:0;color:var(--ink);text-wrap:pretty}
+.lede em{color:var(--ditto-soft)}
+.facts{display:flex;flex-wrap:wrap;gap:14px 40px;margin:4px 0 0;padding:0;list-style:none;font-family:var(--f-util)}
+.facts li{display:grid;gap:2px}
+.facts .v{font-family:var(--f-display);font-size:2.2rem;line-height:1;color:var(--gold);font-variant-numeric:tabular-nums}
+.facts .k{text-transform:uppercase;letter-spacing:.12em;font-size:.72rem;color:var(--dim)}
+.cast{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(15rem,100%),1fr));max-width:48rem;gap:18px}
+.cast div{border-top:1px solid var(--rule);padding-top:12px;min-width:0}
+.cast h3{margin:0 0 4px;font-family:var(--f-util);font-weight:500;text-transform:uppercase;letter-spacing:.1em;font-size:.76rem}
+.cast p{margin:0;font-size:.92rem;color:var(--dim)}
+.cast .c-em h3{color:var(--gold)} .cast .c-sis h3{color:var(--ditto-soft)}
+.swatch{display:inline-block;width:.6em;height:.6em;margin-right:.5em;vertical-align:.05em}
+.c-em .swatch{background:var(--gold);border-radius:50%;box-shadow:0 0 8px var(--gold)} .c-sis .swatch{background:var(--paper);box-shadow:inset 0 0 0 2px var(--ditto)}
+
+.listen{display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px;padding:18px 20px;border:1px solid var(--rule);background:var(--night-2);max-width:44rem}
+.listen .txt{flex:1 1 16rem;min-width:0;margin:0;font-size:.95rem;color:var(--dim)}
+.listen .txt b{display:block;color:var(--ink);font-family:var(--f-util);font-weight:500;text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;margin-bottom:2px}
+.btn{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--gold-dim);background:transparent;color:var(--gold);padding:9px 16px;font-family:var(--f-util);text-transform:uppercase;letter-spacing:.14em;font-size:.76rem;cursor:pointer;transition:background .25s,color .25s,border-color .25s}
+.btn.quiet{border-color:var(--rule);color:var(--dim)}
+.btn:hover{background:var(--gold);color:var(--void);border-color:var(--gold)}
+.file-name{font-family:var(--f-util);font-size:.8rem;color:var(--gold);overflow-wrap:anywhere}
+
+details.notes{border:1px solid var(--rule);background:var(--night-2)}
+details.notes summary{cursor:pointer;padding:12px 16px;font-family:var(--f-util);text-transform:uppercase;letter-spacing:.12em;font-size:.76rem;color:var(--dim);list-style:none;display:flex;justify-content:space-between;gap:12px}
+details.notes summary::-webkit-details-marker{display:none}
+details.notes summary::after{content:"+";color:var(--gold);transition:transform .3s var(--ease)}
+details.notes[open] summary::after{transform:rotate(45deg)}
+details.notes pre{margin:0;padding:4px 16px 18px;font-family:var(--f-type);font-size:.84rem;line-height:1.6;color:var(--ink);white-space:pre-wrap;overflow-wrap:anywhere}
+.index{list-style:none;margin:0;padding:0;columns:2 22rem;column-gap:40px}
+.index li{break-inside:avoid}
+.index a{display:grid;grid-template-columns:4.6rem 1.8rem minmax(0,1fr);gap:8px;padding:8px 0;border-bottom:1px solid var(--rule);text-decoration:none;font-size:.93rem;align-items:baseline}
+.index .ix-t{font-family:var(--f-util);color:var(--dim);font-variant-numeric:tabular-nums;font-size:.82rem}
+.index .ix-n{font-family:var(--f-display);color:var(--gold)}
+.index .ix-title{min-width:0;overflow-wrap:break-word;transition:transform .3s var(--ease)}
+.index a:hover .ix-title{color:var(--gold);transform:translateX(4px)}
+.hint{font-family:var(--f-util);font-size:.78rem;color:var(--dim);letter-spacing:.06em;margin:0}
+.hint kbd{font-family:var(--f-util);border:1px solid var(--rule);padding:0 5px;border-radius:3px;color:var(--ink)}
+
+/* ---------- Transcript ---------- */
+.log{display:grid;grid-template-columns:5.2rem minmax(0,44rem);column-gap:clamp(16px,3vw,40px);padding-top:24px}
+.log>*{grid-column:2;min-width:0}
+mark{background:none;color:var(--gold)}
+.sd{font-family:var(--f-util);font-size:.78em;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);font-style:normal}
+
+.sec-head{grid-column:1/-1;display:grid;grid-template-columns:5.2rem minmax(0,1fr);column-gap:clamp(16px,3vw,40px);align-items:end;margin:110px 0 40px;padding-top:30px;border-top:1px solid var(--rule);scroll-margin-top:24px}
+.sec-head:first-child{margin-top:24px}
+.sec-n{font-family:var(--f-display);font-size:clamp(3rem,7vw,5.4rem);line-height:.8;color:var(--gold);justify-self:start;will-change:transform;text-shadow:0 0 28px rgba(216,183,107,.25)}
+.sec-meta{min-width:0}
+.eyebrow{margin:0 0 6px;font-family:var(--f-util);text-transform:uppercase;letter-spacing:.14em;font-size:.72rem;color:var(--dim)}
+.sec-head h2{margin:0;font-family:var(--f-display);font-weight:400;font-size:clamp(1.4rem,3.2vw,2.3rem);line-height:1.12;text-wrap:balance;max-width:34ch;overflow-wrap:break-word}
+
+.turn{scroll-margin-top:30vh}
+.who{margin:30px 0 10px;display:flex;align-items:center;gap:10px;font-family:var(--f-util)}
+.who .role{text-transform:uppercase;letter-spacing:.12em;font-size:.74rem;font-weight:500}
+.who .star{position:relative;width:7px;height:7px;flex:none}
+.who .star::before,.who .star::after{content:"";position:absolute;inset:0;border-radius:50%}
+.who .star::before{background:currentColor;opacity:.55}
+.who .star::after{background:currentColor;box-shadow:0 0 10px 2px currentColor;opacity:0;transform:scale(.6);transition:opacity .6s ease,transform .6s var(--ease)}
+.turn.here .who .star::after{opacity:1;transform:scale(1)}
+.v-em .who{color:var(--gold)}
+.v-sis .who,.v-sv .who{color:var(--ditto-soft)}
+
+/* Breath lines: each transcript segment holds its own line */
+.lines{display:grid;grid-template-columns:minmax(0,1fr);gap:4px}
+.seg{position:relative;-webkit-tap-highlight-color:transparent}
+button,.track,.tick{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.ln{position:relative;margin:0;min-width:0;font-size:1.28rem;line-height:1.5;overflow-wrap:break-word}
+.ln .seg{transition:opacity .5s ease}
+.ln time{position:absolute;right:calc(100% + clamp(16px,3vw,40px));top:.46em;width:5.2rem;text-align:right;font-family:var(--f-util);font-size:.72rem;color:var(--dim);opacity:.5;transition:opacity .25s;cursor:default}
+.ln:hover time{opacity:1;color:var(--gold)}
+.v-sv .ln{font-style:italic;color:var(--ditto-soft);font-size:1.16rem}
+.v-sv .lines{padding-left:16px;border-left:2px solid var(--ditto)}
+/* playing: the spoken line is lit, others recede a little */
+.sp.seg::before{content:"";position:absolute;left:-14px;top:.35em;bottom:.35em;width:2px;background:var(--gold);box-shadow:0 0 10px var(--gold);transform:scaleY(0);transform-origin:center;transition:transform .45s var(--ease)}
+.has-tape .seg{cursor:pointer}
+.has-tape .ln time{cursor:pointer}
+html.playing .log .seg{opacity:.55;transition:opacity .6s ease}
+html.playing .log .seg.speaking{opacity:1}
+.sp.seg.speaking::before{transform:scaleY(1)}
+.ln .seg.speaking{color:var(--gold-hi)}
+.v-sv .ln .seg.speaking{color:#fff}
+.sp.seg::before{left:-12px}
+
+/* Circulating sheets: ditto ink on duplicator paper */
+.sheet{position:relative;margin:6px 0 12px;background:var(--paper);color:var(--ditto);padding:clamp(20px,3.4vw,40px) clamp(20px,3.6vw,44px) clamp(22px,3vw,34px);
+  font-family:var(--f-type);font-size:1.02rem;line-height:1.72;box-shadow:0 0 0 1px rgba(255,255,255,.05),0 30px 60px -28px rgba(0,0,0,.9),0 0 80px -30px rgba(140,120,255,.35);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.6' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .3 0 0 0 0 .25 0 0 0 0 .55 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E")}
+.sheet::after{content:"";position:absolute;left:0;right:0;top:0;height:6px;background:repeating-linear-gradient(90deg,transparent 0 14px,rgba(67,57,143,.14) 14px 16px)}
+.sheet-cap{font-family:var(--f-util);text-transform:uppercase;letter-spacing:.14em;font-size:.68rem;color:#6d6597;margin:0 0 14px;padding-bottom:10px;border-bottom:1px dashed rgba(67,57,143,.35)}
+.sp{margin:0 0 10px;text-shadow:0 0 .6px rgba(67,57,143,.55)}
+.sp:last-of-type{margin-bottom:0}
+.sp time{display:block;font-family:var(--f-util);font-size:.7rem;letter-spacing:.08em;color:#7a72a6}
+.sheet .seg::before{background:var(--ditto);box-shadow:none}
+html.playing .log .sheet .seg{opacity:.5}
+html.playing .log .sheet .seg.speaking{opacity:1}
+.sheet mark{color:var(--ditto);background:linear-gradient(transparent 62%,rgba(214,181,106,.45) 62%)}
+.sheet .sd{color:#6d6597}
+.sheet.interrupted::before{content:"";position:absolute;left:clamp(6px,1.2vw,14px);top:18px;bottom:18px;width:3px;background:var(--stop);transform-origin:top;transform:scaleY(1)}
+.stop{margin:18px 0 0;display:flex;justify-content:flex-end}
+.stamp{display:inline-block;font-family:var(--f-util);font-weight:600;text-transform:uppercase;letter-spacing:.18em;font-size:.78rem;color:var(--stop);border:2px solid var(--stop);padding:4px 10px 3px;transform:rotate(-3deg)}
+.stamp time{letter-spacing:.06em;font-weight:500}
+
+/* ---------- Coda ---------- */
+.coda{border-top:1px solid var(--rule);margin-top:110px;padding-block:64px 24px;display:grid;gap:18px;max-width:46rem}
+.coda p{margin:0}
+.coda .big{font-family:var(--f-display);font-size:clamp(2rem,6vw,3.8rem);line-height:1.05;color:var(--ink);text-wrap:balance}
+.coda .big span{color:var(--gold);font-style:italic}
+.coda .small{font-family:var(--f-util);color:var(--dim);font-size:.9rem;letter-spacing:.04em}
+
+/* ---------- Reel bar and player ---------- */
+.reel{position:fixed;left:0;right:0;bottom:0;z-index:20;background:rgba(5,7,15,.9);border-top:1px solid var(--rule);
+  padding:10px var(--gut) calc(10px + env(safe-area-inset-bottom,0px));display:grid;grid-template-columns:auto auto minmax(0,1fr) auto minmax(0,14rem);gap:16px;align-items:center;font-family:var(--f-util)}
+@supports ((backdrop-filter:blur(8px)) or (-webkit-backdrop-filter:blur(8px))){.reel{background:rgba(5,7,15,.72);-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2)}}
+.transport{display:flex;align-items:center;gap:6px}
+.skip{width:34px;height:34px;border:0;background:transparent;color:var(--dim);display:grid;place-items:center;cursor:pointer;border-radius:50%;transition:color .2s,transform .2s var(--ease)}
+.skip svg{width:22px;height:22px;display:block}
+.skip:hover{color:var(--gold)}
+.skip:active{transform:scale(.88)}
+#back10:active svg{transform:rotate(-30deg)}#fwd10:active svg{transform:rotate(30deg)}
+.skip svg{transition:transform .25s var(--ease)}
+.skip[hidden]{display:none!important}
+.play{position:relative;width:40px;height:40px;border-radius:50%;border:1px solid var(--gold-dim);background:transparent;display:grid;place-items:center;cursor:pointer;color:var(--gold);transition:border-color .25s,background .25s}
+.play:hover{border-color:var(--gold);background:rgba(216,183,107,.08)}
+.play svg{width:14px;height:14px;display:block}
+.play .i-pause{display:none}
+.playing .play .i-play{display:none}.playing .play .i-pause{display:block}
+.play .ring{position:absolute;inset:-5px;border-radius:50%;border:1px solid var(--gold);opacity:0;transform:scale(.85)}
+.digits{display:flex;font-family:var(--f-display);font-size:1.5rem;color:var(--gold);line-height:1}
+.dg{display:inline-block;height:1em;overflow:hidden;width:.62em;text-align:center}
+.dg .strip{display:block;transition:transform .5s var(--ease);will-change:transform}
+.dg .strip span{display:block;height:1em}
+.colon{width:.32em;text-align:center;color:var(--gold-dim)}
+.track{position:relative;height:30px;cursor:pointer;touch-action:none}
+.track .base{position:absolute;left:0;right:0;top:14px;height:2px;background:rgba(173,186,230,.18)}
+.track .fill{position:absolute;left:0;right:0;top:14px;height:2px;background:var(--gold);transform-origin:left;transform:scaleX(0);transition:transform .35s var(--ease)}
+.track .head{position:absolute;left:0;top:9px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--void);border:2px solid var(--gold);box-shadow:0 0 10px rgba(216,183,107,.6);transition:transform .35s var(--ease)}
+.dragging .track .fill,.dragging .track .head{transition:none}
+.tick{position:absolute;top:8px;width:14px;height:14px;margin-left:-7px;display:grid;place-items:center;text-decoration:none}
+.tick::before{content:"";width:1px;height:12px;background:var(--dim);transition:transform .2s var(--ease),background .2s}
+.tick:hover::before,.tick:focus-visible::before{background:var(--gold);transform:scaleY(1.5)}
+.tip{position:absolute;bottom:22px;left:50%;white-space:nowrap;background:#0d1328;border:1px solid var(--rule);color:var(--ink);font-size:.74rem;padding:4px 8px;opacity:0;transform:translate(-50%,4px);transition:opacity .2s,transform .2s var(--ease);pointer-events:none}
+.tick:hover .tip,.tick:focus-visible .tip{opacity:1;transform:translate(-50%,0)}
+.tick:nth-last-child(-n+3) .tip{left:auto;right:0;transform:translate(0,4px)}
+.tick:nth-last-child(-n+3):hover .tip,.tick:nth-last-child(-n+3):focus-visible .tip{transform:none}
+.ctl{display:flex;gap:6px}
+.chip{border:1px solid var(--rule);background:transparent;color:var(--dim);font-family:var(--f-util);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:6px 9px;cursor:pointer;min-width:3.2em;transition:color .2s,border-color .2s}
+.chip:hover{color:var(--ink);border-color:var(--dim)}
+.chip[aria-pressed="true"]{color:var(--gold);border-color:var(--gold-dim)}
+.chip[hidden]{display:none!important}
+.now{font-size:.8rem;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.now b{color:var(--gold);font-weight:500;margin-right:6px}
+.toast{position:fixed;left:50%;bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:21;max-width:calc(100% - 32px);background:#0d1328;border:1px solid var(--gold-dim);color:var(--ink);font-family:var(--f-util);font-size:.85rem;padding:9px 14px;opacity:0;transform:translate(-50%,8px);transition:opacity .3s,transform .3s var(--ease);pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+/* ---------- Motion (only when allowed) ---------- */
+@keyframes drift{0%{transform:translate3d(-2%,-1%,0) scale(1)}50%{transform:translate3d(2%,1.5%,0) scale(1.06)}100%{transform:translate3d(-1%,2%,0) scale(1.02)}}
+@keyframes tw{0%,100%{opacity:.15;transform:scale(.6)}50%{opacity:1;transform:scale(1)}}
+@keyframes meteor{0%{opacity:0;transform:translate(0,0) rotate(var(--a))}2%{opacity:1}11%{opacity:0;transform:translate(var(--tx),var(--ty)) rotate(var(--a))}100%{opacity:0;transform:translate(var(--tx),var(--ty)) rotate(var(--a))}}
+@keyframes ring{0%{opacity:.7;transform:scale(.85)}100%{opacity:0;transform:scale(1.35)}}
+@media (prefers-reduced-motion:no-preference){
+  .nebula{animation:drift 90s ease-in-out infinite alternate}
+  .twinkle{animation:tw var(--dur,4s) ease-in-out var(--del,0s) infinite}
+  .meteor{animation:meteor var(--dur,20s) linear var(--del,0s) infinite}
+  .playing .play .ring{animation:ring 2.4s ease-out infinite}
+
+  .js h1 .w>span{transform:translateY(108%);transition:transform 1.2s var(--ease);transition-delay:calc(var(--d,0) * 110ms + 150ms)}
+  .js.loaded h1 .w>span{transform:none}
+  .js h1 .truth::after{transform:scaleX(0);transition:transform 1.4s var(--ease) 1.1s}
+  .js.loaded h1 .truth::after{transform:scaleX(1)}
+  .js .hero .fade{opacity:0;transform:translateY(14px);transition:opacity 1s ease,transform 1s var(--ease);transition-delay:calc(var(--d,0) * 80ms + 650ms)}
+  .js.loaded .hero .fade{opacity:1;transform:none}
+
+  .armed .ln,.armed .who{opacity:0;transform:translateY(18px);transition:opacity .8s ease,transform .9s var(--ease);transition-delay:calc(var(--i,0) * 65ms)}
+  .armed.in .ln,.armed.in .who{opacity:1;transform:none}
+  .playing .armed.in .ln{transition-delay:0s}
+  .armed .sheet{opacity:0;transform:translateY(56px) rotate(-1.6deg) scale(.98);transition:opacity .8s ease,transform 1.2s var(--ease)}
+  .armed.in .sheet{opacity:1;transform:none}
+  .armed .sp{opacity:0;transition:opacity .9s ease;transition-delay:calc(var(--i,0) * 90ms + 260ms)}
+  .armed.in .sp{opacity:1}
+  .playing .armed.in .sp{transition-delay:0s}
+  .armed .sheet.interrupted::before{transform:scaleY(0);transition:transform 1.2s var(--ease) .7s}
+  .armed.in .sheet.interrupted::before{transform:scaleY(1)}
+  .armed .stamp{opacity:0;transform:rotate(-3deg) scale(1.7);transition:opacity .25s ease 1.5s,transform .38s cubic-bezier(.3,1.6,.5,1) 1.5s}
+  .armed.in .stamp{opacity:1;transform:rotate(-3deg) scale(1)}
+  .sec-head.armed .sec-meta{opacity:0;transform:translateY(12px);transition:opacity .9s ease .15s,transform 1s var(--ease) .15s}
+  .sec-head.armed.in .sec-meta{transform:none;opacity:1}
+  .sec-head.armed .sec-n>span{display:inline-block;opacity:0;transform:translateY(30%);transition:opacity .9s ease,transform 1.1s var(--ease)}
+  .sec-head.armed.in .sec-n>span{opacity:1;transform:none}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none!important;animation:none!important}
+}
+
+/* ---------- Narrow screens ---------- */
+@media (max-width:860px){
+  .log{grid-template-columns:minmax(0,1fr)}
+  .log>*{grid-column:1}
+  .sec-head{grid-template-columns:auto minmax(0,1fr);column-gap:16px;margin-top:80px}
+  .ln time{display:none}
+  .sp.seg::before{left:-10px}
+  .ln{font-size:1.12rem;line-height:1.55}
+  .reel{grid-template-columns:auto auto minmax(0,1fr) auto;gap:12px}
+  .now{display:none}
+}
+@media (max-width:520px){
+  body{font-size:16px}
+  .index a{grid-template-columns:3.9rem 1.5rem minmax(0,1fr);gap:6px;font-size:.88rem}
+  .index .ix-t{font-size:.76rem}
+  .facts{gap:14px 28px}
+  .facts .v{font-size:1.8rem}
+  .sec-n{font-size:2.8rem}
+  .sheet{font-size:.92rem;line-height:1.66;padding:22px 18px 22px 24px}
+  .sheet-cap{font-size:.62rem}
+  .stamp{font-size:.7rem;letter-spacing:.14em;padding:3px 8px 2px}
+  .who{margin-top:24px}
+  .sec-head h2{font-size:1.3rem}
+  .reel{grid-template-columns:auto auto minmax(0,1fr);row-gap:6px;padding-top:8px}
+  .ctl{grid-column:1/-1;justify-content:flex-end;order:5}
+  .ctl:not(.live){display:none}
+  .digits{font-size:1.25rem}
+  .play{width:36px;height:36px}
+  .skip{width:30px;height:30px}.skip svg{width:20px;height:20px}
+  .transport{gap:2px}
+  .listen{padding:16px}
+  body{padding-bottom:calc(150px + env(safe-area-inset-bottom,0px))}
+  .toast{bottom:calc(118px + env(safe-area-inset-bottom,0px))}
+  .chip{padding:5px 9px}
+}
+</style>
+</head>
+<body>
+
+
+<div class="sky" aria-hidden="true">
+  <div class="nebula"></div>
+  <canvas class="stars" data-k="0.015"></canvas>
+  <canvas class="stars" data-k="0.04"></canvas>
+  <canvas class="stars" data-k="0.08"></canvas>
+  <div id="twinkles"></div>
+  <span class="meteor" style="--x:88%;--y:8%;--a:-24deg;--tx:-62vw;--ty:28vw;--dur:17s;--del:2s;--len:200px"></span>
+  <span class="meteor" style="--x:62%;--y:4%;--a:-38deg;--tx:-40vw;--ty:31vw;--dur:23s;--del:7s;--len:140px"></span>
+  <span class="meteor" style="--x:96%;--y:42%;--a:-16deg;--tx:-74vw;--ty:21vw;--dur:29s;--del:12s;--len:240px"></span>
+  <span class="meteor" style="--x:40%;--y:14%;--a:-30deg;--tx:-34vw;--ty:20vw;--dur:19s;--del:15.5s;--len:120px"></span>
+  <span class="meteor" style="--x:78%;--y:58%;--a:-22deg;--tx:-50vw;--ty:20vw;--dur:26s;--del:20s;--len:170px"></span>
+  <div class="vignette"></div>
+</div>
+
+<div class="wrap">
+  <section class="hero" aria-labelledby="t">
+    <p class="kicker fade" style="--d:0"><span>The Theology of Time</span><b>Sunday, October 15, 1972</b><span>Tape span 00:30:01 to 01:10:19</span></p>
+    <h1 id="t"><span class="w" style="--d:0"><span>Other</span></span> <span class="w" style="--d:1"><span>than</span></span> <span class="w g" style="--d:2"><span>the</span></span> <span class="w g" style="--d:3"><span class="truth">truth</span></span></h1>
+    <p class="lede fade" style="--d:1">The Honorable Elijah Muhammad calls a sister to the stand to read <em>teachings circulating in his name</em>. She reads. He stops her, again and again, and answers each one in front of the hall.</p>
+    <ul class="facts fade" style="--d:2">
+      <li><span class="v">40:18</span><span class="k">minutes of tape</span></li>
+      <li><span class="v">369</span><span class="k">transcript lines</span></li>
+      <li><span class="v">37</span><span class="k">times “other than the truth”</span></li>
+    </ul>
+    <div class="cast fade" style="--d:3">
+      <div class="c-em"><h3><span class="swatch"></span>The Honorable Elijah Muhammad</h3><p>At the stand, centre column.</p></div>
+      <div class="c-sis"><h3><span class="swatch"></span>The Sister</h3><p>The secretary he calls to the stand. Her readings arrive as duplicated sheets; she is reading material under challenge.</p></div>
+    </div>
+    <div class="listen fade" style="--d:4">
+      <p class="txt"><b>Listen along</b><span id="listenMsg">Load the MP3 of this lecture from your device. The page lights each line as it is spoken, and any line can be clicked to jump there.</span></p>
+      <button class="btn" id="heroPlay" type="button" hidden>Play the lecture</button>
+      <button class="btn" id="loadBtn" type="button">Load the recording</button>
+      <input type="file" id="fileIn" accept="audio/*,.mp3,.m4a,.wav,.ogg" class="vh" tabindex="-1">
+    </div>
+    <details class="notes fade" style="--d:5"><summary>Source and editorial notes</summary><pre>Source: The Theology of Time 10⧸15⧸1972 ｜ The Honorable Elijah Muhammad [P4-vtnwubrw].mp3.txt
+Full extracted span: 00:30:01,255–01:10:19,513.
+The sister is called forward at 00:40:43,983, first speaks at 00:41:38,683,
+and begins reading the titled material at 00:42:22,223.
+The last extended reading ends at 01:00:47,905. His response and the closing
+exchange follow. At 01:10:19,513 he turns to doing something for self.
+
+EDITORIAL NOTES (added for this extraction)
+All transcript blocks below retain their original wording, spelling, punctuation,
+timestamps, speaker numbers, and line breaks. Apparent transcription errors have
+not been corrected. Only section headings and explanatory role labels are added.
+The headings summarize topics; they are not titles verified from the writings.
+
+The Honorable Elijah Muhammad.
+The sister/secretary reading and commenting. Her personal name is
+not established in this exchange. Her readings are material being challenged,
+not teachings endorsed by Elijah Muhammad or necessarily by the reader herself.
+At 01:07:09,023: probably the same sister, inferred from context.
+Closing-exchange voices: uncertain. Some closing questions may be the sister; other turns are
+responses or audience interjections. No uniform identity is assigned to these voices.
+All other voices: audience/other voices, inferred from their interjections.
+These role assignments are based on the transcript, not checked against audio.
+
+The sister’s blocks sometimes mix reading with her own comments, corrections,
+or words addressed to Elijah Muhammad. The 00:42:22,223 block includes apparent
+asides such as “Well, if they&#x27;re teaching this...” and “It should be the other
+way around.” The 00:46:53,053 block introduces what the writers attribute to him.
+The 00:49:52,027 block includes her comment about reading spellings as written.
+Exact boundaries within these blocks are not reliably marked in the source,
+so they are preserved intact rather than presented as pure quotations of a document.
+
+He explicitly stops the reading and says more pages remain. This extraction
+contains the complete discussion in this lecture, not the full underlying writings.</pre></details>
+    <nav aria-label="Sections" class="fade" style="--d:6"><ol class="index"><li><a href="#s1"><span class="ix-t">00:30:01</span><span class="ix-n">01</span><span class="ix-title">INTRODUCTORY REMARKS — correcting teachings attributed to him</span></a></li><li><a href="#s2"><span class="ix-t">00:39:31</span><span class="ix-n">02</span><span class="ix-title">SETUP — people making up texts; the sister is called forward</span></a></li><li><a href="#s3"><span class="ix-t">00:41:38</span><span class="ix-n">03</span><span class="ix-title">SISTER’S INTRODUCTION</span></a></li><li><a href="#s4"><span class="ix-t">00:42:22</span><span class="ix-n">04</span><span class="ix-title">READING AND RESPONSE — “Fard,” word meanings, and silk</span></a></li><li><a href="#s5"><span class="ix-t">00:46:51</span><span class="ix-n">05</span><span class="ix-title">READING AND RESPONSE — California</span></a></li><li><a href="#s6"><span class="ix-t">00:47:42</span><span class="ix-n">06</span><span class="ix-title">READING AND RESPONSE — substance, reflector, and vacuum</span></a></li><li><a href="#s7"><span class="ix-t">00:49:26</span><span class="ix-n">07</span><span class="ix-title">READING AND RESPONSE — “fifth year teaching,” conferences, and Mars</span></a></li><li><a href="#s8"><span class="ix-t">00:55:27</span><span class="ix-n">08</span><span class="ix-title">READING AND RESPONSE — birth, doctors, and planetary claims</span></a></li><li><a href="#s9"><span class="ix-t">00:59:24</span><span class="ix-n">09</span><span class="ix-title">READING AND RESPONSE — cap, chamber, operation, and glow</span></a></li><li><a href="#s10"><span class="ix-t">01:07:03</span><span class="ix-n">10</span><span class="ix-title">CLOSING EXCHANGE — remaining pages and postponement</span></a></li><li><a href="#s11"><span class="ix-t">01:08:07</span><span class="ix-n">11</span><span class="ix-title">CONCLUDING REMARKS — why he had the material read</span></a></li></ol></nav>
+    <p class="hint fade" style="--d:7">Scroll to follow the reel. <kbd>J</kbd> and <kbd>K</kbd> step between speakers; <kbd>Space</kbd> plays and pauses, and <kbd>←</kbd> <kbd>→</kbd> skip 10 seconds.</p>
+  </section>
+
+  <main class="log" id="log">
+<header class="sec-head" id="s1" data-t="1801.255" data-sec="1"><span class="sec-n" aria-hidden="true">01</span><div class="sec-meta"><p class="eyebrow">Editorial heading · <time>00:30:01,255</time></p><h2>1. INTRODUCTORY REMARKS — correcting teachings attributed to him</h2></div></header>
+<div class="turn v-em" data-t="1801.255" data-sec="1" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Honorable Elijah Muhammad</span></p><div class="lines"><p class="ln" style="--i:0"><time>00:30:01</time><span class="seg" data-s="1801.255" title="00:30:01,255 → 00:30:12,755">So brothers and sisters, we are here this afternoon to correct you of some of your mistakes,</span> <span class="seg" data-s="1812.755" title="00:30:12,755 → 00:30:18,035">and to declare you innocent of those mistakes.</span></p><p class="ln" style="--i:1"><time>00:30:18</time><span class="seg" data-s="1818.035" title="00:30:18,035 → 00:30:25,835">And some of those mistakes that we are here to correct you on, you are guilty.</span></p><p class="ln" style="--i:2"><time>00:30:25</time><span class="seg" data-s="1825.835" title="00:30:25,835 → 00:30:45,833">And we want to correct you in the public so that the public won't think that we are giving you these mistakes ourselves and backing you up here.I don't back you up in to <mark>other than the truth</mark>.</span></p><p class="ln" style="--i:3"><time>00:30:46</time><span class="seg" data-s="1846.593" title="00:30:46,593 → 00:30:51,353">I don't care what you say could be on me.</span></p><p class="ln" style="--i:4"><time>00:30:51</time><span class="seg" data-s="1851.353" title="00:30:51,353 → 00:30:57,973">Don't call me, "Mr. Muhammad, you're</span> <span class="seg" data-s="1857.973" title="00:30:57,973 → 00:30:59,793">our god.</span></p><p class="ln" style="--i:5"><time>00:30:59</time><span class="seg" data-s="1859.793" title="00:30:59,793 → 00:31:03,033">You are Master Fard Muhammad." Don't tell me that.</span></p><p class="ln" style="--i:6"><time>00:31:03</time><span class="seg" data-s="1863.754" title="00:31:03,754 → 00:31:07,353">Master Fard Muhammad is the one that I am representing.</span></p><p class="ln" style="--i:7"><time>00:31:16</time><span class="seg" data-s="1876.754" title="00:31:16,754 → 00:31:19,693">I</span> <span class="seg" data-s="1879.693" title="00:31:19,693 → 00:31:24,393">am the man that just wants to take my own place.</span></p><p class="ln" style="--i:8"><time>00:31:25</time><span class="seg" data-s="1885.053" title="00:31:25,053 → 00:31:28,713">And leave the place that I don't belong in-</span></p><p class="ln" style="--i:9"><time>00:31:30</time><span class="seg" data-s="1890.053" title="00:31:30,053 → 00:31:32,754">... for the man that belongs there.</span></p><p class="ln" style="--i:9"><time>00:31:35</time><span class="seg" data-s="1895.293" title="00:31:35,293 → 00:31:43,313">I have heard that you are putting your place, not you physical,</span> <span class="seg" data-s="1903.313" title="00:31:43,313 → 00:31:46,493">some of you.</span></p><p class="ln" style="--i:9"><time>00:31:46</time><span class="seg" data-s="1906.493" title="00:31:46,493 → 00:31:51,313">So-called believers, I have to call you that-</span></p><p class="ln" style="--i:9"><time>00:31:52</time><span class="seg" data-s="1912.273" title="00:31:52,273 → 00:31:56,473">... are putting your place</span> <span class="seg" data-s="1916.473" title="00:31:56,473 → 00:31:59,433">in somebody else's place-</span></p><p class="ln" style="--i:9"><time>00:31:59</time><span class="seg" data-s="1919.453" title="00:31:59,453 → 00:32:01,633">... and making you somebody else.</span></p><p class="ln" style="--i:9"><time>00:32:03</time><span class="seg" data-s="1923.193" title="00:32:03,193 → 00:32:07,213">And what you are making is <mark>other than the truth</mark>.</span></p><p class="ln" style="--i:9"><time>00:32:09</time><span class="seg" data-s="1929.573" title="00:32:09,573 → 00:32:15,093">We want our people to be reconverted.</span></p><p class="ln" style="--i:9"><time>00:32:15</time><span class="seg" data-s="1935.533" title="00:32:15,533 → 00:32:18,773">Out of <mark>other than the truth</mark> into truth.</span></p><p class="ln" style="--i:9"><time>00:32:20</time><span class="seg" data-s="1940.813" title="00:32:20,813 → 00:32:23,713">We don't want to add nothing to the truth-</span></p><p class="ln" style="--i:9"><time>00:32:24</time><span class="seg" data-s="1944.873" title="00:32:24,873 → 00:32:27,753">... because that will make it <mark>other than the truth</mark>.</span></p><p class="ln" style="--i:9"><time>00:32:30</time><span class="seg" data-s="1950.913" title="00:32:30,913 → 00:32:41,793">So we're going to make now a habit of exposing you before those that you told <mark>other than the truth</mark> to.</span></p><p class="ln" style="--i:9"><time>00:32:43</time><span class="seg" data-s="1963.753" title="00:32:43,753 → 00:32:49,793">So let those who are seeking the truth...</span></p><p class="ln" style="--i:9"><time>00:32:49</time><span class="seg" data-s="1969.793" title="00:32:49,793 → 00:32:52,953">Pardon me, it sounds like I said, "Fate,"</span></p><p class="ln" style="--i:9"><time>00:32:52</time><span class="seg" data-s="1972.953" title="00:32:52,953 → 00:32:58,573">who are seeking the truth, that they know that you was not telling them the truth.</span></p><p class="ln" style="--i:9"><time>00:32:59</time><span class="seg" data-s="1979.993" title="00:32:59,993 → 00:33:03,833">I don't back you up in telling <mark>other than the truth</mark>.</span></p><p class="ln" style="--i:9"><time>00:33:06</time><span class="seg" data-s="1986.253" title="00:33:06,253 → 00:33:09,293">So, not only</span> <span class="seg" data-s="1989.293" title="00:33:09,293 → 00:33:13,713">do I not back you up in telling</span> <span class="seg" data-s="1993.713" title="00:33:13,713 → 00:33:22,553">and you're telling <mark>other than the truth</mark>, I'm going to force those who are seeking the truth to not to back you up in it.</span></p><p class="ln" style="--i:9"><time>00:33:23</time><span class="seg" data-s="2003.593" title="00:33:23,593 → 00:33:25,193">Walk all on.</span></p><p class="ln" style="--i:9"><time>00:33:25</time><span class="seg" data-s="2005.973" title="00:33:25,973 → 00:33:28,733">Because I'm going to tell them the truth.</span></p><p class="ln" style="--i:9"><time>00:33:30</time><span class="seg" data-s="2010.013" title="00:33:30,013 → 00:33:34,053">And if you tell them <mark>other than the truth</mark>, I'm going to tell them-</span></p><p class="ln" style="--i:9"><time>00:33:34</time><span class="seg" data-s="2014.293" title="00:33:34,293 → 00:33:36,093">... that you told <mark>other than the truth</mark>.</span></p><p class="ln" style="--i:9"><time>00:33:37</time><span class="seg" data-s="2017.793" title="00:33:37,793 → 00:33:44,693">Right before their face, like you told them <mark>other than the truth</mark> to their face.</span></p><p class="ln" style="--i:9"><time>00:33:45</time><span class="seg" data-s="2025.553" title="00:33:45,553 → 00:33:48,273">I'm going to tell them the truth-</span></p><p class="ln" style="--i:9"><time>00:33:48</time><span class="seg" data-s="2028.413" title="00:33:48,413 → 00:33:49,753">... to their face.</span></p><p class="ln" style="--i:9"><time>00:33:50</time><span class="seg" data-s="2030.973" title="00:33:50,973 → 00:33:54,793">I am not here to preach lies.</span></p><p class="ln" style="--i:9"><time>00:33:54</time><span class="seg" data-s="2034.793" title="00:33:54,793 → 00:33:58,373">I am here to preach the truth.</span></p><p class="ln" style="--i:9"><time>00:33:58</time><span class="seg" data-s="2038.473" title="00:33:58,473 → 00:34:04,673">You have lived under falsehood all your life.</span></p><p class="ln" style="--i:9"><time>00:34:05</time><span class="seg" data-s="2045.953" title="00:34:05,953 → 00:34:07,573">The truth has come.</span></p><p class="ln" style="--i:9"><time>00:34:09</time><span class="seg" data-s="2049.173" title="00:34:09,173 → 00:34:13,353">And falsehood must bend.</span></p><p class="ln" style="--i:9"><time>00:34:14</time><span class="seg" data-s="2054.873" title="00:34:14,873 → 00:34:17,293">We were born under falsehood.</span></p><p class="ln" style="--i:9"><time>00:34:19</time><span class="seg" data-s="2059.033" title="00:34:19,033 → 00:34:20,833">We love falsehood-</span></p><p class="ln" style="--i:9"><time>00:34:22</time><span class="seg" data-s="2062.613" title="00:34:22,613 → 00:34:24,133">... rather than truth.</span></p><p class="ln" style="--i:9"><time>00:34:25</time><span class="seg" data-s="2065.293" title="00:34:25,293 → 00:34:27,873">As the Bible puts it,</span> <span class="seg" data-s="2067.873" title="00:34:27,873 → 00:34:31,033">that's being born</span> <span class="seg" data-s="2071.033" title="00:34:31,033 → 00:34:32,253">under darkness.</span></p><p class="ln" style="--i:9"><time>00:34:33</time><span class="seg" data-s="2073.053" title="00:34:33,053 → 00:34:34,953">We love darkness-</span></p><p class="ln" style="--i:9"><time>00:34:34</time><span class="seg" data-s="2074.993" title="00:34:34,993 → 00:34:36,693">... rather than light.</span></p><p class="ln" style="--i:9"><time>00:34:37</time><span class="seg" data-s="2077.953" title="00:34:37,953 → 00:34:43,933">So when light came, we fled back looking for darkness.</span></p><p class="ln" style="--i:9"><time>00:34:47</time><span class="seg" data-s="2087.093" title="00:34:47,093 → 00:34:49,813">We want to correct you.</span></p><p class="ln" style="--i:9"><time>00:34:49</time><span class="seg" data-s="2089.813" title="00:34:49,813 → 00:34:53,253">You have many things,</span> <span class="seg" data-s="2093.253" title="00:34:53,253 → 00:34:55,513">discourse</span> <span class="seg" data-s="2095.513" title="00:34:55,513 → 00:34:58,133">putting out to the people</span> <span class="seg" data-s="2098.133" title="00:34:58,133 → 00:35:00,093">as though I teach you that.</span></p><p class="ln" style="--i:9"><time>00:35:01</time><span class="seg" data-s="2101.213" title="00:35:01,213 → 00:35:03,793">So that you</span> <span class="seg" data-s="2103.793" title="00:35:03,793 → 00:35:06,393">will get your <mark>other than the truth</mark> perception.</span></p><p class="ln" style="--i:9"><time>00:35:07</time><span class="seg" data-s="2107.813" title="00:35:07,813 → 00:35:13,533">Brothers and sisters, I do not think there's people <mark>other than the truth</mark>.</span></p><p class="ln" style="--i:9"><time>00:35:14</time><span class="seg" data-s="2114.013" title="00:35:14,013 → 00:35:16,633">What I teach is truth.</span></p><p class="ln" style="--i:9"><time>00:35:19</time><span class="seg" data-s="2119.373" title="00:35:19,373 → 00:35:25,273">I'm not here to add nothing to the truth.</span></p><p class="ln" style="--i:9"><time>00:35:25</time><span class="seg" data-s="2125.513" title="00:35:25,513 → 00:35:31,673">I'm not here to try to make you think that I'm something that I am not.</span></p><p class="ln" style="--i:9"><time>00:35:31</time><span class="seg" data-s="2131.693" title="00:35:31,693 → 00:35:35,853">If</span> <span class="seg" data-s="2135.853" title="00:35:35,853 → 00:35:37,893">you think</span> <span class="seg" data-s="2137.893" title="00:35:37,893 → 00:35:49,613">that I'm trying to make you see me in the light of something that I'm it, not in, get your book and come on, and I will get my book.</span></p><p class="ln" style="--i:9"><time>00:35:51</time><span class="seg" data-s="2151.913" title="00:35:51,913 → 00:35:54,393">And I will prove to you-</span></p><p class="ln" style="--i:9"><time>00:35:54</time><span class="seg" data-s="2154.413" title="00:35:54,413 → 00:36:01,553">... that I don't go beyond the scope of mine on</span> <span class="seg" data-s="2161.553" title="00:36:01,553 → 00:36:06,333">at vi- or rather mission that Allah has given to me.</span></p><p class="ln" style="--i:9"><time>00:36:08</time><span class="seg" data-s="2168.713" title="00:36:08,713 → 00:36:11,953">If I say anything</span> <span class="seg" data-s="2171.953" title="00:36:11,953 → 00:36:17,473">beyond what I have been missioned to do</span> <span class="seg" data-s="2177.473" title="00:36:17,473 → 00:36:20,553">that you can't find</span> <span class="seg" data-s="2180.553" title="00:36:20,553 → 00:36:23,053">me backed up in it</span> <span class="seg" data-s="2183.053" title="00:36:23,053 → 00:36:26,653">in the scripture of truth, come to me.</span></p><p class="ln" style="--i:9"><time>00:36:28</time><span class="seg" data-s="2188.493" title="00:36:28,493 → 00:36:35,173">I'll pay you $100 for every one... Oh, no, that's not enough.</span></p><p class="ln" style="--i:9"><time>00:36:36</time><span class="seg" data-s="2196.013" title="00:36:36,013 → 00:36:46,424">Give you 10... $1,000 then for every story.... that I tell you <mark>other than the truth</mark>-</span></p><p class="ln" style="--i:9"><time>00:36:46</time><span class="seg" data-s="2206.444" title="00:36:46,444 → 00:36:50,304">... of my mission and of my way.</span></p><p class="ln" style="--i:9"><time>00:36:50</time><span class="seg" data-s="2210.304" title="00:36:50,304 → 00:36:53,783">If you find anything that I'm doing</span> <span class="seg" data-s="2213.783" title="00:36:53,783 → 00:37:00,943">that you can prove that it is even other than righteous, I will give you $10,000.</span></p><p class="ln" style="--i:9"><time>00:37:02</time><span class="seg" data-s="2222.123" title="00:37:02,123 → 00:37:06,343">If you cannot locate the answer in the scripture-</span></p><p class="ln" style="--i:9"><time>00:37:06</time><span class="seg" data-s="2226.583" title="00:37:06,583 → 00:37:09,103">... of truth.</span></p><p class="ln" style="--i:9"><time>00:37:09</time><span class="seg" data-s="2229.103" title="00:37:09,103 → 00:37:16,323">There never was a false prophet since, to the people in the past.</span></p><p class="ln" style="--i:9"><time>00:37:17</time><span class="seg" data-s="2237.564" title="00:37:17,564 → 00:37:20,303">And this is not one standing before you.</span></p><p class="ln" style="--i:9"><time>00:37:34</time><span class="seg" data-s="2254.763" title="00:37:34,763 → 00:37:41,623">Some of the things that I do, you may label as being other than right.</span></p><p class="ln" style="--i:9"><time>00:37:42</time><span class="seg" data-s="2262.383" title="00:37:42,383 → 00:37:46,063">But that, that's just because you have not read the scriptures.</span></p><p class="ln" style="--i:9"><time>00:37:48</time><span class="seg" data-s="2268.123" title="00:37:48,123 → 00:37:53,423">You have learned what the last man</span> <span class="seg" data-s="2273.423" title="00:37:53,423 → 00:37:57,423">should look like, what he should do,</span> <span class="seg" data-s="2277.423" title="00:37:57,423 → 00:38:06,163">and how that the book teaches you he is a full fellow, and you don't take time to read what a full fellow is.</span></p><p class="ln" style="--i:9"><time>00:38:08</time><span class="seg" data-s="2288.543" title="00:38:08,543 → 00:38:13,743">When a man is</span> <span class="seg" data-s="2293.743" title="00:38:13,743 → 00:38:15,883">brought to you</span> <span class="seg" data-s="2295.883" title="00:38:15,883 → 00:38:20,643">and he is checked by another one,</span> <span class="seg" data-s="2300.643" title="00:38:20,643 → 00:38:24,563">he fulfills Jonah,</span> <span class="seg" data-s="2304.563" title="00:38:24,563 → 00:38:25,683">uh, scripture.</span></p><p class="ln" style="--i:9"><time>00:38:27</time><span class="seg" data-s="2307.243" title="00:38:27,243 → 00:38:34,763">Well, then you've got to go read Jonah and learn what Jonah did-</span></p><p class="ln" style="--i:9"><time>00:38:34</time><span class="seg" data-s="2314.843" title="00:38:34,843 → 00:38:39,383">... to see whether or not this man fulfill, filled his word.</span></p><p class="ln" style="--i:9"><time>00:38:39</time><span class="seg" data-s="2319.423" title="00:38:39,423 → 00:38:44,383">Fulfill means to do the same work that that man did.</span></p><p class="ln" style="--i:9"><time>00:38:46</time><span class="seg" data-s="2326.423" title="00:38:46,423 → 00:39:01,923">Then that man that you are talking to or present before you is fulfilling, but if you don't see Jonah's works in this man's works, then he don't fulfill Jonah's work.</span></p><p class="ln" style="--i:9"><time>00:39:03</time><span class="seg" data-s="2343.023" title="00:39:03,023 → 00:39:08,463">Fulfill means to do what another one does.</span></p><p class="ln" style="--i:9"><time>00:39:08</time><span class="seg" data-s="2348.583" title="00:39:08,583 → 00:39:17,963">So be careful about how you label people-</span></p><p class="ln" style="--i:9"><time>00:39:19</time><span class="seg" data-s="2359.323" title="00:39:19,323 → 00:39:23,963">... to be something that they're not.</span></p><p class="ln" style="--i:9"><time>00:39:25</time><span class="seg" data-s="2365.843" title="00:39:25,843 → 00:39:28,183">I want</span> <span class="seg" data-s="2368.183" title="00:39:28,183 → 00:39:31,603">you to know that I don't condone falsehood.</span></p><p class="ln" style="--i:9"><time>00:39:31</time><span class="seg" data-s="2371.723" title="00:39:31,723 → 00:39:31,803">And if you want to do so, you are, are not following me.</span></p></div></div>
+<header class="sec-head" id="s2" data-t="2371.823" data-sec="2"><span class="sec-n" aria-hidden="true">02</span><div class="sec-meta"><p class="eyebrow">Editorial heading · <time>00:39:31,823</time></p><h2>2. SETUP — people making up texts; the sister is called forward</h2></div></header>
+<div class="turn v-em" data-t="2371.823" data-sec="2" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Honorable Elijah Muhammad</span></p><div class="lines"><p class="ln" style="--i:0"><time>00:39:31</time><span class="seg" data-s="2371.823" title="00:39:31,823 → 00:39:31,823">You're following yourself.</span></p><p class="ln" style="--i:1"><time>00:39:31</time><span class="seg" data-s="2371.823" title="00:39:31,823 → 00:39:34,963"><span class="sd">(coughs)</span> I have some brother</span> <span class="seg" data-s="2374.963" title="00:39:34,963 → 00:39:58,043">that is just going out and making up</span> <span class="seg" data-s="2398.043" title="00:39:58,043 → 00:40:01,243">texts of their own</span> <span class="seg" data-s="2401.243" title="00:40:01,243 → 00:40:04,623">and delivering them for you to believe.</span></p><p class="ln" style="--i:2"><time>00:40:06</time><span class="seg" data-s="2406.863" title="00:40:06,863 → 00:40:14,103">I'm going to teach you the history of Jesus that are appealed to me.</span></p><p class="ln" style="--i:3"><time>00:40:14</time><span class="seg" data-s="2414.143" title="00:40:14,143 → 00:40:18,723">But, please, don't you try and teach it un- less you're going to teach the truth.</span></p><p class="ln" style="--i:4"><time>00:40:22</time><span class="seg" data-s="2422.343" title="00:40:22,343 → 00:40:31,883">Some of you is just going wiley, telling everything of what you think.</span></p><p class="ln" style="--i:5"><time>00:40:31</time><span class="seg" data-s="2431.883" title="00:40:31,883 → 00:40:34,483">We don't want what you think.</span></p><p class="ln" style="--i:6"><time>00:40:35</time><span class="seg" data-s="2435.203" title="00:40:35,203 → 00:40:37,403">We want what God has taught us.</span></p><p class="ln" style="--i:7"><time>00:40:39</time><span class="seg" data-s="2439.383" title="00:40:39,383 → 00:40:42,803">Want his thinking and not yours.</span></p><p class="ln" style="--i:8"><time>00:40:43</time><span class="seg" data-s="2443.983" title="00:40:43,983 → 00:40:59,523">Uh, the sister over here... Where is she? Come up here, s- secretary, and let her share some of this, uh, teaching that is going on so I can straighten it out. I want these people to know the truth.</span></p><p class="ln" style="--i:9"><time>00:40:59</time><span class="seg" data-s="2459.603" title="00:40:59,603 → 00:41:02,523">I don't want them to come here</span> <span class="seg" data-s="2462.523" title="00:41:02,523 → 00:41:11,763">and listen that <mark>other than the truth</mark> out there from the mouth of some of you who call yourself representing Islam.</span></p><p class="ln" style="--i:9"><time>00:41:11</time><span class="seg" data-s="2471.763" title="00:41:11,763 → 00:41:25,923">I don't want you to listen to no <mark>other than the truth</mark>. And I want to know the <mark>other than the truth</mark> that you are hearing so that I can stop that man's mouth.</span></p><p class="ln" style="--i:9"><time>00:41:26</time><span class="seg" data-s="2486.183" title="00:41:26,183 → 00:41:38,623">He won't be back here for a minute.</span></p></div></div>
+<header class="sec-head" id="s3" data-t="2498.683" data-sec="3"><span class="sec-n" aria-hidden="true">03</span><div class="sec-meta"><p class="eyebrow">Editorial heading · <time>00:41:38,683</time></p><h2>3. SISTER’S INTRODUCTION</h2></div></header>
+<div class="turn v-sv" data-t="2498.683" data-sec="3" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Sister</span></p><div class="lines"><p class="ln" style="--i:0"><time>00:41:38</time><span class="seg" data-s="2498.683" title="00:41:38,683 → 00:41:39,783">Salaam alaikum.</span></p></div></div>
+<div class="turn v-em" data-t="2499.783" data-sec="3" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Honorable Elijah Muhammad</span></p><div class="lines"><p class="ln" style="--i:0"><time>00:41:39</time><span class="seg" data-s="2499.783" title="00:41:39,783 → 00:41:41,123">Walaikum salaam.</span></p></div></div>
+<div class="turn v-sv" data-t="2501.123" data-sec="3" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Sister</span></p><div class="lines"><p class="ln" style="--i:0"><time>00:41:41</time><span class="seg" data-s="2501.123" title="00:41:41,123 → 00:41:50,403">In the name of Allah, the all-wise, true and living God, to whom we forever give praise and thanks, for our beloved leader and teacher, the most honorable Elijah Muhammad.</span></p><p class="ln" style="--i:1"><time>00:41:51</time><span class="seg" data-s="2511.883" title="00:41:51,883 → 00:42:01,783">Dear apostles, brothers and sisters, and to our visiting guests, there are some old Muslims telling <mark>other than the truth</mark>,</span> <span class="seg" data-s="2521.783" title="00:42:01,783 → 00:42:14,203">and the messenger gave me the privilege to tell you all that there are quite a few new ones coming into the Nation of Islam, and we don't want you to think that we are behind such <mark>other than the truth</mark>.</span></p><p class="ln" style="--i:2"><time>00:42:14</time><span class="seg" data-s="2534.203" title="00:42:14,203 → 00:42:22,223">And with the messenger's permission, I'm going to read you some of this that they are circulating.</span></p></div></div>
+<header class="sec-head" id="s4" data-t="2542.223" data-sec="4"><span class="sec-n" aria-hidden="true">04</span><div class="sec-meta"><p class="eyebrow">Editorial heading · <time>00:42:22,223</time></p><h2>4. READING AND RESPONSE — “Fard,” word meanings, and silk</h2></div></header>
+<div class="turn v-sis" data-t="2542.223" data-sec="4" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Sister</span></p><figure class="sheet interrupted"><figcaption class="sheet-cap">Circulating text, read aloud · may include her own remarks</figcaption><p class="sp seg" data-s="2542.223" style="--i:0"><time title="00:42:22,223 → 00:44:08,513">00:42:22,223</time><span class="tx">Supreme Wisdom, Seventh-Year Teachings, Minister Awakenings. Well, if they're teaching this, they're going to be putting the people back to sleep. Wisdom of 60 Degrees, Master Fard Muhammad and its Meaning and Thematical Breakdown. Note... This is what they have on here. "These teachings are only for the learned and not the profane." It should be the other way around.It is taught in supreme wisdom as well as the fundamentals of supreme wisdom, in the seventh year advanced study, that Master Fard Muhammad came from a faraway land, the holy city of Mecca, in the east to the shores of North America as a merchant and peddler of silk. The faraway land represents the unknown. The word faraway does mean unknown. Faraway means the unknown, and its root is the same as the word Fard. The word Fard, which is the same as the word Fardi of the Arabic. Master Fard Muhammad was a traveling merchant. This comes from the word Farnet, which means travelers, and the word Far, and man, which means a wayfarer or traveling peddler or merchant. The word Farnet itself means a traveler. The selling of the silk stems from the word Faran Dean or Faran, which is the fabric of silk. His goal is separation of the four originals, brown, yellow, red, black, from the white race. Negative force-</span></p><p class="stop"><span class="stamp">Stopped <time>00:44:08,513</time></span></p></figure></div>
+<div class="turn v-em" data-t="2648.513" data-sec="4" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Honorable Elijah Muhammad</span></p><div class="lines"><p class="ln" style="--i:0"><time>00:44:08</time><span class="seg" data-s="2648.513" title="00:44:08,513 → 00:44:11,413">Just a minute.</span></p><p class="ln" style="--i:1"><time>00:44:11</time><span class="seg" data-s="2651.413" title="00:44:11,413 → 00:44:13,953">Now, I never taught nothing like that.</span></p><p class="ln" style="--i:2"><time>00:44:15</time><span class="seg" data-s="2655.753" title="00:44:15,753 → 00:44:21,213">This is made teachings by the- the one who is teaching.</span></p><p class="ln" style="--i:3"><time>00:44:21</time><span class="seg" data-s="2661.733" title="00:44:21,733 → 00:44:23,493">He made it up himself.</span></p><p class="ln" style="--i:4"><time>00:44:24</time><span class="seg" data-s="2664.293" title="00:44:24,293 → 00:44:40,213">And he desired to make it up himself because that he wanted to have something odd in the teaching that you may look upon him as some great author of that which you have never heard.</span></p><p class="ln" style="--i:5"><time>00:44:41</time><span class="seg" data-s="2681.813" title="00:44:41,813 → 00:44:46,233">Read, sister.</span></p><p class="ln" style="--i:6"><time>00:44:46</time><span class="seg" data-s="2686.233" title="00:44:46,233 → 00:44:47,353">Read, sister.</span></p></div></div>
+<div class="turn v-sis" data-t="2687.353" data-sec="4" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Sister</span></p><figure class="sheet interrupted"><figcaption class="sheet-cap">Circulating text, read aloud · may include her own remarks</figcaption><p class="sp seg" data-s="2687.353" style="--i:0"><time title="00:44:47,353 → 00:45:07,833">00:44:47,353</time><span class="tx">The an- Yes, sir. The answer lies in the actual meaning of the word Faradi itself. Faradi is a dark brown date grown in Arabia and California. This plant, which represents the American so-called Negro, who was taken from Arabia and placed in California. And now they-</span></p><p class="stop"><span class="stamp">Stopped <time>00:45:07,833</time></span></p></figure></div>
+<div class="turn v-em" data-t="2707.833" data-sec="4" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Honorable Elijah Muhammad</span></p><div class="lines"><p class="ln" style="--i:0"><time>00:45:07</time><span class="seg" data-s="2707.833" title="00:45:07,833 → 00:45:15,533">Just a minute, sister. This is not the meanings of Fard, and if there is</span> <span class="seg" data-s="2715.533" title="00:45:15,533 → 00:45:23,033">a Muslim here that knows what Fard means, he can stand and tell you.</span></p><p class="ln" style="--i:1"><time>00:45:23</time><span class="seg" data-s="2723.033" title="00:45:23,033 → 00:45:33,293">And if there's not one, other than myself, I can tell you what it means. It don't mean no such thing.</span></p><p class="ln" style="--i:2"><time>00:45:34</time><span class="seg" data-s="2734.073" title="00:45:34,073 → 00:45:37,533">Fard is a name</span> <span class="seg" data-s="2737.533" title="00:45:37,533 → 00:45:49,073">that is known by the scientists to be an attribute that is not placed among the 99.</span></p><p class="ln" style="--i:3"><time>00:45:49</time><span class="seg" data-s="2749.073" title="00:45:49,073 → 00:45:55,933">It means that which is the beginning, that which is openness.</span></p><p class="ln" style="--i:4"><time>00:45:56</time><span class="seg" data-s="2756.073" title="00:45:56,073 → 00:46:02,493">This is the first. This is the name of our prayer.</span></p><p class="ln" style="--i:5"><time>00:46:02</time><span class="seg" data-s="2762.913" title="00:46:02,913 → 00:46:10,113">The first, and that, uh, people going out trying to interpt</span> <span class="seg" data-s="2770.113" title="00:46:10,113 → 00:46:21,953">these Arab words to you according to what they think. You shouldn't listen to them until you write 'em down and send them to me.</span></p><p class="ln" style="--i:6"><time>00:46:23</time><span class="seg" data-s="2783.973" title="00:46:23,973 → 00:46:26,713">And I will get the understanding.</span></p><p class="ln" style="--i:7"><time>00:46:27</time><span class="seg" data-s="2787.333" title="00:46:27,333 → 00:46:39,713">If I don't get it out of the Quran, there's other books of the Arabic language which interprets their language, their names.</span></p><p class="ln" style="--i:8"><time>00:46:39</time><span class="seg" data-s="2799.713" title="00:46:39,713 → 00:46:42,793">It's there, we can get it,</span> <span class="seg" data-s="2802.793" title="00:46:42,793 → 00:46:50,573">but don't you try and use your own explanation of it.</span></p><p class="ln" style="--i:9"><time>00:46:50</time><span class="seg" data-s="2810.573" title="00:46:50,573 → 00:46:51,973">Read on.</span></p></div></div>
+<header class="sec-head" id="s5" data-t="2811.973" data-sec="5"><span class="sec-n" aria-hidden="true">05</span><div class="sec-meta"><p class="eyebrow">Editorial heading · <time>00:46:51,973</time></p><h2>5. READING AND RESPONSE — California</h2></div></header>
+<div class="turn v-sis" data-t="2811.973" data-sec="5" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Sister</span></p><figure class="sheet"><figcaption class="sheet-cap">Circulating text, read aloud · may include her own remarks</figcaption><p class="sp seg" data-s="2811.973" style="--i:0"><time title="00:46:51,973 → 00:46:52,933">00:46:51,973</time><span class="tx">Then they</span></p><p class="sp seg" data-s="2813.053" style="--i:1"><time title="00:46:53,053 → 00:47:13,173">00:46:53,053</time><span class="tx">Apostle, they go on and quote you. They say the messenger says that California is the devil's last stronghold. The state of California represents white America being the golden state, blonde hair, and the root of the word California, which means white. The word Cali means white.</span></p></figure></div>
+<div class="turn v-em" data-t="2833.173" data-sec="5" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Honorable Elijah Muhammad</span></p><div class="lines"><p class="ln" style="--i:0"><time>00:47:13</time><span class="seg" data-s="2833.173" title="00:47:13,173 → 00:47:14,213">I</span> <span class="seg" data-s="2834.213" title="00:47:14,213 → 00:47:20,253">don't teach you that California is the devil's stronghold.</span></p><p class="ln" style="--i:1"><time>00:47:20</time><span class="seg" data-s="2840.673" title="00:47:20,673 → 00:47:22,973">I don't teach you that.</span></p><p class="ln" style="--i:2"><time>00:47:23</time><span class="seg" data-s="2843.013" title="00:47:23,013 → 00:47:26,733">The whole USA is the devil's stronghold.</span></p><p class="ln" style="--i:3"><time>00:47:41</time><span class="seg" data-s="2861.673" title="00:47:41,673 → 00:47:42,113">Keep telling.</span></p></div></div>
+<header class="sec-head" id="s6" data-t="2862.113" data-sec="6"><span class="sec-n" aria-hidden="true">06</span><div class="sec-meta"><p class="eyebrow">Editorial heading · <time>00:47:42,113</time></p><h2>6. READING AND RESPONSE — substance, reflector, and vacuum</h2></div></header>
+<div class="turn v-sis" data-t="2862.113" data-sec="6" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Sister</span></p><figure class="sheet interrupted"><figcaption class="sheet-cap">Circulating text, read aloud · may include her own remarks</figcaption><p class="sp seg" data-s="2862.113" style="--i:0"><time title="00:47:42,113 → 00:48:10,873">00:47:42,113</time><span class="tx">Master Fard Muhammad represents substance, physical matter, the reflector, that which is incomplete, invisible, transparent, white, crystal, parenthesis Christ, but Christ represents the his, Master Fard Muhammad, being the reflector, reflects the vacuum unto man, Black man. The vacuum is the so-called Negro being in a state of mental stagnation-</span></p><p class="stop"><span class="stamp">Stopped <time>00:48:10,873</time></span></p></figure></div>
+<div class="turn v-em" data-t="2890.873" data-sec="6" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Honorable Elijah Muhammad</span></p><div class="lines"><p class="ln" style="--i:0"><time>00:48:10</time><span class="seg" data-s="2890.873" title="00:48:10,873 → 00:48:18,193">Just a minute. I want to say to you who is listening to all of this, it's no teachings of mine.</span></p><p class="ln" style="--i:1"><time>00:48:19</time><span class="seg" data-s="2899.553" title="00:48:19,553 → 00:48:23,513">This is a made teachings by someone</span> <span class="seg" data-s="2903.513" title="00:48:23,513 → 00:48:31,273">that, uh, they should stand up and- and tell me how that they become</span> <span class="seg" data-s="2911.273" title="00:48:31,273 → 00:48:35,673">interpreters in their names and teachings</span> <span class="seg" data-s="2915.673" title="00:48:35,673 → 00:48:40,293">in that way that they are done.</span></p><p class="ln" style="--i:2"><time>00:48:40</time><span class="seg" data-s="2920.293" title="00:48:40,293 → 00:48:46,793">If such one is here doing, if the author of such stand now and explain to me.</span></p><p class="ln" style="--i:3"><time>00:48:49</time><span class="seg" data-s="2929.933" title="00:48:49,933 → 00:48:51,053">I</span> <span class="seg" data-s="2931.053" title="00:48:51,053 → 00:48:56,313">was with him for near three and a half years, day and night-</span></p><p class="ln" style="--i:4"><time>00:48:57</time><span class="seg" data-s="2937.708" title="00:48:57,708 → 00:49:02,307">... and that's that He taught me, I'm here to bear witness.</span></p><p class="ln" style="--i:5"><time>00:49:03</time><span class="seg" data-s="2943.807" title="00:49:03,807 → 00:49:06,507">And I've been bearing witness</span> <span class="seg" data-s="2946.507" title="00:49:06,507 → 00:49:10,547">and I've been representing it to you-</span></p><p class="ln" style="--i:6"><time>00:49:10</time><span class="seg" data-s="2950.588" title="00:49:10,588 → 00:49:12,247">... for 42 years.</span></p><p class="ln" style="--i:7"><time>00:49:14</time><span class="seg" data-s="2954.147" title="00:49:14,147 → 00:49:23,127">And I don't think I should make that awful mistake of what He went over with me day and night.</span></p><p class="ln" style="--i:8"><time>00:49:25</time><span class="seg" data-s="2965.047" title="00:49:25,047 → 00:49:26,607">Read on.</span></p></div></div>
+<header class="sec-head" id="s7" data-t="2966.607" data-sec="7"><span class="sec-n" aria-hidden="true">07</span><div class="sec-meta"><p class="eyebrow">Editorial heading · <time>00:49:26,607</time></p><h2>7. READING AND RESPONSE — “fifth year teaching,” conferences, and Mars</h2></div></header>
+<div class="turn v-sis" data-t="2966.607" data-sec="7" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Sister</span></p><figure class="sheet"><figcaption class="sheet-cap">Circulating text, read aloud · may include her own remarks</figcaption><p class="sp seg" data-s="2966.607" style="--i:0"><time title="00:49:26,607 → 00:49:33,687">00:49:26,607</time><span class="tx">This is called Supreme Wisdom fifth year teaching. The birth of the savior, Master Wallace D. Muhammad.</span></p></figure></div>
+<div class="turn v-em" data-t="2973.687" data-sec="7" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Honorable Elijah Muhammad</span></p><div class="lines"><p class="ln" style="--i:0"><time>00:49:33</time><span class="seg" data-s="2973.687" title="00:49:33,687 → 00:49:40,647">No. The supreme wisdom that I teach you is what Allah has taught me.</span></p><p class="ln" style="--i:1"><time>00:49:42</time><span class="seg" data-s="2982.047" title="00:49:42,047 → 00:49:49,447">That wisdom, I call the supreme wisdom, which is the supreme wisdom.</span></p><p class="ln" style="--i:2"><time>00:49:51</time><span class="seg" data-s="2991.027" title="00:49:51,027 → 00:49:52,027">Read on.</span></p></div></div>
+<div class="turn v-sis" data-t="2992.027" data-sec="7" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Sister</span></p><figure class="sheet interrupted"><figcaption class="sheet-cap">Circulating text, read aloud · may include her own remarks</figcaption><p class="sp seg" data-s="2992.027" style="--i:0"><time title="00:49:52,027 → 00:50:58,487">00:49:52,027</time><span class="tx">In the year 1852, Black diplomats of the Nation of Islam met in the holy city of Mecca in Saudi Arabia to discuss with the 12 minor wise scientists, they had been summoned, the crucial world problem between the Black nations of the Earth and the White races. The conference consisted of statements concerning the rapid technological and scientific advancements that had progressed within the White civilization. The other important attachment that the general conference discussed was how and in what way did all these advancements affect the Black nations and the planet. The cities of Asia which were represented were Kuball, which is located in Afghanistan, Karh in Pakistan, Baghdad in Iraq, Ankara in Turkey, Caerio... Excuse me, I'm pronouncing it exactly the way they have it spelled here. Caerio in Egypt, Lashio in Burma, and the country with the most delegates, Peking, China. The next country-</span></p><p class="stop"><span class="stamp">Stopped <time>00:50:58,487</time></span></p></figure></div>
+<div class="turn v-em" data-t="3058.487" data-sec="7" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Honorable Elijah Muhammad</span></p><div class="lines"><p class="ln" style="--i:0"><time>00:50:58</time><span class="seg" data-s="3058.487" title="00:50:58,487 → 00:51:00,307">Now...</span></p><p class="ln" style="--i:1"><time>00:51:00</time><span class="seg" data-s="3060.307" title="00:51:00,307 → 00:51:02,267">Go ahead.</span></p></div></div>
+<div class="turn v-sis" data-t="3062.267" data-sec="7" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Sister</span></p><figure class="sheet"><figcaption class="sheet-cap">Circulating text, read aloud · may include her own remarks</figcaption><p class="sp seg" data-s="3062.267" style="--i:0"><time title="00:51:02,267 → 00:51:11,187">00:51:02,267</time><span class="tx">The next country, India, also had a large body that was represented, which were from the city of New Delhi.</span></p><p class="sp seg" data-s="3071.187" style="--i:1"><time title="00:51:11,187 → 00:51:23,107">00:51:11,187</time><span class="tx">During the same year, there was also a large conference meeting which w- which, excuse me, which was being held on the inhabited planet of Mars.</span></p></figure></div>
+<div class="turn v-em" data-t="3083.107" data-sec="7" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Honorable Elijah Muhammad</span></p><div class="lines"><p class="ln" style="--i:0"><time>00:51:23</time><span class="seg" data-s="3083.107" title="00:51:23,107 → 00:51:25,787"><span class="sd">(laughs)</span></span></p><p class="ln" style="--i:1"><time>00:51:25</time><span class="seg" data-s="3085.787" title="00:51:25,787 → 00:51:29,247">It was held on Mars.</span></p><p class="ln" style="--i:2"><time>00:51:29</time><span class="seg" data-s="3089.307" title="00:51:29,307 → 00:51:32,267">What a lie.</span></p><p class="ln" style="--i:3"><time>00:51:32</time><span class="seg" data-s="3092.707" title="00:51:32,707 → 00:51:39,847">I wish you'd stand up so I could send you out right now.</span></p><p class="ln" style="--i:4"><time>00:51:52</time><span class="seg" data-s="3112.047" title="00:51:52,047 → 00:51:54,587">This is what</span> <span class="seg" data-s="3114.587" title="00:51:54,587 → 00:51:57,427">gets the people wrong-</span></p><p class="ln" style="--i:5"><time>00:51:57</time><span class="seg" data-s="3117.547" title="00:51:57,547 → 00:52:00,267">... in their understanding of us.</span></p><p class="ln" style="--i:6"><time>00:52:00</time><span class="seg" data-s="3120.907" title="00:52:00,907 → 00:52:05,327">There stands a liar on this point, there stand a truth one on that point.</span></p><p class="ln" style="--i:7"><time>00:52:05</time><span class="seg" data-s="3125.527" title="00:52:05,527 → 00:52:09,207">We don't know which one to believe.</span></p><p class="ln" style="--i:8"><time>00:52:09</time><span class="seg" data-s="3129.967" title="00:52:09,967 → 00:52:18,687">Just saying whatever comes up. All you know you want to tell something different from what you have heard.</span></p><p class="ln" style="--i:9"><time>00:52:20</time><span class="seg" data-s="3140.607" title="00:52:20,607 → 00:52:26,247">I don't want that kind of man following me, nor woman.</span></p><p class="ln" style="--i:9"><time>00:52:26</time><span class="seg" data-s="3146.307" title="00:52:26,307 → 00:52:29,327">Don't add to what you hear me say.</span></p><p class="ln" style="--i:9"><time>00:52:30</time><span class="seg" data-s="3150.827" title="00:52:30,827 → 00:52:33,727">Nor take from what you hear me say.</span></p><p class="ln" style="--i:9"><time>00:52:34</time><span class="seg" data-s="3154.587" title="00:52:34,587 → 00:52:37,167">It is the truth that I have received.</span></p><p class="ln" style="--i:9"><time>00:52:37</time><span class="seg" data-s="3157.927" title="00:52:37,927 → 00:52:42,287">When you go and add and take from, you're making it <mark>other than the truth</mark>.</span></p><p class="ln" style="--i:9"><time>00:52:43</time><span class="seg" data-s="3163.827" title="00:52:43,827 → 00:52:51,387">So I want to tell new people to stop listen at any such talk or teaching-</span></p><p class="ln" style="--i:9"><time>00:52:51</time><span class="seg" data-s="3171.447" title="00:52:51,447 → 00:52:55,727">... that is not in the same words that I'm teaching them.</span></p><p class="ln" style="--i:9"><time>00:52:56</time><span class="seg" data-s="3176.967" title="00:52:56,967 → 00:53:00,467">And I'd rather for all of 'em to come here.</span></p><p class="ln" style="--i:9"><time>00:53:00</time><span class="seg" data-s="3180.827" title="00:53:00,827 → 00:53:06,767">And then if they find me telling <mark>other than the truth</mark>, then the whole teaching is <mark>other than the truth</mark>.</span></p><p class="ln" style="--i:9"><time>00:53:07</time><span class="seg" data-s="3187.647" title="00:53:07,647 → 00:53:09,407">I'm mixing it up.</span></p><p class="ln" style="--i:9"><time>00:53:10</time><span class="seg" data-s="3190.747" title="00:53:10,747 → 00:53:15,547">But, brother, you won't find me telling you <mark>other than the truth</mark>.</span></p><p class="ln" style="--i:9"><time>00:53:17</time><span class="seg" data-s="3197.527" title="00:53:17,527 → 00:53:19,547">Not nothing I say.</span></p><p class="ln" style="--i:9"><time>00:53:20</time><span class="seg" data-s="3200.627" title="00:53:20,627 → 00:53:24,487">If you think I'm telling you <mark>other than the truth</mark>,</span> <span class="seg" data-s="3204.487" title="00:53:24,487 → 00:53:32,927">go and explain it to me what you think is <mark>other than the truth</mark>, and I will</span> <span class="seg" data-s="3212.927" title="00:53:32,927 → 00:53:41,807">give you $10,000, or a check for $10,000 before you leave here.</span></p><p class="ln" style="--i:9"><time>00:53:43</time><span class="seg" data-s="3223.247" title="00:53:43,247 → 00:53:51,627">Yes. And if that is not enough, I'll make it 10,000 times 10,000.</span></p><p class="ln" style="--i:9"><time>00:54:00</time><span class="seg" data-s="3240.187" title="00:54:00,187 → 00:54:03,507">My greatest desire</span> <span class="seg" data-s="3243.507" title="00:54:03,507 → 00:54:06,907">is to tell you the truth.</span></p><p class="ln" style="--i:9"><time>00:54:07</time><span class="seg" data-s="3247.247" title="00:54:07,247 → 00:54:14,487">Because the liar lied to us and we can't leave that liar with his lie.</span></p><p class="ln" style="--i:9"><time>00:54:15</time><span class="seg" data-s="3255.487" title="00:54:15,487 → 00:54:19,307">We have to have truth to go from him.</span></p><p class="ln" style="--i:9"><time>00:54:22</time><span class="seg" data-s="3262.807" title="00:54:22,807 → 00:54:29,067">And anything that I said, you always is welcome to question me on it.</span></p><p class="ln" style="--i:9"><time>00:54:29</time><span class="seg" data-s="3269.667" title="00:54:29,667 → 00:54:37,947">I don't run from you just because you want to question me for I should say nothing.</span></p><p class="ln" style="--i:9"><time>00:54:37</time><span class="seg" data-s="3277.947" title="00:54:37,947 → 00:54:40,527">That's what I'm here for-</span></p><p class="ln" style="--i:9"><time>00:54:40</time><span class="seg" data-s="3280.587" title="00:54:40,587 → 00:54:42,987">... for you to question me-</span></p><p class="ln" style="--i:9"><time>00:54:43</time><span class="seg" data-s="3283.027" title="00:54:43,027 → 00:54:47,587">... on the knowledge of the truth that I say I am teaching.</span></p><p class="ln" style="--i:9"><time>00:54:49</time><span class="seg" data-s="3289.027" title="00:54:49,027 → 00:54:50,907">You are all</span> <span class="seg" data-s="3290.907" title="00:54:50,907 → 00:54:55,887">set free by God Himself who taught me,</span> <span class="seg" data-s="3295.887" title="00:54:55,887 → 00:54:58,227">to ask Him questions-</span></p><p class="ln" style="--i:9"><time>00:54:58</time><span class="seg" data-s="3298.607" title="00:54:58,607 → 00:55:06,465">... learn all about yourself.I'm equipped with the truth from Almighty God, Allah.</span></p><p class="ln" style="--i:9"><time>00:55:07</time><span class="seg" data-s="3307.945" title="00:55:07,945 → 00:55:10,305">Some of it you may not understand.</span></p><p class="ln" style="--i:9"><time>00:55:11</time><span class="seg" data-s="3311.645" title="00:55:11,645 → 00:55:15,845">But don't try to condemn that which you don't understand yourself.</span></p><p class="ln" style="--i:9"><time>00:55:16</time><span class="seg" data-s="3316.546" title="00:55:16,546 → 00:55:24,786">Don't you fancy out nothing. Just old plain truth.</span></p><p class="ln" style="--i:9"><time>00:55:25</time><span class="seg" data-s="3325.005" title="00:55:25,005 → 00:55:27,325">Pass them up.</span></p></div></div>
+<header class="sec-head" id="s8" data-t="3327.325" data-sec="8"><span class="sec-n" aria-hidden="true">08</span><div class="sec-meta"><p class="eyebrow">Editorial heading · <time>00:55:27,325</time></p><h2>8. READING AND RESPONSE — birth, doctors, and planetary claims</h2></div></header>
+<div class="turn v-sis" data-t="3327.325" data-sec="8" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Sister</span></p><figure class="sheet interrupted"><figcaption class="sheet-cap">Circulating text, read aloud · may include her own remarks</figcaption><p class="sp seg" data-s="3327.325" style="--i:0"><time title="00:55:27,325 → 00:55:48,945">00:55:27,325</time><span class="tx">All nature recognized the birth of Muhammad, even the elements within nature. There were five wise doctors who delivered the infant, because specialized care had to be taken, whereas not at any time should the child's head interfere or touch the walls of his mother's uterus.</span></p><p class="sp seg" data-s="3348.945" style="--i:1"><time title="00:55:48,945 → 00:56:32,045">00:55:48,945</time><span class="tx">It is taught that hardly an ounce of blood prevailed in the delivery of the child. The place of the birth was took place in a special located within a building, which was located in the holy city Mecca. This special chamber was constructed in perpendicular of the Earth's axis, and in direct tangent of the Earth's magnetic force field, being that Mecca is located at the center of the Earth's magnetic core. Because during the time of birth, the magnetic gravitational pull field between all the planets in the universe had positioned and centered in conjunction to one another's cores beyond the degree of 99 and 9000</span></p><p class="sp seg" data-s="3392.045" style="--i:2"><time title="00:56:32,045 → 00:56:32,165">00:56:32,045</time><span class="tx">of-</span></p><p class="stop"><span class="stamp">Stopped <time>00:56:32,165</time></span></p></figure></div>
+<div class="turn v-em" data-t="3392.165" data-sec="8" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Honorable Elijah Muhammad</span></p><div class="lines"><p class="ln" style="--i:0"><time>00:56:32</time><span class="seg" data-s="3392.165" title="00:56:32,165 → 00:56:39,785">Th- this is why so many of us get, uh,</span> <span class="seg" data-s="3399.785" title="00:56:39,785 → 00:56:41,105">misunderstood.</span></p><p class="ln" style="--i:1"><time>00:56:42</time><span class="seg" data-s="3402.705" title="00:56:42,705 → 00:56:44,565">I never taught nothing like that.</span></p><p class="ln" style="--i:2"><time>00:56:46</time><span class="seg" data-s="3406.525" title="00:56:46,525 → 00:56:54,185">This is a makeup of that person teaching you something that he was not taught-</span></p><p class="ln" style="--i:3"><time>00:56:54</time><span class="seg" data-s="3414.565" title="00:56:54,565 → 00:57:03,165">... <mark>other than the truth</mark> he's carrying out to people who was born out</span> <span class="seg" data-s="3423.165" title="00:57:03,165 → 00:57:05,805">of these</span> <span class="seg" data-s="3425.805" title="00:57:05,805 → 00:57:12,985">purse of truth, born under the chief liar, the devil.</span></p><p class="ln" style="--i:4"><time>00:57:13</time><span class="seg" data-s="3433.705" title="00:57:13,705 → 00:57:16,685">And he taught them how to lie.</span></p><p class="ln" style="--i:5"><time>00:57:16</time><span class="seg" data-s="3436.705" title="00:57:16,705 → 00:57:22,445">And he came out after he hear the truth, following the devil-</span></p><p class="ln" style="--i:6"><time>00:57:22</time><span class="seg" data-s="3442.485" title="00:57:22,485 → 00:57:27,445">... teaching you <mark>other than the truth</mark> himself.</span></p><p class="ln" style="--i:7"><time>00:57:27</time><span class="seg" data-s="3447.905" title="00:57:27,905 → 00:57:30,505">These people I want you to run down.</span></p><p class="ln" style="--i:8"><time>00:57:32</time><span class="seg" data-s="3452.905" title="00:57:32,905 → 00:57:35,765">Bring them before me so I can put them out-</span></p><p class="ln" style="--i:9"><time>00:57:36</time><span class="seg" data-s="3456.205" title="00:57:36,205 → 00:57:38,485">... of our circle.</span></p><p class="ln" style="--i:9"><time>00:57:38</time><span class="seg" data-s="3458.485" title="00:57:38,485 → 00:57:43,025">They're doing no good for theirself nor you.</span></p><p class="ln" style="--i:9"><time>00:57:44</time><span class="seg" data-s="3464.085" title="00:57:44,085 → 00:57:46,505">These are the liars-</span></p><p class="ln" style="--i:9"><time>00:57:46</time><span class="seg" data-s="3466.525" title="00:57:46,525 → 00:57:51,305">... who goes out after hearing the truth and add to it-</span></p><p class="ln" style="--i:9"><time>00:57:51</time><span class="seg" data-s="3471.825" title="00:57:51,825 → 00:57:56,365">... take from to make it sound different-</span></p><p class="ln" style="--i:9"><time>00:57:56</time><span class="seg" data-s="3476.385" title="00:57:56,385 → 00:58:00,745">... or make you think that he's wiser than the God himself.</span></p><p class="ln" style="--i:9"><time>00:58:02</time><span class="seg" data-s="3482.825" title="00:58:02,825 → 00:58:05,625">He has been telling <mark>other than the truth</mark>.</span></p><p class="ln" style="--i:9"><time>00:58:08</time><span class="seg" data-s="3488.625" title="00:58:08,625 → 00:58:21,185">This is what I want you who are visiting us, get out, and you gets a hold to it, and you can't understand it and you walks away from it.</span></p><p class="ln" style="--i:9"><time>00:58:21</time><span class="seg" data-s="3501.265" title="00:58:21,265 → 00:58:24,045">For the next 19 or 20 weeks</span> <span class="seg" data-s="3504.045" title="00:58:24,045 → 00:58:24,805">that I have-</span></p><p class="ln" style="--i:9"><time>00:58:24</time><span class="seg" data-s="3504.825" title="00:58:24,825 → 00:58:28,945">... been visiting you here at this house,</span> <span class="seg" data-s="3508.945" title="00:58:28,945 → 00:58:36,805">I want to straighten out these kind of <mark>other-than-the-truth</mark> teachings.</span></p><p class="ln" style="--i:9"><time>00:58:36</time><span class="seg" data-s="3516.985" title="00:58:36,985 → 00:58:39,365">That you may know the truth-</span></p><p class="ln" style="--i:9"><time>00:58:39</time><span class="seg" data-s="3519.405" title="00:58:39,405 → 00:58:41,625">... from myself-</span></p><p class="ln" style="--i:9"><time>00:58:41</time><span class="seg" data-s="3521.645" title="00:58:41,645 → 00:58:45,985">... who received it directly from the mouth of God.</span></p><p class="ln" style="--i:9"><time>00:58:46</time><span class="seg" data-s="3526.085" title="00:58:46,085 → 00:58:55,765">And as I said, I'm willing to pay with my life for lying to you if you find me lying.</span></p><p class="ln" style="--i:9"><time>00:58:57</time><span class="seg" data-s="3537.325" title="00:58:57,325 → 00:59:01,825">Nope, I'm not going to lie.</span></p><p class="ln" style="--i:9"><time>00:59:01</time><span class="seg" data-s="3541.825" title="00:59:01,825 → 00:59:03,165">No, sir.</span></p><p class="ln" style="--i:9"><time>00:59:04</time><span class="seg" data-s="3544.365" title="00:59:04,365 → 00:59:07,545">I am gonna tell you the truth.</span></p><p class="ln" style="--i:9"><time>00:59:08</time><span class="seg" data-s="3548.405" title="00:59:08,405 → 00:59:11,125">If not, wouldn't one of you come here to listen then?</span></p><p class="ln" style="--i:9"><time>00:59:11</time><span class="seg" data-s="3551.805" title="00:59:11,805 → 00:59:15,205">I won't add a lie if you're to make a house full of people-</span></p><p class="ln" style="--i:9"><time>00:59:15</time><span class="seg" data-s="3555.805" title="00:59:15,805 → 00:59:18,905">... to listen to <mark>other than the truth</mark>.</span></p><p class="ln" style="--i:9"><time>00:59:20</time><span class="seg" data-s="3560.225" title="00:59:20,225 → 00:59:22,385">I am going to teach you the truth.</span></p></div></div>
+<header class="sec-head" id="s9" data-t="3564.385" data-sec="9"><span class="sec-n" aria-hidden="true">09</span><div class="sec-meta"><p class="eyebrow">Editorial heading · <time>00:59:24,385</time></p><h2>9. READING AND RESPONSE — cap, chamber, operation, and glow</h2></div></header>
+<div class="turn v-em" data-t="3564.385" data-sec="9" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Honorable Elijah Muhammad</span></p><div class="lines"><p class="ln" style="--i:0"><time>00:59:24</time><span class="seg" data-s="3564.385" title="00:59:24,385 → 00:59:26,065">Do you have any more? Huh?</span></p></div></div>
+<div class="turn v-sis" data-t="3566.065" data-sec="9" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Sister</span></p><figure class="sheet interrupted"><figcaption class="sheet-cap">Circulating text, read aloud · may include her own remarks</figcaption><p class="sp seg" data-s="3566.065" style="--i:0"><time title="00:59:26,065 → 00:59:28,165">00:59:26,065</time><span class="tx">Yes, sir.</span></p><p class="sp seg" data-s="3568.165" style="--i:1"><time title="00:59:28,165 → 01:00:44,265">00:59:28,165</time><span class="tx">This cap was made... Pardon me. After the child had been born, the doctors placed a metallic-like cap over his head. This cap was made of a special cloth which had, was then treated with certain fluids and then woven with a highly special metal, silk, which was sewn as threads. This metal was weaved into the cloth of the cap. The child was then wrapped with special cloth which had been treated in certain oil. He was then placed into a special small room chamber which had been constructed with the original, where the oxygen content was totally different from that on the outside. The child remained in this chamber for a period of 27 days, and then was taken to the surgeon who performed an advanced operation upon the center located in the spine, which took exactly 76 hours, no more, no less. It is taught in the Birth and Science of the Savior seventh-year minister's lesson that after this particular operation had been completed that the child's body started to produce a yellowish white glow all around his entirety.</span></p><p class="sp seg" data-s="3644.265" style="--i:2"><time title="01:00:44,265 → 01:00:47,905">01:00:44,265</time><span class="tx">It is taught that this glow lasted for 12 days, whereby-</span></p><p class="stop"><span class="stamp">Stopped <time>01:00:47,905</time></span></p></figure></div>
+<div class="turn v-em" data-t="3647.905" data-sec="9" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Honorable Elijah Muhammad</span></p><div class="lines"><p class="ln" style="--i:0"><time>01:00:47</time><span class="seg" data-s="3647.905" title="01:00:47,905 → 01:00:51,145">Now, a man that can lie that well...</span></p><p class="ln" style="--i:1"><time>01:00:58</time><span class="seg" data-s="3658.925" title="01:00:58,925 → 01:01:02,425">...</span></p><p class="ln" style="--i:2"><time>01:01:02</time><span class="seg" data-s="3662.425" title="01:01:02,425 → 01:01:06,045">he ought to be made</span> <span class="seg" data-s="3666.045" title="01:01:06,045 → 01:01:13,523">to wait-... until the last believer walks in the gate of heaven.</span></p><p class="ln" style="--i:3"><time>01:01:14</time><span class="seg" data-s="3674.883" title="01:01:14,883 → 01:01:19,004">And then throw him in the middle of Hell.</span></p><p class="ln" style="--i:4"><time>01:01:28</time><span class="seg" data-s="3688.864" title="01:01:28,864 → 01:01:32,383">I come to a place like this</span> <span class="seg" data-s="3692.383" title="01:01:32,383 → 01:01:35,603">and you mislead me?</span></p><p class="ln" style="--i:5"><time>01:01:35</time><span class="seg" data-s="3695.603" title="01:01:35,603 → 01:01:38,303">Telling <mark>other than the truth</mark></span> <span class="seg" data-s="3698.303" title="01:01:38,303 → 01:01:42,543">of what the messenger has taught?</span></p><p class="ln" style="--i:6"><time>01:01:42</time><span class="seg" data-s="3702.543" title="01:01:42,543 → 01:01:47,543">Why, brother, I don't care to walk with you in the gate.</span></p><p class="ln" style="--i:7"><time>01:01:58</time><span class="seg" data-s="3718.604" title="01:01:58,604 → 01:02:04,163">What do you think I am? A liar?</span></p><p class="ln" style="--i:8"><time>01:02:04</time><span class="seg" data-s="3724.163" title="01:02:04,163 → 01:02:05,903">Try and prove it.</span></p><p class="ln" style="--i:9"><time>01:02:07</time><span class="seg" data-s="3727.643" title="01:02:07,643 → 01:02:13,163">I'm here directly from the face of God as is written.</span></p><p class="ln" style="--i:9"><time>01:02:23</time><span class="seg" data-s="3743.223" title="01:02:23,223 → 01:02:25,523">I didn't came on my own.</span></p><p class="ln" style="--i:9"><time>01:02:27</time><span class="seg" data-s="3747.004" title="01:02:27,004 → 01:02:33,543">I, ha, was risen up in the midst of you and sent to teach you the truth.</span></p><p class="ln" style="--i:9"><time>01:02:34</time><span class="seg" data-s="3754.783" title="01:02:34,783 → 01:02:40,424">And no man on earth could teach you what I'm teaching you-</span></p><p class="ln" style="--i:9"><time>01:02:40</time><span class="seg" data-s="3760.944" title="01:02:40,944 → 01:02:43,683">... if it was not the truth.</span></p><p class="ln" style="--i:9"><time>01:02:49</time><span class="seg" data-s="3769.784" title="01:02:49,784 → 01:02:57,523">Why do you add to it? Why are you throwing <mark>other than the truth</mark> into?</span></p><p class="ln" style="--i:9"><time>01:02:57</time><span class="seg" data-s="3777.523" title="01:02:57,523 → 01:03:08,943">You don't do that to be seen and heard, because people will listen at you, they will tell it, and then you will be brought before me one day.</span></p><p class="ln" style="--i:9"><time>01:03:11</time><span class="seg" data-s="3791.283" title="01:03:11,283 → 01:03:17,743">And I have power with God to put you to a finishing touch.</span></p><p class="ln" style="--i:9"><time>01:03:31</time><span class="seg" data-s="3811.483" title="01:03:31,483 → 01:03:35,503">I'm suddenly very dissatisfied-</span></p><p class="ln" style="--i:9"><time>01:03:35</time><span class="seg" data-s="3815.803" title="01:03:35,803 → 01:03:38,983">... of you rising up,</span> <span class="seg" data-s="3818.983" title="01:03:38,983 → 01:03:41,363">taking hold of the truth-</span></p><p class="ln" style="--i:9"><time>01:03:41</time><span class="seg" data-s="3821.423" title="01:03:41,423 → 01:03:45,203">... and trying to preach to the people as <mark>other than the truth</mark>-</span></p><p class="ln" style="--i:9"><time>01:03:46</time><span class="seg" data-s="3826.383" title="01:03:46,383 → 01:03:49,123">... from yourself.</span></p><p class="ln" style="--i:9"><time>01:03:50</time><span class="seg" data-s="3830.503" title="01:03:50,503 → 01:03:53,803">We may not like you after a while.</span></p><p class="ln" style="--i:9"><time>01:03:53</time><span class="seg" data-s="3833.823" title="01:03:53,823 → 01:03:57,823">And I ask you to stop before we dislike you.</span></p><p class="ln" style="--i:9"><time>01:03:58</time><span class="seg" data-s="3838.523" title="01:03:58,523 → 01:04:03,743">"We," I mean God himself.</span></p><p class="ln" style="--i:9"><time>01:04:06</time><span class="seg" data-s="3846.903" title="01:04:06,903 → 01:04:08,903">You are doing the wrong thing.</span></p><p class="ln" style="--i:9"><time>01:04:10</time><span class="seg" data-s="3850.183" title="01:04:10,183 → 01:04:12,843">We are here to kill the liar.</span></p><p class="ln" style="--i:9"><time>01:04:13</time><span class="seg" data-s="3853.603" title="01:04:13,603 → 01:04:18,543">Destroy him who has destroyed the people of righteous-</span></p><p class="ln" style="--i:9"><time>01:04:19</time><span class="seg" data-s="3859.323" title="01:04:19,323 → 01:04:26,883">... and telling them and misleading them in a way of <mark>other than the truth</mark>.</span></p><p class="ln" style="--i:9"><time>01:04:27</time><span class="seg" data-s="3867.043" title="01:04:27,043 → 01:04:30,043">This is a good way to learn</span> <span class="seg" data-s="3870.043" title="01:04:30,043 → 01:04:33,643">who your brother is.</span></p><p class="ln" style="--i:9"><time>01:04:35</time><span class="seg" data-s="3875.063" title="01:04:35,063 → 01:04:40,523">Just make up whole lies and go tell it to the people.</span></p><p class="ln" style="--i:9"><time>01:04:40</time><span class="seg" data-s="3880.563" title="01:04:40,563 → 01:04:43,683">Make them to think I'm teaching you that.</span></p><p class="ln" style="--i:9"><time>01:04:44</time><span class="seg" data-s="3884.663" title="01:04:44,663 → 01:04:47,303">Because it's me that you are coming to.</span></p><p class="ln" style="--i:9"><time>01:04:47</time><span class="seg" data-s="3887.963" title="01:04:47,963 → 01:04:51,603">I'm not teaching the people <mark>other than the truth</mark>.</span></p><p class="ln" style="--i:9"><time>01:04:53</time><span class="seg" data-s="3893.223" title="01:04:53,223 → 01:04:55,263">It is you</span> <span class="seg" data-s="3895.263" title="01:04:55,263 → 01:05:06,223">who are taking and visiting the truth apart and adding to the parts your own lie over it.</span></p><p class="ln" style="--i:9"><time>01:05:07</time><span class="seg" data-s="3907.263" title="01:05:07,263 → 01:05:10,843">You won't get away with it.</span></p><p class="ln" style="--i:9"><time>01:05:12</time><span class="seg" data-s="3912.023" title="01:05:12,023 → 01:05:15,923">I'm more excited at that little fellow</span> <span class="seg" data-s="3915.923" title="01:05:15,923 → 01:05:19,363">that they call a lamb in the Bible.</span></p><p class="ln" style="--i:9"><time>01:05:21</time><span class="seg" data-s="3921.583" title="01:05:21,583 → 01:05:25,503">Bound to get you for it.</span></p><p class="ln" style="--i:9"><time>01:05:32</time><span class="seg" data-s="3932.883" title="01:05:32,883 → 01:05:43,963">Why will you come here? To get something to go and tell <mark>other than the truth</mark> only.</span></p><p class="ln" style="--i:9"><time>01:05:44</time><span class="seg" data-s="3944.563" title="01:05:44,563 → 01:05:47,843">Get truth now, and then add <mark>other than the truth</mark> to it.</span></p><p class="ln" style="--i:9"><time>01:05:48</time><span class="seg" data-s="3948.123" title="01:05:48,123 → 01:05:50,643">You shouldn't come here.</span></p><p class="ln" style="--i:9"><time>01:05:50</time><span class="seg" data-s="3950.763" title="01:05:50,763 → 01:05:53,883">This is the wrong place.</span></p><p class="ln" style="--i:9"><time>01:05:54</time><span class="seg" data-s="3954.303" title="01:05:54,303 → 01:05:57,923">This is where you come to learn the truth.</span></p><p class="ln" style="--i:9"><time>01:05:59</time><span class="seg" data-s="3959.683" title="01:05:59,683 → 01:06:06,143">And I just hire you to prove what I teach here <mark>other than the truth</mark>.</span></p><p class="ln" style="--i:9"><time>01:06:06</time><span class="seg" data-s="3966.843" title="01:06:06,843 → 01:06:12,923">I do that every time I get on this stand.</span></p><p class="ln" style="--i:9"><time>01:06:14</time><span class="seg" data-s="3974.063" title="01:06:14,063 → 01:06:17,463">I want people that love the truth.</span></p><p class="ln" style="--i:9"><time>01:06:19</time><span class="seg" data-s="3979.523" title="01:06:19,523 → 01:06:26,783">I want people that love the result of truth-</span></p><p class="ln" style="--i:9"><time>01:06:27</time><span class="seg" data-s="3987.003" title="01:06:27,003 → 01:06:31,143">... and not the result of a liar.</span></p><p class="ln" style="--i:9"><time>01:06:32</time><span class="seg" data-s="3992.643" title="01:06:32,643 → 01:06:35,603">I can prove everything I teach to you.</span></p><p class="ln" style="--i:9"><time>01:06:39</time><span class="seg" data-s="3999.183" title="01:06:39,183 → 01:06:40,223">Everything.</span></p><p class="ln" style="--i:9"><time>01:06:42</time><span class="seg" data-s="4002.283" title="01:06:42,283 → 01:06:46,343">I'll prove to you that, that it is the truth.</span></p><p class="ln" style="--i:9"><time>01:06:48</time><span class="seg" data-s="4008.763" title="01:06:48,763 → 01:06:53,963">Not only that, everything I do I can prove that it's the truth.</span></p></div></div>
+<header class="sec-head" id="s10" data-t="4023.843" data-sec="10"><span class="sec-n" aria-hidden="true">10</span><div class="sec-meta"><p class="eyebrow">Editorial heading · <time>01:07:03,843</time></p><h2>10. CLOSING EXCHANGE — remaining pages and postponement</h2></div></header>
+<div class="turn v-em" data-t="4023.843" data-sec="10" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Honorable Elijah Muhammad</span></p><div class="lines"><p class="ln" style="--i:0"><time>01:07:03</time><span class="seg" data-s="4023.843" title="01:07:03,843 → 01:07:06,503">All right.</span></p><p class="ln" style="--i:1"><time>01:07:06</time><span class="seg" data-s="4026.503" title="01:07:06,503 → 01:07:09,023">No more? All right.</span></p></div></div>
+<div class="turn v-sv" data-t="4029.023" data-sec="10" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Sister</span></p><div class="lines"><p class="ln" style="--i:0"><time>01:07:09</time><span class="seg" data-s="4029.023" title="01:07:09,023 → 01:07:11,563">There's quite a bit more here, Apostle. Did you want to hear any more?</span></p></div></div>
+<div class="turn v-em" data-t="4034.593" data-sec="10" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Honorable Elijah Muhammad</span></p><div class="lines"><p class="ln" style="--i:0"><time>01:07:14</time><span class="seg" data-s="4034.593" title="01:07:14,593 → 01:07:17,113">Come here, you show me.</span></p><p class="ln" style="--i:1"><time>01:07:17</time><span class="seg" data-s="4037.113" title="01:07:17,113 → 01:07:27,213">Come here and show me... some of it.</span></p><p class="ln" style="--i:2"><time>01:07:27</time><span class="seg" data-s="4047.213" title="01:07:27,213 → 01:07:31,073">Oh, no. That's very different.</span></p></div></div>
+<div class="turn v-sv" data-t="4051.073" data-sec="10" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Sister</span></p><div class="lines"><p class="ln" style="--i:0"><time>01:07:31</time><span class="seg" data-s="4051.073" title="01:07:31,073 → 01:07:34,854">You mean, right here?</span></p></div></div>
+<div class="turn v-em" data-t="4054.854" data-sec="10" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Honorable Elijah Muhammad</span></p><div class="lines"><p class="ln" style="--i:0"><time>01:07:34</time><span class="seg" data-s="4054.854" title="01:07:34,854 → 01:07:37,914">You've had that much already?</span></p></div></div>
+<div class="turn v-sv" data-t="4057.914" data-sec="10" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Sister</span></p><div class="lines"><p class="ln" style="--i:0"><time>01:07:37</time><span class="seg" data-s="4057.914" title="01:07:37,914 → 01:07:37,953">Yeah.</span></p></div></div>
+<div class="turn v-em" data-t="4057.953" data-sec="10" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Honorable Elijah Muhammad</span></p><div class="lines"><p class="ln" style="--i:0"><time>01:07:37</time><span class="seg" data-s="4057.953" title="01:07:37,953 → 01:07:41,033">My goodness, Lord.</span></p><p class="ln" style="--i:1"><time>01:07:41</time><span class="seg" data-s="4061.033" title="01:07:41,033 → 01:07:42,873">You even got Vietnam now.</span></p></div></div>
+<div class="turn v-sv" data-t="4062.873" data-sec="10" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Sister</span></p><div class="lines"><p class="ln" style="--i:0"><time>01:07:42</time><span class="seg" data-s="4062.873" title="01:07:42,873 → 01:07:45,613">Yes, sir.</span></p></div></div>
+<div class="turn v-em" data-t="4065.613" data-sec="10" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Honorable Elijah Muhammad</span></p><div class="lines"><p class="ln" style="--i:0"><time>01:07:45</time><span class="seg" data-s="4065.613" title="01:07:45,613 → 01:07:47,793">Man,</span> <span class="seg" data-s="4067.793" title="01:07:47,793 → 01:07:53,313">that's some professional writer here who's going to try to teach us.</span></p><p class="ln" style="--i:1"><time>01:07:53</time><span class="seg" data-s="4073.313" title="01:07:53,313 → 01:07:55,973">Oh, Lord.</span></p></div></div>
+<div class="turn v-sv" data-t="4075.973" data-sec="10" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Sister</span></p><div class="lines"><p class="ln" style="--i:0"><time>01:07:55</time><span class="seg" data-s="4075.973" title="01:07:55,973 → 01:07:57,413">You want any more?</span></p></div></div>
+<div class="turn v-em" data-t="4077.413" data-sec="10" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Honorable Elijah Muhammad</span></p><div class="lines"><p class="ln" style="--i:0"><time>01:07:57</time><span class="seg" data-s="4077.413" title="01:07:57,413 → 01:07:58,194">Hmm?</span></p></div></div>
+<div class="turn v-sv" data-t="4078.194" data-sec="10" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Sister</span></p><div class="lines"><p class="ln" style="--i:0"><time>01:07:58</time><span class="seg" data-s="4078.194" title="01:07:58,194 → 01:07:58,354">You want any more, Brother?</span></p></div></div>
+<div class="turn v-em" data-t="4078.354" data-sec="10" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Honorable Elijah Muhammad</span></p><div class="lines"><p class="ln" style="--i:0"><time>01:07:58</time><span class="seg" data-s="4078.354" title="01:07:58,354 → 01:08:05,014">No. We, uh, we... have some for next time.</span></p></div></div>
+<div class="turn v-sv" data-t="4085.014" data-sec="10" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Sister</span></p><div class="lines"><p class="ln" style="--i:0"><time>01:08:05</time><span class="seg" data-s="4085.014" title="01:08:05,014 → 01:08:07,053">Yes, sir.</span></p></div></div>
+<header class="sec-head" id="s11" data-t="4087.053" data-sec="11"><span class="sec-n" aria-hidden="true">11</span><div class="sec-meta"><p class="eyebrow">Editorial heading · <time>01:08:07,053</time></p><h2>11. CONCLUDING REMARKS — why he had the material read</h2></div></header>
+<div class="turn v-em" data-t="4087.053" data-sec="11" tabindex="-1"><p class="who"><span class="star" aria-hidden="true"></span><span class="role">The Honorable Elijah Muhammad</span></p><div class="lines"><p class="ln" style="--i:0"><time>01:08:07</time><span class="seg" data-s="4087.053" title="01:08:07,053 → 01:08:14,453">I'm going to stop this sister secretary from reading off this,</span> <span class="seg" data-s="4094.453" title="01:08:14,453 → 01:08:23,474">uh, others in the truth grounds. Yeah, after looking there, seems you have two or three more pages, and that, uh,</span> <span class="seg" data-s="4103.474" title="01:08:23,474 → 01:08:26,793">some of it even goes into politics.</span></p><p class="ln" style="--i:1"><time>01:08:26</time><span class="seg" data-s="4106.793" title="01:08:26,793 → 01:08:30,114">So I'm going to leave it go-</span></p><p class="ln" style="--i:2"><time>01:08:30</time><span class="seg" data-s="4110.194" title="01:08:30,194 → 01:08:35,553">... till next time when I don't have too much</span> <span class="seg" data-s="4115.553" title="01:08:35,553 → 01:08:39,053">of business to take up with you.</span></p><p class="ln" style="--i:3"><time>01:08:39</time><span class="seg" data-s="4119.053" title="01:08:39,053 → 01:08:44,613">Then I'll let this go in again. We will have some more of this next Sunday.</span></p><p class="ln" style="--i:4"><time>01:08:45</time><span class="seg" data-s="4125.094" title="01:08:45,094 → 01:08:47,813">We wanna get rid of this.</span></p><p class="ln" style="--i:5"><time>01:08:49</time><span class="seg" data-s="4129.074" title="01:08:49,074 → 01:08:53,753">We believe that we have very intelligent people visiting us-</span></p><p class="ln" style="--i:6"><time>01:08:55</time><span class="seg" data-s="4135.133" title="01:08:55,133 → 01:09:02,694">... at this time, and we want them to listen at something</span> <span class="seg" data-s="4142.694" title="01:09:02,694 → 01:09:07,953">of truth and something of business that we should be doing.</span></p><p class="ln" style="--i:7"><time>01:09:09</time><span class="seg" data-s="4149.553" title="01:09:09,553 → 01:09:20,173">And not to be listening to a lot of little yellmouth brothers who don't know what they're talking about.</span></p><p class="ln" style="--i:8"><time>01:09:20</time><span class="seg" data-s="4160.534" title="01:09:20,534 → 01:09:24,513">And they're just opening their mouth, saying what they think.</span></p><p class="ln" style="--i:9"><time>01:09:25</time><span class="seg" data-s="4165.813" title="01:09:25,813 → 01:09:36,513">That's why I had this much read out to them. I want them to know that I'm not down here taking up no such foolishness.</span></p><p class="ln" style="--i:9"><time>01:09:37</time><span class="seg" data-s="4177.633" title="01:09:37,633 → 01:09:39,113">And I don't teach it.</span></p><p class="ln" style="--i:9"><time>01:09:40</time><span class="seg" data-s="4180.173" title="01:09:40,173 → 01:09:42,433">This is just a foolish brother-</span></p><p class="ln" style="--i:9"><time>01:09:42</time><span class="seg" data-s="4182.673" title="01:09:42,673 → 01:09:49,034">... or a sister that is taking the teaching, trying to make himself look wise.</span></p><p class="ln" style="--i:9"><time>01:09:50</time><span class="seg" data-s="4190.453" title="01:09:50,453 → 01:09:52,953">And making himself look like a fool.</span></p><p class="ln" style="--i:9"><time>01:09:55</time><span class="seg" data-s="4195.253" title="01:09:55,253 → 01:09:57,393">I don't condone</span> <span class="seg" data-s="4197.393" title="01:09:57,393 → 01:09:59,034">in nothing of the kind.</span></p><p class="ln" style="--i:9"><time>01:09:59</time><span class="seg" data-s="4199.993" title="01:09:59,993 → 01:10:02,534">The truth</span> <span class="seg" data-s="4202.534" title="01:10:02,534 → 01:10:04,613">alone is sufficient-</span></p><p class="ln" style="--i:9"><time>01:10:06</time><span class="seg" data-s="4206.733" title="01:10:06,733 → 01:10:09,993">... to make you to admire it</span> <span class="seg" data-s="4209.993" title="01:10:09,993 → 01:10:12,653">or you</span> <span class="seg" data-s="4212.653" title="01:10:12,653 → 01:10:14,333">can</span> <span class="seg" data-s="4214.333" title="01:10:14,333 → 01:10:17,473">disbelieve it and leave.</span></p></div></div>
+  </main>
+
+  <footer class="coda">
+    <p class="small"><time>01:10:19,513</time></p>
+    <p class="big">The truth alone is <span>sufficient</span>.</p>
+    <p class="small">At 01:10:19,513 he turns to doing something for self. He explicitly stops the reading and says more pages remain. This extraction contains the complete discussion in this lecture, not the full underlying writings.</p>
+  </footer>
+</div>
+
+<div class="reel" role="region" aria-label="Reel and player">
+  <div class="transport">
+  <button class="skip" id="back10" type="button" aria-label="Back 10 seconds" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5V2L7 6l5 4V7a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z" fill="currentColor"/><text x="12" y="16.2" text-anchor="middle" font-size="6.6" font-family="Arial,sans-serif" font-weight="700" fill="currentColor">10</text></svg></button>
+  <button class="play" id="play" type="button" aria-label="Load the recording"><span class="ring"></span>
+    <svg class="i-play" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.5v11l9-5.5z" fill="currentColor"/></svg>
+    <svg class="i-pause" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.5h3v11H3zM8 1.5h3v11H8z" fill="currentColor"/></svg>
+  </button>
+  <button class="skip" id="fwd10" type="button" aria-label="Forward 10 seconds" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5V2l5 4-5 4V7a6 6 0 1 0 6 6h2a8 8 0 1 1-8-8z" fill="currentColor"/><text x="12" y="16.2" text-anchor="middle" font-size="6.6" font-family="Arial,sans-serif" font-weight="700" fill="currentColor">10</text></svg></button>
+  </div>
+  <span class="digits" id="digits" role="timer" aria-label="00:30:01"></span>
+  <div class="track" id="track" aria-label="Position in the lecture"><span class="base"></span><span class="fill" id="fill"></span><span class="head" id="head"></span><a class="tick" href="#s1" style="left:0.000%" aria-label="Section 1: INTRODUCTORY REMARKS — correcting teachings attributed to him"><span class="tip">01 · INTRODUCTORY REMARKS — correcting teachings attributed to him</span></a><a class="tick" href="#s2" style="left:23.594%" aria-label="Section 2: SETUP — people making up texts; the sister is called forward"><span class="tip">02 · SETUP — people making up texts; the sister is called forward</span></a><a class="tick" href="#s3" style="left:28.840%" aria-label="Section 3: SISTER’S INTRODUCTION"><span class="tip">03 · SISTER’S INTRODUCTION</span></a><a class="tick" href="#s4" style="left:30.641%" aria-label="Section 4: READING AND RESPONSE — “Fard,” word meanings, and silk"><span class="tip">04 · READING AND RESPONSE — “Fard,” word meanings, and silk</span></a><a class="tick" href="#s5" style="left:41.795%" aria-label="Section 5: READING AND RESPONSE — California"><span class="tip">05 · READING AND RESPONSE — California</span></a><a class="tick" href="#s6" style="left:43.869%" aria-label="Section 6: READING AND RESPONSE — substance, reflector, and vacuum"><span class="tip">06 · READING AND RESPONSE — substance, reflector, and vacuum</span></a><a class="tick" href="#s7" style="left:48.190%" aria-label="Section 7: READING AND RESPONSE — “fifth year teaching,” conferences, and Mars"><span class="tip">07 · READING AND RESPONSE — “fifth year teaching,” conferences, and Mars</span></a><a class="tick" href="#s8" style="left:63.106%" aria-label="Section 8: READING AND RESPONSE — birth, doctors, and planetary claims"><span class="tip">08 · READING AND RESPONSE — birth, doctors, and planetary claims</span></a><a class="tick" href="#s9" style="left:72.909%" aria-label="Section 9: READING AND RESPONSE — cap, chamber, operation, and glow"><span class="tip">09 · READING AND RESPONSE — cap, chamber, operation, and glow</span></a><a class="tick" href="#s10" style="left:91.909%" aria-label="Section 10: CLOSING EXCHANGE — remaining pages and postponement"><span class="tip">10 · CLOSING EXCHANGE — remaining pages and postponement</span></a><a class="tick" href="#s11" style="left:94.523%" aria-label="Section 11: CONCLUDING REMARKS — why he had the material read"><span class="tip">11 · CONCLUDING REMARKS — why he had the material read</span></a></div>
+  <div class="ctl" id="ctl">
+    <button class="chip" id="rate" type="button" hidden aria-label="Playback speed">1×</button>
+    <button class="chip" id="follow" type="button" hidden aria-pressed="true">Follow</button>
+  </div>
+  <div class="now" id="now"><b>01</b>Introductory remarks</div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<audio id="tape" preload="metadata"></audio>
+
+<script>
+(function(){
+  /* For self-hosting: put the MP3's URL here. TAPE_OFFSET is the lecture time (in seconds)
+     at which the file starts: 0 for the full recording, 1801.255 for a file cut at 00:30:01,255. */
+  var TAPE_SRC = "/lectures/other-than-the-truth/theology-of-time-1972-10-15.mp3";
+  var TAPE_OFFSET = 1800;
+
+  var root=document.documentElement;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  root.classList.add('js');
+  var START=1801.255, END=4219.513, SECS={"1": "INTRODUCTORY REMARKS — correcting teachings attributed to him", "2": "SETUP — people making up texts; the sister is called forward", "3": "SISTER’S INTRODUCTION", "4": "READING AND RESPONSE — “Fard,” word meanings, and silk", "5": "READING AND RESPONSE — California", "6": "READING AND RESPONSE — substance, reflector, and vacuum", "7": "READING AND RESPONSE — “fifth year teaching,” conferences, and Mars", "8": "READING AND RESPONSE — birth, doctors, and planetary claims", "9": "READING AND RESPONSE — cap, chamber, operation, and glow", "10": "CLOSING EXCHANGE — remaining pages and postponement", "11": "CONCLUDING REMARKS — why he had the material read"};
+  function $(id){return document.getElementById(id)}
+
+  /* ---------- Sky ---------- */
+  var canv=[].slice.call(document.querySelectorAll('canvas.stars')), skyH=0;
+  function rnd(seed){return function(){seed=(seed*16807)%2147483647;return (seed-1)/2147483646}}
+  function paintSky(){
+    var w=window.innerWidth, h=window.innerHeight, dpr=Math.min(window.devicePixelRatio||1,2);
+    skyH=h;
+    canv.forEach(function(c,li){
+      c.width=Math.round(w*dpr); c.height=Math.round(h*2*dpr); c.style.height=(h*2)+'px';
+      var x=c.getContext('2d'); x.scale(dpr,dpr);
+      var r=rnd(1234+li*977), n=Math.round(w*h/[2600,6500,16000][li]);
+      for(var i=0;i<n;i++){
+        var px=r()*w, py=r()*h, rad=[.5,.8,1.15][li]*(0.6+r()*0.8), a=[.45,.7,.9][li]*(0.4+r()*0.6);
+        var tint=r(); var col=tint<.15?'255,226,170':tint<.35?'190,200,255':'255,255,255';
+        x.fillStyle='rgba('+col+','+a.toFixed(2)+')';
+        x.beginPath();x.arc(px,py,rad,0,6.283);x.fill();
+        x.beginPath();x.arc(px,py+h,rad,0,6.283);x.fill();
+        if(li===2&&r()<.12){x.fillStyle='rgba('+col+',.08)';x.beginPath();x.arc(px,py,rad*5,0,6.283);x.fill();x.beginPath();x.arc(px,py+h,rad*5,0,6.283);x.fill();}
+      }
+    });
+    var tw=$('twinkles'); tw.innerHTML=''; var r2=rnd(77);
+    for(var j=0;j<(w<600?10:22);j++){
+      var s=document.createElement('span');s.className='twinkle';
+      s.style.left=(r2()*100)+'%';s.style.top=(r2()*100)+'%';
+      s.style.setProperty('--dur',(3+r2()*5).toFixed(2)+'s');s.style.setProperty('--del',(-r2()*6).toFixed(2)+'s');
+      tw.appendChild(s);
+    }
+    parallax();
+  }
+  var secNums=[].slice.call(document.querySelectorAll('.sec-n'));
+  function parallax(){
+    var y=window.scrollY||0;
+    if(reduce){canv.forEach(function(c){c.style.transform='translate3d(0,0,0)'});return;}
+    canv.forEach(function(c){var k=+c.dataset.k; c.style.transform='translate3d(0,'+(-((y*k)%skyH))+'px,0)';});
+    var vh=window.innerHeight;
+    for(var i=0;i<secNums.length;i++){
+      var b=secNums[i].parentNode.getBoundingClientRect();
+      if(b.bottom<-200||b.top>vh+200)continue;
+      var p=(b.top+b.height/2-vh/2)/vh; secNums[i].style.transform='translate3d(0,'+(p*-38).toFixed(1)+'px,0)';
+    }
+  }
+  var ticking=false;
+  window.addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(function(){ticking=false;parallax();})}},{passive:true});
+  var rz;window.addEventListener('resize',function(){clearTimeout(rz);rz=setTimeout(function(){paintSky();var t=lastT;lastT=-1;setTime(t)},150)});
+  secNums.forEach(function(n){n.innerHTML='<span>'+n.textContent+'</span>'});
+  paintSky();
+
+  /* ---------- Rolling counter ---------- */
+  var dEl=$('digits'), strips=[];
+  [0,1,':',2,3,':',4,5].forEach(function(x){
+    if(x===':'){var c=document.createElement('span');c.className='colon';c.textContent=':';dEl.appendChild(c);return;}
+    var d=document.createElement('span');d.className='dg';var s=document.createElement('span');s.className='strip';
+    for(var n=0;n<10;n++){var e=document.createElement('span');e.textContent=n;s.appendChild(e);}
+    d.appendChild(s);dEl.appendChild(d);strips.push(s);
+  });
+  var fill=$('fill'), head=$('head'), track=$('track'), now=$('now');
+  var lastT=-1,lastSec='',lastStr='';
+  function pad(n){return (n<10?'0':'')+n}
+  function setTime(t,sec){
+    if(t===lastT)return;lastT=t;
+    var s=Math.max(0,Math.floor(t)), str=pad(Math.floor(s/3600))+pad(Math.floor(s%3600/60))+pad(s%60);
+    if(str!==lastStr){lastStr=str;for(var i=0;i<6;i++)strips[i].style.transform='translateY('+(-(+str[i]))+'em)';
+      dEl.setAttribute('aria-label',str.slice(0,2)+':'+str.slice(2,4)+':'+str.slice(4));}
+    var p=Math.max(0,Math.min(1,(t-START)/(END-START)));
+    fill.style.transform='scaleX('+p+')';
+    head.style.transform='translateX('+(p*track.clientWidth)+'px)';
+    if(sec&&sec!==lastSec){lastSec=sec;now.innerHTML='<b>'+pad(+sec)+'</b>';now.appendChild(document.createTextNode(SECS[sec]));}
+  }
+  setTime(START,'1');
+
+  var items=[].slice.call(document.querySelectorAll('.turn,.sec-head'));
+  var turns=[].slice.call(document.querySelectorAll('.turn'));
+  var segs=[].slice.call(document.querySelectorAll('.seg'));
+  var segT=segs.map(function(e){return +e.dataset.s});
+  var tape=$('tape'), loaded=false, playing=false;
+
+  /* Reel follows the turn crossing the middle of the screen */
+  var hereEl=null;
+  function markHere(el){if(hereEl===el)return;if(hereEl)hereEl.classList.remove('here');hereEl=el;if(el&&el.classList.contains('turn'))el.classList.add('here');}
+  if('IntersectionObserver' in window){
+    var mid=new IntersectionObserver(function(es){
+      if(playing)return;
+      es.forEach(function(e){if(e.isIntersecting){setTime(+e.target.dataset.t,e.target.dataset.sec);markHere(e.target);}});
+    },{rootMargin:'-48% 0px -51% 0px'});
+    items.forEach(function(el){mid.observe(el)});
+  }
+
+  /* Arrival: only things below the first screen are held back */
+  var io=null;
+  if(!reduce && 'IntersectionObserver' in window){
+    var vh=window.innerHeight;
+    io=new IntersectionObserver(function(es){
+      es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+    },{rootMargin:'0px 0px -8% 0px',threshold:0.01});
+    items.forEach(function(el){if(el.getBoundingClientRect().top>vh*0.95){el.classList.add('armed');io.observe(el);}});
+    requestAnimationFrame(function(){requestAnimationFrame(function(){root.classList.add('loaded')})});
+  } else { root.classList.add('loaded'); }
+  function reveal(el){var t=el.closest('.turn,.sec-head');if(t)t.classList.add('in');}
+
+  /* ---------- Player ---------- */
+  var toastT;function toast(m){var t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('on')},3200);}
+  var fileIn=$('fileIn'), playBtn=$('play'), rateBtn=$('rate'), followBtn=$('follow');
+  var follow=true, lastUser=0, lastFile=null;
+  function pick(){fileIn.click();}
+  $('loadBtn').addEventListener('click',pick);
+  function setSrc(src,label){
+    tape.src=src; tape.load(); loaded=true;
+    root.classList.add('has-tape');
+    rateBtn.hidden=false;followBtn.hidden=false;$('back10').hidden=false;$('fwd10').hidden=false;$('ctl').classList.add('live');
+    playBtn.setAttribute('aria-label','Play');
+    $('loadBtn').textContent='Change file';
+    $('listenMsg').innerHTML='';var f=document.createElement('span');f.className='file-name';f.textContent=label;$('listenMsg').appendChild(document.createTextNode('Loaded: '));$('listenMsg').appendChild(f);
+  }
+  fileIn.addEventListener('change',function(){
+    var f=fileIn.files&&fileIn.files[0]; if(!f)return; lastFile=f;
+    TAPE_OFFSET=0; setSrc(URL.createObjectURL(f),f.name+' (timecodes assume the full recording)'); toast('Recording loaded. Press play or click any line.');
+  });
+  tape.addEventListener('error',function(){
+    if(lastFile&&tape.src.indexOf('blob:')===0){ /* some viewers refuse blob media: retry as a data URL */
+      var rd=new FileReader();rd.onload=function(){tape.src=rd.result;tape.load();};rd.readAsDataURL(lastFile);lastFile=null;return;}
+    if(TAPE_SRC&&!inMemory&&fetching){toast('Loading the recording…');return;}
+    toast('The recording could not be played here. Try loading the MP3 from your device.');stop();
+  });
+  if(TAPE_SRC){setSrc(TAPE_SRC,'');$('listenMsg').textContent='The recording of this lecture is attached. Press play below, or click any line to hear it from that moment.';$('loadBtn').textContent='Use another file';$('loadBtn').classList.add('quiet');$('heroPlay').hidden=false;}
+  $('heroPlay').addEventListener('click',function(){if(tape.paused){if(lectureTime()<START-1)seekTo(START,true);else start();}else{stop();}});
+  tape.addEventListener('play',function(){$('heroPlay').textContent='Pause';});tape.addEventListener('pause',function(){$('heroPlay').textContent='Resume';});
+
+  function lectureTime(){return tape.currentTime+TAPE_OFFSET}
+  /* iPhones load nothing until play() runs inside the tap itself, so start first and
+     position the tape as soon as it can be positioned. */
+  var pending=null;
+  function seekTo(t,andPlay){
+    if(!loaded)return;
+    var target=Math.max(0,t-TAPE_OFFSET);
+    ensureBlob();
+    if(tape.readyState>=1){pending=inMemory?null:target;tape.currentTime=target;}
+    else{pending=target;tape.addEventListener('loadedmetadata',function(){if(pending!==null){tape.currentTime=pending;pending=null;}},{once:true});}
+    if(andPlay)start();
+  }
+  var startedAt=0;
+  /* Keep a full in-memory copy of the recording, so seeking never depends on the
+     server supporting partial (range) requests. Safari needs that for audio at all. */
+  var fetching=false, inMemory=false, wantPlay=false;
+  function ensureBlob(){
+    if(fetching||inMemory||!TAPE_SRC||!/^https?:$/.test(location.protocol))return;
+    if(tape.src.indexOf('blob:')===0)return;
+    fetching=true;
+    fetch(TAPE_SRC,{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('http '+r.status);return r.blob();}).then(function(b){
+      var url=URL.createObjectURL(b.type?b:new Blob([b],{type:'audio/mpeg'}));
+      var at=pending!==null?pending:tape.currentTime, resume=!tape.paused||wantPlay;
+      swapping=true; tape.src=url; tape.load(); inMemory=true;
+      tape.addEventListener('loadedmetadata',function(){
+        tape.currentTime=at; pending=null; swapping=false;
+        if(resume){var p=tape.play();if(p&&p.catch)p.catch(function(){});}
+      },{once:true});
+    }).catch(function(){fetching=false;});
+  }
+  var swapping=false;
+  tape.addEventListener('seeked',function(){if(pending!==null&&Math.abs(tape.currentTime-pending)<1.5)pending=null;});
+  function start(){
+    wantPlay=true; ensureBlob();
+    if(tape.networkState===3||tape.error){tape.load();}
+    var p=tape.play();
+    if(p&&p.catch)p.catch(function(err){if(err&&err.name==='AbortError')return;toast('Playback was blocked. Tap play again.');});
+    clearTimeout(startedAt);startedAt=setTimeout(function(){if(!tape.paused&&tape.readyState<3)toast('Loading the recording…');},2500);
+  }
+  function stop(){tape.pause();}
+  playBtn.addEventListener('click',function(){
+    if(!loaded){pick();return;}
+    if(tape.paused){ if(lectureTime()<START-1)seekTo(Math.max(START,lastT>START?lastT:START),true); else start(); } else stop();
+  });
+  tape.addEventListener('play',function(){playing=true;root.classList.add('playing');playBtn.setAttribute('aria-label','Pause');loop();});
+  tape.addEventListener('pause',function(){if(swapping)return;wantPlay=false;playing=false;root.classList.remove('playing');playBtn.setAttribute('aria-label','Play');});
+  tape.addEventListener('ended',function(){playing=false;root.classList.remove('playing');});
+  function skip(d){if(!loaded)return;var t=Math.max(START,Math.min(END,lectureTime()+d));seekTo(t,!tape.paused);if(tape.paused){setTime(t,lastSec);var i=find(t);if(i>=0){segs[i].closest('.turn').classList.add('in');}}lastUser=0;}
+  $('back10').addEventListener('click',function(){skip(-10)});
+  $('fwd10').addEventListener('click',function(){skip(10)});
+  var rates=[1,1.25,1.5,.75],ri=0;
+  rateBtn.addEventListener('click',function(){ri=(ri+1)%rates.length;tape.playbackRate=rates[ri];rateBtn.textContent=rates[ri]+'×';});
+  followBtn.addEventListener('click',function(){follow=!follow;followBtn.setAttribute('aria-pressed',follow);if(follow)lastUser=0;});
+  ['wheel','touchmove'].forEach(function(ev){window.addEventListener(ev,function(){lastUser=Date.now()},{passive:true})});
+
+  var cur=-1;
+  function find(t){var lo=0,hi=segT.length-1,a=-1;while(lo<=hi){var m=(lo+hi)>>1;if(segT[m]<=t){a=m;lo=m+1}else hi=m-1;}return a;}
+  function loop(){
+    if(!playing)return;
+    var t=lectureTime(), i=find(t);
+    if(i!==cur){
+      if(cur>=0)segs[cur].classList.remove('speaking');
+      cur=i;
+      if(i>=0){
+        var el=segs[i]; el.classList.add('speaking'); reveal(el);
+        var tn=el.closest('.turn'); markHere(tn);
+        if(follow&&Date.now()-lastUser>4000){
+          var b=el.getBoundingClientRect(), vh=window.innerHeight;
+          if(b.top<vh*.22||b.bottom>vh*.68){window.scrollTo({top:window.scrollY+b.top-vh*.38,behavior:reduce?'auto':'smooth'});}
+        }
+      }
+    }
+    var tn2=i>=0?segs[i].closest('.turn'):null;
+    setTime(t,tn2?tn2.dataset.sec:null);
+    requestAnimationFrame(loop);
+  }
+
+  /* Click a line (or its timecode) to hear it */
+  document.getElementById('log').addEventListener('click',function(e){
+    var s=e.target.closest('.seg'); if(!s&&e.target.tagName==='TIME'&&e.target.parentNode.classList.contains('ln'))s=e.target.parentNode.querySelector('.seg'); if(!s)return;
+    var sel=window.getSelection&&window.getSelection(); if(sel&&!sel.isCollapsed)return;
+    if(!loaded){ if(e.target.tagName==='TIME'){toast('Load the recording first to listen from this line.');} return; }
+    seekTo(+s.dataset.s,true); lastUser=0;
+  });
+
+  /* Track: drag or click to move through the lecture */
+  function tFromX(x){var b=track.getBoundingClientRect();return START+Math.max(0,Math.min(1,(x-b.left)/b.width))*(END-START);}
+  function nearestTurn(t){var best=turns[0];for(var i=0;i<turns.length;i++){if(+turns[i].dataset.t<=t)best=turns[i];else break;}return best;}
+  var drag=false;
+  track.addEventListener('pointerdown',function(e){if(e.target.closest('.tick'))return;drag=true;root.classList.add('dragging');track.setPointerCapture(e.pointerId);setTime(tFromX(e.clientX));});
+  track.addEventListener('pointermove',function(e){if(drag)setTime(tFromX(e.clientX));});
+  track.addEventListener('pointerup',function(e){if(!drag)return;drag=false;root.classList.remove('dragging');var t=tFromX(e.clientX);
+    if(loaded)seekTo(t,!tape.paused);
+    var el=nearestTurn(t);el.classList.add('in');el.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});lastUser=Date.now()-3000;});
+
+  /* Keys: J / K step between speakers, Space plays */
+  var stops=turns;
+  document.addEventListener('keydown',function(e){
+    if(e.metaKey||e.ctrlKey||e.altKey)return;
+    var tg=e.target.tagName;if(tg==='INPUT'||tg==='TEXTAREA'||tg==='SELECT')return;
+    if(e.key===' '&&loaded&&tg!=='BUTTON'&&tg!=='SUMMARY'&&tg!=='A'){e.preventDefault();playBtn.click();return;}
+    if(loaded&&(e.key==='ArrowLeft'||e.key==='ArrowRight')){e.preventDefault();skip(e.key==='ArrowLeft'?-10:10);return;}
+    var k=e.key.toLowerCase();if(k!=='j'&&k!=='k')return;
+    var y=window.innerHeight*0.3, idx=-1;
+    for(var i=0;i<stops.length;i++){if(stops[i].getBoundingClientRect().top<=y+2)idx=i;else break;}
+    var n=k==='j'?idx+1:idx-1; if(k==='k'&&idx>=0&&stops[idx].getBoundingClientRect().top<y-4)n=idx;
+    n=Math.max(0,Math.min(stops.length-1,n));
+    var el=stops[n];el.classList.add('in');lastUser=Date.now();
+    el.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+    el.focus({preventScroll:true});
+    if(loaded&&!tape.paused)seekTo(+el.dataset.t,true);
+    e.preventDefault();
+  });
+})();
+</script>
+
+</body>
+</html>
