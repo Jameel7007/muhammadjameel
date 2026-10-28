@@ -3,6 +3,10 @@
 # appears in the Projects section on the homepage — no code change needed.
 # linkLabel is optional and defaults to "Visit".
 projects:
+  - title: Mashrabiya Light
+    description: A quiet room behind a carved wooden screen. Sunlight falls through the lattice and a few panes of jewel-colored glass, laying stars of white and colored light across a marble floor. Move the sun from a rose dawn into the blue hour, and choose among four classic lattices, their stars drawn by Hankin's method of polygons in contact.
+    link: https://jameel7007.github.io/mashrabiya-light/
+    linkLabel: Visit
   - title: Other Than the Truth
     description: The Theology of Time, October 15, 1972. A sister reads teachings circulating in the Honorable Elijah Muhammad's name, and he stops her, one claim at a time. The full exchange, transcribed word for word and set to the original recording.
     link: https://muhammadjameel.com/lectures/other-than-the-truth/
