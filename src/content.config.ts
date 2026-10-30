@@ -43,6 +43,10 @@ const site = defineCollection({
           description: z.string(),
           link: z.string().url(),
           buyLabel: z.string().default('Buy on Amazon'),
+          // Optional direct sale of the PDF (Gumroad). Leave pdfLink out
+          // and no PDF link is shown for that book.
+          pdfLink: z.string().url().optional(),
+          pdfLabel: z.string().default('Or buy the PDF'),
         })
       )
       .optional(),

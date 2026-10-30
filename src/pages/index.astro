@@ -119,9 +119,16 @@ const coverColors = {
                 <div class="book-author">Muhammad Jameel</div>
               </div>
               <p class="book-desc">{book.description}</p>
-              <a href={book.link} target="_blank" rel="noopener" class="btn-outline">
-                {book.buyLabel}
-              </a>
+              <div class="book-buy">
+                <a href={book.link} target="_blank" rel="noopener" class="btn-outline">
+                  {book.buyLabel}
+                </a>
+                {book.pdfLink && (
+                  <a href={book.pdfLink} target="_blank" rel="noopener" class="link-underline">
+                    {book.pdfLabel}
+                  </a>
+                )}
+              </div>
             </div>
           ))
         }
@@ -464,6 +471,15 @@ const coverColors = {
     color: var(--color-cream);
     font-style: italic;
     font-size: var(--text-meta);
+  }
+
+  /* Amazon button and the quieter PDF text link sit on one line and wrap
+     under each other on narrow covers. Text link, not a second box. */
+  .book-buy {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 14px 28px;
   }
 
   .book-desc {

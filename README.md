@@ -73,7 +73,7 @@ All fixed site text lives in plain files under `src/content/site/` — edit thes
 | File | Holds |
 | --- | --- |
 | `src/content/site/bio.md` | The bio paragraphs (Markdown body) and the green pull quote (`quote:` in frontmatter). The full bio shows on `/about`; the homepage shows only the paragraphs above the `<!-- homepage-end -->` marker (at most two) with a "Read the full biography" link. |
-| `src/content/site/books.md` | The three books: cover title lines, cover color (`green`/`ink`/`red`), description, buy link and button label. |
+| `src/content/site/books.md` | The three books: cover title lines, cover color (`green`/`ink`/`red`), description, buy link and button label, and an optional `pdfLink` (Gumroad page for the PDF edition) shown as a text link beside the Amazon button. |
 | `src/content/site/footer.md` | Newsletter heading, blurb, email placeholder, button label, thank-you message, social links, and the copyright line (year is added automatically). |
 | `src/content/site/documents.md` | The documents list: title, page count, description, and the PDF path under `public/documents/`. |
 
