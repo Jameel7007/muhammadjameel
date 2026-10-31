@@ -7,15 +7,15 @@ books:
     cover: green
     description: The hidden affinities between the teachings of the Honorable Elijah Muhammad and the classical Sufi path.
     link: https://www.amazon.com/dp/172473122X
-    pdfLink: https://thomasmmooney.gumroad.com/l/sufism-and-the-nation-of-islam
+    pdfLink: https://muhammadjameel.gumroad.com/l/sufism-and-the-nation-of-islam
   - titleLines: ['Death of', 'the Scholars']
     cover: ink
     description: Why the scholarship of the Orthodox Muslim world has come to death, and how the Teachings of the Honorable Elijah Muhammad bring Islam back to life.
     link: https://www.amazon.com/dp/1687530327
-    pdfLink: https://thomasmmooney.gumroad.com/l/death-of-the-scholars
+    pdfLink: https://muhammadjameel.gumroad.com/l/death-of-the-scholars
   - titleLines: ['Religious', 'Exemption']
     cover: red
     description: An examination of conscience, law, and the believer's duty when faith and state authority collide.
     link: https://www.amazon.com/dp/B09SY8P9RR
-    pdfLink: https://thomasmmooney.gumroad.com/l/religious-exemption
+    pdfLink: https://muhammadjameel.gumroad.com/l/religious-exemption
 ---
