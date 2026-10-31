@@ -10,7 +10,7 @@ books:
     pdfLink: https://thomasmmooney.gumroad.com/l/sufism-and-the-nation-of-islam
   - titleLines: ['Death of', 'the Scholars']
     cover: ink
-    description: An elegy for a vanishing generation of sacred learning, and what is lost when the inheritors of the Prophet depart.
+    description: Why the scholarship of the Orthodox Muslim world has come to death, and how the Teachings of the Honorable Elijah Muhammad bring Islam back to life.
     link: https://www.amazon.com/dp/1687530327
     pdfLink: https://thomasmmooney.gumroad.com/l/death-of-the-scholars
   - titleLines: ['Religious', 'Exemption']
