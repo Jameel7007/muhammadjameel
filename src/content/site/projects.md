@@ -3,6 +3,10 @@
 # appears in the Projects section on the homepage — no code change needed.
 # linkLabel is optional and defaults to "Visit".
 projects:
+  - title: Endless Rose
+    description: An endless T-plan prayer hall, a forest of columns and horseshoe arches in the manner of Córdoba and Kairouan. Each count of dhikr carries you one bay toward the mihrab, lit by the real day where you are. Every round of thirty-three ends beneath a new sixteenfold zellige rose, laid tile by tile in the dome as you walked.
+    link: https://jameel7007.github.io/endless-rose/
+    linkLabel: Visit
   - title: Mashrabiya Light
     description: A quiet room behind a carved wooden screen. Sunlight falls through the lattice and a few panes of jewel-colored glass, laying stars of white and colored light across a marble floor. Move the sun from a rose dawn into the blue hour, and choose among four classic lattices, their stars drawn by Hankin's method of polygons in contact.
     link: https://jameel7007.github.io/mashrabiya-light/
