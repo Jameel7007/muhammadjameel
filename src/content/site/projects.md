@@ -3,6 +3,10 @@
 # appears in the Projects section on the homepage — no code change needed.
 # linkLabel is optional and defaults to "Visit".
 projects:
+  - title: Zellige Configurator
+    description: Design a zellige panel and take it to a workshop. Choose the centerpiece, the size, and eight glazes, and see it hung on a wall or laid in a floor as the sun moves. Every tile is a true cut shape, so the page counts the pieces glaze by glaze and draws the cut plan at real size — built on the pattern engine of Rosette in Tesserae.
+    link: https://jameel7007.github.io/zellige-configurator/
+    linkLabel: Design a panel
   - title: Endless Rose
     description: An endless T-plan prayer hall, a forest of columns and horseshoe arches in the manner of Córdoba and Kairouan. Each count of dhikr carries you one bay toward the mihrab, lit by the real day where you are. Every round of thirty-three ends beneath a new sixteenfold zellige rose, laid tile by tile in the dome as you walked.
     link: https://jameel7007.github.io/endless-rose/
